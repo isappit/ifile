@@ -1,0 +1,59 @@
+{
+    "name": "isappit/ifile",
+    "description": "IFile is a Search Engine Documental Framework to the indexing and serching in many document formats, PDF, DOC, XLS, DOCX, MP3, JPG and many other.",
+    "license": "LGPL-2.1",
+    "version": "dev-master",
+    "keywords": [
+        "framework",
+        "zf2",
+        "search engine",
+        "lucene",
+        "pdf",
+        "doc",
+        "mp3",
+        "jpg"
+    ],
+    "minimum-stability" : "dev",
+    "homepage": "https://ifile.isapp.it",
+    "authors": [
+        {
+        	"name": "Giampaolo Losito",
+           "email": "giampaolo@isapp.it",
+            "homepage": "http://www.isapp.it",
+            "role": "Developer"
+        },
+        {
+        	"name": "Antonio Di Girolamo",
+            "email": "antonio@isapp.it",
+            "homepage": "http://www.isapp.it",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "info@isapp.it",
+        "issues": "https://github.com/isappit/ifile/issues",
+        "source": "https://github.com/isappit/ifile"
+    },
+    "autoload": {
+        "psr-4": {
+            "Isappit\\Ifile\\": "src"
+        }
+    },
+    "repositories": 
+	[
+		{
+			"type": "git",
+			"url": "https://github.com/zendframework/ZendSearch.git",
+			"reference": "master"
+		},
+		{
+            "type": "composer",
+            "url": "http://packages.zendframework.com/"
+        }
+	],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendpdf": "dev-master",
+        "zendframework/zendsearch": "dev-master"
+    }
+}

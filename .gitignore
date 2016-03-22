@@ -1,0 +1,9 @@
+/.buildpath
+/.project
+/ClassMapAutoloader.php
+/test.php
+/.settings/
+/vendor/
+/composer.phar
+/IFileConfig.xml
+/composer.lock

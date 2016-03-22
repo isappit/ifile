@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+	<xs:element name="ifile">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="root-application" />
+				<xs:element ref="table-name" minOccurs="0" />
+				<xs:element ref="timelimit" minOccurs="0" />
+				<xs:element name="memorylimit" type="xs:positiveInteger" minOccurs="0" />
+				<xs:element name="resultlimit" type="xs:positiveInteger" minOccurs="0" />
+				<xs:element name="default-search-field" type="xs:string" minOccurs="0" />
+				<xs:element ref="duplicate" minOccurs="0" />
+				<xs:element ref="server" minOccurs="0" />
+				<xs:element name="encoding" type="encoding-type" minOccurs="0" />
+				<xs:element ref="doctotxt" minOccurs="0" />
+				<xs:element ref="xpdf" minOccurs="0" />
+				<xs:element ref="zend-document" minOccurs="0" />					
+				<xs:element ref="analyzer" minOccurs="0" />					
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- root-application -->
+	<xs:element name="root-application">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value = "[\s]*[\S][\s\S]*"/>
+          </xs:restriction>
+          </xs:simpleType>
+    </xs:element>
+	
+	<!-- table-name -->
+	<xs:element name="table-name">
+		<xs:complexType mixed="true">
+			<xs:attribute name="collation" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- timelimit -->
+	<xs:element name="timelimit">
+		<xs:simpleType>
+	      <xs:restriction base="xs:integer">
+	        <xs:minInclusive value="180"/>
+	      </xs:restriction>
+	  	</xs:simpleType>
+	</xs:element>
+	
+	<!-- duplicate -->
+	<xs:element name="duplicate">
+		<xs:simpleType>
+		    <xs:restriction base="xs:integer">
+		      <xs:enumeration value="0"/>
+		      <xs:enumeration value="1"/>		      
+		    </xs:restriction>
+		 </xs:simpleType>
+	</xs:element>
+	
+	<!-- doctotxt -->
+	<xs:element name="server">
+		<xs:complexType>
+			<xs:attribute name="bit" type="bit-type"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- doctotxt -->
+	<xs:element name="doctotxt">
+		<xs:complexType>
+			<xs:attribute name="type" use="required" type="doctotxt-type"/>
+			<xs:attribute name="encoding" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- xpdf -->
+	<xs:element name="xpdf">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="pdfinfo" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="executable" type="xs:string" minOccurs="0" />
+							<xs:element name="xpdfrc" type="xs:string" minOccurs="0" />
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="pdftotext" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="executable" type="xs:string" minOccurs="0" />
+							<xs:element name="xpdfrc" type="xs:string" minOccurs="0" />
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="opw" type="xs:string" minOccurs="0" />
+			</xs:all>			
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- zend-document -->
+	<xs:element name="zend-document">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="fields" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="field" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- analyzer -->
+	<xs:element name="analyzer">
+		<xs:complexType>
+			<xs:all>
+		    	<xs:element name="type" minOccurs="0">
+					<xs:complexType>
+						<xs:choice>
+					    	<xs:element ref="default" minOccurs="0" />
+							<xs:element ref="custom-default" minOccurs="0" />
+						</xs:choice>			
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="filters" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="stop-words" type="xs:string" minOccurs="0" />
+							<xs:element ref="short-words" minOccurs="0"/>
+							<xs:element name="custom-filters" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<!--xs:element name="filter" type="xs:string" maxOccurs="unbounded"/-->
+										<xs:element ref="filter" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+			</xs:all>			
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- zend-document::field -->
+	<xs:element name="field">
+		<xs:complexType>
+			<xs:attribute name="name" use="required" type="fields-name"/>
+			<xs:attribute name="type" use="required" type="index-type"/>
+			<xs:attribute name="encoding" type="encoding-type"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- zend-document::field::fields-name -->
+	<xs:simpleType name="fields-name">
+		<xs:restriction base="xs:string">
+		  <!-- Is recommended to not modify this type of fileds -->
+		  <!--xs:enumeration value="extensionfile"/-->
+		  <xs:enumeration value="name"/>		  
+		  <xs:enumeration value="path"/>
+		  <xs:enumeration value="filename"/>
+		  <xs:enumeration value="introtext"/>			
+		  <xs:enumeration value="body"/>
+		  <xs:enumeration value="title"/>
+		  <xs:enumeration value="subject"/>
+		  <xs:enumeration value="description"/>
+		  <xs:enumeration value="creator"/>
+		  <xs:enumeration value="keywords"/>
+		  <xs:enumeration value="created"/>
+		  <xs:enumeration value="modified"/>
+		  <xs:enumeration value="pages"/>			
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- zend-document::field::index-type -->
+	<xs:simpleType name="index-type">
+	    <xs:restriction base="xs:string">
+	      <xs:enumeration value="Keyword"/>
+	      <xs:enumeration value="UnIndexed"/>
+	      <xs:enumeration value="Binary"/>
+	      <xs:enumeration value="Text"/>
+	      <xs:enumeration value="UnStored"/>
+	    </xs:restriction>
+	</xs:simpleType>
+	
+	<!-- doctotxt::doctotext-type -->
+	<xs:simpleType name="doctotxt-type">
+	    <xs:restriction base="xs:string">
+	      <xs:enumeration value="ANTIWORD"/>
+	      <xs:enumeration value="COM"/>
+	      <xs:enumeration value="PHP"/>	      
+	    </xs:restriction>
+	 </xs:simpleType>
+	 
+	<!-- server::bit -->
+	<xs:simpleType name="bit-type">
+	    <xs:restriction base="xs:integer">
+	      <xs:enumeration value="32"/>
+	      <xs:enumeration value="64"/>	      
+	    </xs:restriction>
+	 </xs:simpleType>
+	
+	<!-- encoding::encoding-type -->
+	<xs:simpleType name="encoding-type">
+	    <xs:restriction base="xs:string">
+	      <xs:enumeration value="UTF-8"/>
+	      <xs:enumeration value="ASCII"/>
+		  <!-- Western Europe (Latin 1) -->
+	      <xs:enumeration value="ISO-8859-1"/>
+		  <!-- Western Europe but with the euro symbol (Latin 0) -->
+	      <xs:enumeration value="ISO-8859-15"/>
+		  <!-- Central and East European (Latin 2) -->
+	      <xs:enumeration value="ISO-8859-2"/>		  
+		  <!-- Greek (Latin 7) -->
+	      <xs:enumeration value="ISO-8859-7"/>
+		  <!-- Arabic -->		  
+		  <xs:enumeration value="ISO-8859-6"/>
+	      <xs:enumeration value="CP1256"/>
+	      <xs:enumeration value="Windows-1252"/>
+	      <!-- Cyrillic -->
+	      <xs:enumeration value="KOI8-R"/>
+	    </xs:restriction>
+	</xs:simpleType>
+	
+	<!-- analyzer::type::defautl -->
+	<xs:element name="default">
+		<xs:simpleType>
+		    <xs:restriction base="xs:string">
+		      <xs:enumeration value="Text"/>
+		      <xs:enumeration value="TextNum"/>
+		      <xs:enumeration value="Text_CaseInsensitive"/>
+		      <xs:enumeration value="TextNum_CaseInsensitive"/>
+			  <xs:enumeration value="Utf8"/>
+		      <xs:enumeration value="Utf8Num"/>
+		      <xs:enumeration value="Utf8_CaseInsensitive"/>
+		      <xs:enumeration value="Utf8Num_CaseInsensitive"/>
+		    </xs:restriction>
+		 </xs:simpleType>
+	</xs:element>
+	
+	<!-- analyzer::type::custom-default -->
+	<xs:element name="custom-default">
+		<xs:complexType mixed="true">
+			<xs:attribute name="class" use="required" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- analyzer::filters::short-words -->
+	<xs:element name="short-words">
+		<xs:simpleType>
+		    <xs:restriction base="xs:integer">
+		      <xs:enumeration value="2"/>
+		      <xs:enumeration value="3"/>
+		      <xs:enumeration value="4"/>
+		    </xs:restriction>
+		 </xs:simpleType>
+	</xs:element>
+	
+	<!-- analyzer::filters::custom-filters::filter -->
+	<xs:element name="filter">
+		<xs:complexType mixed="true">
+			<xs:attribute name="class" use="required" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

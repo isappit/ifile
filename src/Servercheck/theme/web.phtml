@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>IFile Server Check</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="IFile server check" />
+        <meta name="keywords" content="Server check"/>
+        <link rel="stylesheet" href="servercheck/theme/css/style.css" type="text/css" media="screen"/>
+    </head>
+    <style>
+       
+    </style>
+    <body>
+        <div id="content">
+            <a class="back" href=""></a>
+            <span class="scroll"></span>
+            <p class="head">
+                IFile server check
+                <a href="http://ifile.isapp.it">IFile by isApp.it</a>
+            </p>
+            
+            <table class="table1">
+            	<thead>
+            		<tr>
+            			<th scope="col" abbr="Component"></th>
+            			<th colspan="2" scope="col" abbr="Check">Check</th>
+            			<th scope="col" abbr="Requirements">Requirements</th>
+            			<th scope="col" abbr="Info">Info</th>
+            			<th scope="col" abbr="Use">Use</th>
+            			<th scope="col" abbr="WebSite">WebSite</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		<?php 
+	            		foreach($this->registry as $caption => $check) {
+	            	?>	
+	            			<tr>
+	            				<th scope="col"></th>
+	            				<th class="checkcaption" colspan="6"><?php echo $caption; ?></th>
+	            			</tr>
+	            	<?php 
+	            			foreach($check as $obj){
+					?>
+								<tr>
+									<th scope="row"><?php echo $obj->getLabel(); ?></th>
+									<td><span class="<?php echo ($obj->getCheck()) ? 'ok' : 'ko';?>"></span></td> 
+									<td><?php echo $obj->getMessage(); ?></td> 
+									<td><?php echo $obj->getRequire(); ?></td>
+									<td><?php echo $obj->getInfo(); ?></td>
+									<td><?php echo $obj->getInfoUse(); ?></td>
+									<td>
+										<a href="<?php echo $obj->getSite(); ?>" target="_blanck" ><?php echo $obj->getSite(); ?></a>
+									</td>
+								</tr>
+					<?php 
+	            			}
+            			}            		
+            		?>
+            	</tbody>
+            </table>
+        </div>
+    </body>
+</html>

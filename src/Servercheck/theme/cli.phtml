@@ -1,0 +1,14 @@
+<?php 
+foreach($this->registry as $caption => $check) {
+	echo "***********************************************************\n";
+	echo strtoupper($caption)."\n";
+	echo "***********************************************************\n";
+	foreach($check as $obj){
+		echo "Component: ".$obj->getLabel()."\n";
+		echo "Check: ".$obj->getMessage()."\n";
+		echo "Requirements: ".$obj->getRequire()."\n";
+		echo "Info: ".$obj->getInfo()."\n";
+		echo "Use: ".$obj->getInfoUse()."\n";
+		echo "WebSite:".$obj->getSite()."\n\n";
+	}
+}

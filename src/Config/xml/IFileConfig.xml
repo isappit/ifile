@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+ * Leggi il file readme.txt per la descrizione dei TAG del file IFileConfig.xml 
+ */  
+-->
+<ifile>
+	<root-application>/Users/giampaolo/logs</root-application>
+	<!--table-name collation="utf8_general_ci">indexjifile</table-name-->
+	<!--timelimit>180</timelimit-->
+	<!--memorylimit></memorylimit-->
+	<!--resultlimit></resultlimit-->
+	<!--default-search-field>body</default-search-field-->
+	<!--duplicate>1</duplicate-->
+	<server bit="32" />
+	<!--encoding>UTF-8</encoding-->
+	<!--xpdf>
+		<pdfinfo>
+			<executable>C:\xampp\htdocs\IFile\binaries\xpdfbin-win-3.03\bin32\pdfinfo.exe</executable>			
+			<xpdfrc></xpdfrc>
+		</pdfinfo>
+		<pdftotext>
+			<executable>C:\xampp\htdocs\IFile\binaries\xpdfbin-win-3.03\bin32\pdftotext.exe</executable>			
+			<xpdfrc></xpdfrc>
+		</pdftotext>
+		<opw></opw>
+	</xpdf-->
+	<!--doctotxt encoding="8859-1" type="ANTIWORD" /-->
+	<!--doctotxt encoding="" type="COM" /-->
+	<!--
+	<zend-document>
+		<fields>
+			<field name="body" type="UnStored" encoding="UTF-8"/>
+			<field name="introtext" type="Keyword" encoding="UTF-8" />
+			<field name="title" type="UnStored" encoding="UTF-8" />						
+			<field name="subject" type="UnStored" encoding="UTF-8" />						
+			<field name="description" type="UnStored" encoding="UTF-8" />						
+			<field name="creator" type="UnStored" encoding="UTF-8" />						
+			<field name="keywords" type="UnStored" encoding="UTF-8" />						
+			<field name="created" type="UnStored" encoding="UTF-8" />						
+			<field name="modified" type="UnStored" encoding="UTF-8" />
+		</fields>		
+	</zend-document>
+	-->
+	<analyzer>		
+		<type>
+			<!--default>Utf8_CaseInsensitive</default-->
+			<default>Utf8Num_CaseInsensitive</default>
+			<!--custom-default class="StandardAnalyzer_Analyzer_Standard_English">C:\xampp\htdocs\IFile\analyzer\StandardAnalyzer\Analyzer\Standard\English.php</custom-default-->
+		</type>
+		<filters>
+			<!--stop-words>C:\xampp\htdocs\IFile\stopwords\stopwords.txt</stop-words-->
+			<!--short-words>2</short-words-->
+			<!--custom-filters>
+				<filter class="StandardAnalyzer_Analysis_TokenFilter_EnglishPECLStemmer">C:\xampp\htdocs\IFile\sf_IFile-Allura\trunk\tokenfilter\stemming\english\EnglishPECLStemmer.php</filter>
+				<filter class="StandardAnalyzer_Analysis_TokenFilter_EnglishPorterStemmer">C:\xampp\htdocs\IFile\sf_IFile-Allura\trunk\tokenfilter\stemming\english\EnglishPorterStemmer.php</filter>
+				<filter class="StandardAnalyzer_Analysis_TokenFilter_ItalianPECLStemmer">C:\xampp\htdocs\IFile\sf_IFile-Allura\trunk\tokenfilter\stemming\italian\ItalianPECLStemmer.php</filter>
+			</custom-filters-->		
+		</filters>
+	</analyzer>	
+</ifile>
