@@ -6,6 +6,7 @@ use Isappit\Ifile\Exception\IFileException;
 use Isappit\Ifile\Query\IFileQueryRegistry;
 use Isappit\Ifile\Servercheck\LuceneServerCheck;
 use ZendSearch\Lucene\Lucene as Zend_Search_Lucene;
+use ZendSearch\Lucene\Analysis\Analyzer\Analyzer as Zend_Search_Lucene_Analysis_Analyzer;
 
 /**
  * IFile framework

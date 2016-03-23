@@ -45,7 +45,7 @@
 	<analyzer>		
 		<type>
 			<!--default>Utf8_CaseInsensitive</default-->
-			<default>Utf8Num_CaseInsensitive</default>
+			<default>Utf8Num\CaseInsensitive</default>
 			<!--custom-default class="StandardAnalyzer_Analyzer_Standard_English">C:\xampp\htdocs\IFile\analyzer\StandardAnalyzer\Analyzer\Standard\English.php</custom-default-->
 		</type>
 		<filters>

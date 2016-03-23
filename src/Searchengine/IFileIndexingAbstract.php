@@ -4,7 +4,8 @@ namespace Isappit\Ifile\Searchengine;
 use Isappit\Ifile\IFileFactory;
 use Isappit\Ifile\Config\IFileConfig;
 use Isappit\Ifile\Exception\IFileException;
-use Isappit\Ifile\Query\IFileInfoFile;
+use Isappit\Ifile\Helpers\IFileHelper;
+use Isappit\Ifile\Helpers\IFileInfoFile;
 use Isappit\Ifile\Query\IFileQueryRegistry;
 
 /**

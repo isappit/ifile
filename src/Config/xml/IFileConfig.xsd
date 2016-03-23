@@ -229,12 +229,12 @@
 		    <xs:restriction base="xs:string">
 		      <xs:enumeration value="Text"/>
 		      <xs:enumeration value="TextNum"/>
-		      <xs:enumeration value="Text_CaseInsensitive"/>
-		      <xs:enumeration value="TextNum_CaseInsensitive"/>
+		      <xs:enumeration value="Text\CaseInsensitive"/>
+		      <xs:enumeration value="TextNum\CaseInsensitive"/>
 			  <xs:enumeration value="Utf8"/>
 		      <xs:enumeration value="Utf8Num"/>
-		      <xs:enumeration value="Utf8_CaseInsensitive"/>
-		      <xs:enumeration value="Utf8Num_CaseInsensitive"/>
+		      <xs:enumeration value="Utf8\CaseInsensitive"/>
+		      <xs:enumeration value="Utf8Num\CaseInsensitive"/>
 		    </xs:restriction>
 		 </xs:simpleType>
 	</xs:element>
