@@ -1,5 +1,9 @@
 <?php
 namespace Isappit\Ifile\Tokenfilter\Stemming\English;
+
+use Isappit\Ifile\Tokenfilter\Stemming\English\EnglishStemmer\PorterStemmer;
+use ZendSearch\Lucene\Analysis\Token as Zend_Search_Lucene_Analysis_Token;
+use ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface;
 /**
  * IFile Framework
  * 
@@ -24,13 +28,8 @@ namespace Isappit\Ifile\Tokenfilter\Stemming\English;
  */
 /** PorterStemmer */
 require_once 'EnglishStemmer/PorterStemmer.php';
-/** Zend_Search_Lucene_Analysis_TokenFilter */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
-/** Zend_Search_Lucene_Exception */
-require_once 'Zend/Search/Lucene/Exception.php';
 
-
-class EnglishPorterStemmer extends Zend_Search_Lucene_Analysis_TokenFilter
+class EnglishPorterStemmer implements TokenFilterInterface
 {
     
 	/**
@@ -46,15 +45,15 @@ class EnglishPorterStemmer extends Zend_Search_Lucene_Analysis_TokenFilter
      */
     public function normalize(Zend_Search_Lucene_Analysis_Token $srcToken) {
 		
-		echo "Prima: ".$srcToken->getTermText()."<br />";
+// 		echo "Prima: ".$srcToken->getTermText()."<br />";
 		
 		$newToken = new Zend_Search_Lucene_Analysis_Token(
                                      PorterStemmer::stem( $srcToken->getTermText() ),
                                      $srcToken->getStartOffset(),
                                      $srcToken->getEndOffset());
 
-		echo "Dopo: ".$newToken->getTermText()."<br />";
-		echo "--------------------------------<br />";
+// 		echo "Dopo: ".$newToken->getTermText()."<br />";
+// 		echo "--------------------------------<br />";
 
         $newToken->setPositionIncrement($srcToken->getPositionIncrement());
 

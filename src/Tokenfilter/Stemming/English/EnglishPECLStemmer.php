@@ -1,11 +1,16 @@
 <?php
 namespace Isappit\Ifile\Tokenfilter\Stemming\English;
+
+use Isappit\Ifile\Exception\IFileStemException;
+use Isappit\Ifile\Servercheck\LuceneServerCheck;
+use ZendSearch\Lucene\Analysis\Token as Zend_Search_Lucene_Analysis_Token;
+use ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface;
 /**
  * IFile Framework
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/en-GB
+ * @subpackage TokenFilter/Stemming/English
  * @author 	   Giampaolo Losito, Antonio Di Girolamo
  * @copyright  2011 isApp.it (www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
@@ -17,19 +22,13 @@ namespace Isappit\Ifile\Tokenfilter\Stemming\English;
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/en-GB
+ * @subpackage TokenFilter/Stemming/English
  * @author 	   Giampaolo Losito, Antonio Di Girolamo
  * @copyright  2011 isApp.it (www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
 
-/** Zend_Search_Lucene_Analysis_TokenFilter */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
-/** Zend_Search_Lucene_Exception */
-require_once 'Zend/Search/Lucene/Exception.php';
-
-
-class EnglishPECLStemmer extends Zend_Search_Lucene_Analysis_TokenFilter
+class EnglishPECLStemmer implements TokenFilterInterface
 {
     
     /**
@@ -46,13 +45,11 @@ class EnglishPECLStemmer extends Zend_Search_Lucene_Analysis_TokenFilter
 		$reportCheckStem = $reportServerCheck['Extension']['stem'];
 		
 		if (!$reportCheckStem->getCheck()) {
-			require_once dirname(__FILE__).'/../IFile_Stem_Exception.php';
-			throw new IFile_Stem_Exception("PECL Stem library not supported.");
+			throw new IFileStemException("PECL Stem library not supported.");
 		}
 		
 		if (!function_exists('stem_english')) {
-			require_once dirname(__FILE__).'/../IFile_Stem_Exception.php';
-			throw new IFile_Stem_Exception("English Stemmer not supported. Install and compile PECL Stem with English Stemmer.");
+			throw new IFileStemException("English Stemmer not supported. Install and compile PECL Stem with English Stemmer.");
 		}
     }
 

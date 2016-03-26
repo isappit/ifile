@@ -1,4 +1,10 @@
 <?php
+namespace Isappit\Ifile\Tokenfilter\Stemming\French;
+
+use Isappit\Ifile\Exception\IFileStemException;
+use Isappit\Ifile\Servercheck\LuceneServerCheck;
+use ZendSearch\Lucene\Analysis\Token as Zend_Search_Lucene_Analysis_Token;
+use ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface;
 /**
  * IFile Framework
  * 
@@ -22,13 +28,7 @@
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
 
-/** Zend_Search_Lucene_Analysis_TokenFilter */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
-/** Zend_Search_Lucene_Exception */
-require_once 'Zend/Search/Lucene/Exception.php';
-
-
-class StandardAnalyzer_Analysis_TokenFilter_FrenchPECLStemmer extends Zend_Search_Lucene_Analysis_TokenFilter
+class FrenchPECLStemmer implements TokenFilterInterface
 {
     
     /**
@@ -45,13 +45,11 @@ class StandardAnalyzer_Analysis_TokenFilter_FrenchPECLStemmer extends Zend_Searc
 		$reportCheckStem = $reportServerCheck['Extension']['stem'];
 		
 		if (!$reportCheckStem->getCheck()) {
-			require_once dirname(__FILE__).'/../IFile_Stem_Exception.php';
-			throw new IFile_Stem_Exception("PECL Stem library not supported.");
+			throw new IFileStemException("PECL Stem library not supported.");
 		}
 		
 		if (!function_exists('stem_french')) {
-			require_once dirname(__FILE__).'/../IFile_Stem_Exception.php';
-			throw new IFile_Stem_Exception("French Stemmer not supported. Install and compile PECL Stem with French Stemmer.");
+			throw new IFileStemException("French Stemmer not supported. Install and compile PECL Stem with French Stemmer.");
 		}
     }
 

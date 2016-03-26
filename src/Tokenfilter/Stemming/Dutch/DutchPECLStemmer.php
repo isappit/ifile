@@ -1,15 +1,20 @@
 <?php
 namespace Isappit\Ifile\Tokenfilter\Stemming\Dutch;
+
+use Isappit\Ifile\Exception\IFileStemException;
+use Isappit\Ifile\Servercheck\LuceneServerCheck;
+use ZendSearch\Lucene\Analysis\Token as Zend_Search_Lucene_Analysis_Token;
+use ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface;
 /**
  * IFile Framework
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/en-GB
+ * @subpackage TokenFilter/Stemming/Dutch
  * @author 	   Giampaolo Losito, Antonio Di Girolamo
  * @copyright  2011 isApp.it (www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
- * @version    1.0
+ * @version    2.0
  */
 
 /**
@@ -17,19 +22,13 @@ namespace Isappit\Ifile\Tokenfilter\Stemming\Dutch;
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/en-GB
+ * @subpackage TokenFilter/Stemming/Dutch
  * @author 	   Giampaolo Losito, Antonio Di Girolamo
  * @copyright  2011 isApp.it (www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
 
-/** Zend_Search_Lucene_Analysis_TokenFilter */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
-/** Zend_Search_Lucene_Exception */
-require_once 'Zend/Search/Lucene/Exception.php';
-
-
-class DutchPECLStemmer extends Zend_Search_Lucene_Analysis_TokenFilter
+class DutchPECLStemmer implements TokenFilterInterface
 {
     
     /**
@@ -46,13 +45,11 @@ class DutchPECLStemmer extends Zend_Search_Lucene_Analysis_TokenFilter
 		$reportCheckStem = $reportServerCheck['Extension']['stem'];
 		
 		if (!$reportCheckStem->getCheck()) {
-			require_once dirname(__FILE__).'/../IFile_Stem_Exception.php';
-			throw new IFile_Stem_Exception("PECL Stem library not supported.");
+			throw new IFileStemException("PECL Stem library not supported.");
 		}
 		
 		if (!function_exists('stem_dutch')) {
-			require_once dirname(__FILE__).'/../IFile_Stem_Exception.php';
-			throw new IFile_Stem_Exception("Dutch Stemmer not supported. Install and compile PECL Stem with Dutch Stemmer.");
+			throw new IFileStemException("Dutch Stemmer not supported. Install and compile PECL Stem with Dutch Stemmer.");
 		}
     }
 

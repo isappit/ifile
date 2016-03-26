@@ -1,4 +1,6 @@
 <?php
+namespace Isappit\Ifile\Tokenfilter\Stemming\English\EnglishStemmer;
+
 /**
  * IFile Framework
  * 
@@ -8,7 +10,7 @@
  * @author 	   Richard Heyes & Jon Abernathy - http://www.phpguru.org/
  * @copyright  2005 Richard Heyes (http://www.phpguru.org/)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
- * @version    1.0
+ * @version    2.0
  */
 
 /**

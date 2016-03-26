@@ -1,14 +1,16 @@
 <?php
 namespace Isappit\Ifile\Tokenfilter\Stemming\Danish;
 
-use ZendSearch\Lucene\Analysis\Token as Token;
-
+use Isappit\Ifile\Exception\IFileStemException;
+use Isappit\Ifile\Servercheck\LuceneServerCheck;
+use ZendSearch\Lucene\Analysis\Token as Zend_Search_Lucene_Analysis_Token;
+use ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface;
 /**
  * IFile Framework
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/en-GB
+ * @subpackage TokenFilter/Stemming/Danish
  * @author 	   Giampaolo Losito, Antonio Di Girolamo
  * @copyright  2011 isApp.it (www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
@@ -20,25 +22,19 @@ use ZendSearch\Lucene\Analysis\Token as Token;
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/en-GB
+ * @subpackage TokenFilter/Stemming/Danish
  * @author 	   Giampaolo Losito, Antonio Di Girolamo
  * @copyright  2011 isApp.it (www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
 
-/** Zend_Search_Lucene_Analysis_TokenFilter */
-// require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
-/** Zend_Search_Lucene_Exception */
-// require_once 'Zend/Search/Lucene/Exception.php';
-
-
-class DanishPECLStemmer implements ZendSearch\Lucene\Analysys\TokenFilter\TokenFilterInterface
+class DanishPECLStemmer implements TokenFilterInterface
 {
     
     /**
      * Construttore
      * 
-     * @throws IFile_Stem_Exception
+     * @throws IFileStemException
      */
     public function __construct(){
     	// Verifica la presenza della libreria PECL Stem 
@@ -49,11 +45,11 @@ class DanishPECLStemmer implements ZendSearch\Lucene\Analysys\TokenFilter\TokenF
 		$reportCheckStem = $reportServerCheck['Extension']['stem'];
 		
 		if (!$reportCheckStem->getCheck()) {
-			throw new Isappit\Ifile\Tokenfilter\Stemming\IFileStemException("PECL Stem library not supported.");
+			throw new IFileStemException("PECL Stem library not supported.");
 		}
 		
 		if (!function_exists('stem_danish')) {
-			throw new Isappit\Ifile\Tokenfilter\Stemming\IFileStemException("Danish Stemmer not supported. Install and compile PECL Stem with Danish Stemmer.");
+			throw new IFileStemException("Danish Stemmer not supported. Install and compile PECL Stem with Danish Stemmer.");
 		}
     }
 
@@ -63,9 +59,9 @@ class DanishPECLStemmer implements ZendSearch\Lucene\Analysys\TokenFilter\TokenF
      * @param ZendSearch\Lucene\Analysis\Token $srcToken
      * @return ZendSearch\Lucene\Analysis\Token
      */
-    public function normalize(ZendSearch\Lucene\Analysis\Token $srcToken) {
+    public function normalize(Zend_Search_Lucene_Analysis_Token $srcToken) {
 		
-		$newToken = new Token(
+		$newToken = new Zend_Search_Lucene_Analysis_Token(
                               stem_danish( $srcToken->getTermText() ),
                               $srcToken->getStartOffset(),
                               $srcToken->getEndOffset());

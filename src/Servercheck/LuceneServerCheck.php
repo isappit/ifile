@@ -578,7 +578,6 @@ class LuceneServerCheck {
 	private function checkPHPLib() {
 		// recupera la lista delle librerie installate 
 		$extension = get_loaded_extensions();
-		
 		// librerie da verificare
 		$checkExt = $this->getListExtension();
 		// effettua un lower dei nomi delle librerie

@@ -7,6 +7,8 @@ use Isappit\Ifile\Query\IFileQueryRegistry;
 use Isappit\Ifile\Servercheck\LuceneServerCheck;
 use ZendSearch\Lucene\Lucene as Zend_Search_Lucene;
 use ZendSearch\Lucene\Analysis\Analyzer\Analyzer as Zend_Search_Lucene_Analysis_Analyzer;
+use ZendSearch\Lucene\Analysis\TokenFilter\StopWords as Zend_Search_Lucene_Analysis_TokenFilter_StopWords;
+use ZendSearch\Lucene\Analysis\TokenFilter\ShortWords as Zend_Search_Lucene_Analysis_TokenFilter_ShortWords;
 
 /**
  * IFile framework
@@ -61,7 +63,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * 
 	 * @param string $indexDir Path to the directory. 
 	 * @return void 
-	 * @throws Zend_Search_Lucene_Exception, IFileException
+	 * @throws ZendSearch\Lucene\Exception, IFileException
 	 */
 	private function __createIndex($indexDir) {
 		// verifica che esista il framework Zend
@@ -150,7 +152,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * 
 	 * @param Zend_Search_Lucene_Document $doc
 	 * @return void
-	 * @throws Zend_Search_Lucene_Exception	 
+	 * @throws ZendSearch\Lucene\Exception	 
 	 */
 	protected function __addDocument(Zend_Search_Lucene_Document $doc) {
 		// Recupera l'istanza di configurazione 		
@@ -189,7 +191,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * stop-words e short-words da aggiungere al processo di analyzer
 	 * 
 	 * @return void
-	 * @throws ReflectionException, Zend_Search_Lucene_Exception
+	 * @throws ReflectionException, ZendSearch\Lucene\Exception
 	 */
 	private function __setDefaultAnalyzer() {
 		// Recupera l'istanza di configurazione		
@@ -215,8 +217,6 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 		$stopWords = $IfileConfig->getConfig('stop-words');
 		// se esiste il file delle stop-words lo aggiungo come filtro
 		if ($stopWords != null) {
-			/** Zend_Search_Lucene_Analysis_TokenFilter_StopWords */
-			require_once ('Zend/Search/Lucene/Analysis/TokenFilter/StopWords.php');
 			$stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords(); 
 			$stopWordsFilter->loadFromFile($stopWords);
 			// aggiunge il filtro sulle stop-words			
@@ -225,8 +225,6 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 		// Recupero il filtro per le short-words
 		$shortWords = $IfileConfig->getConfig('short-words');
 		if ($shortWords != null) {
-			/** Zend_Search_Lucene_Analysis_TokenFilter_ShortWords */
-			require_once ('Zend/Search/Lucene/Analysis/TokenFilter/ShortWords.php');
 			$shortWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords($shortWords);
 			// aggiunge il filtro sulle short-words			
 			$analyzer->addFilter($shortWordsFilter);
@@ -237,7 +235,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 		if ($addFilters != null) {
 			foreach ($addFilters as $filter) {
 				// Reflection	
-				$reflection = new ReflectionClass($filter);
+				$reflection = new \ReflectionClass($filter);
 				// aggiunge il filtro sulle short-words			
 				//$analyzer->addFilter($filter);
 				$analyzer->addFilter($reflection->newInstance());
@@ -347,11 +345,11 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * Ritorna un array di oggetti Zend_Search_Lucene_Search_QueryHit
 	 * o un array vuoto in caso la query non presenta match.
 	 * I campi (fields) devono essere gli stessi per tutti i termini 
-	 * altrimenti viene generata una eccezione di tipo Zend_Search_Lucene_Exception  
+	 * altrimenti viene generata una eccezione di tipo ZendSearch\Lucene\Exception  
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return array di Zend_Search_Lucene_Search_QueryHit 
-	 * @throws Zend_Search_Lucene_Exception
+	 * @throws ZendSearch\Lucene\Exception
 	 * 
 	 * @TODO
 	 * si potrebbe migliorare gestendo anche la posizione
@@ -407,7 +405,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return array di Zend_Search_Lucene_Search_QueryHit
-	 * @throws Zend_Search_Lucene_Exception, IFileException
+	 * @throws ZendSearch\Lucene\Exception, IFileException
 	 */
 	protected function __queryFuzzy(IFileQueryRegistry $query) {
 		// array dei risultati
@@ -445,7 +443,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return array di Zend_Search_Lucene_Search_QueryHit
-	 * @throws Zend_Search_Lucene_Exception, IFileException
+	 * @throws ZendSearch\Lucene\Exception, IFileException
 	 * 
 	 * @TODO
 	 * Andrebbe implementata anche la gestione per le Fuzzy, Wildcard e Range
@@ -572,7 +570,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return array di Zend_Search_Lucene_Search_QueryHit
-	 * @throws Zend_Search_Lucene_Exception, IFileException
+	 * @throws ZendSearch\Lucene\Exception, IFileException
 	 * 
 	 * @TODO
 	 * Andrebbe implementata anche la gestione per le Fuzzy, Wildcard e Range
@@ -665,7 +663,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return array di Zend_Search_Lucene_Search_QueryHit
-	 * @throws Zend_Search_Lucene_Exception, IFileException
+	 * @throws ZendSearch\Lucene\Exception, IFileException
 	 */
 	protected function __queryWildcard(IFileQueryRegistry $query) {
 		// array dei risultati
@@ -711,7 +709,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return array di Zend_Search_Lucene_Search_QueryHit
-	 * @throws Zend_Search_Lucene_Exception, IFileException
+	 * @throws ZendSearch\Lucene\Exception, IFileException
 	 */
 	protected function __queryRange(IFileQueryRegistry $query) {
 		
@@ -760,7 +758,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * 
 	 * @param string $query
 	 * @return array di Zend_Search_Lucene_Search_QueryHit
-	 * @throws Zend_Search_Lucene_Exception, Zend_Search_Lucene_Search_QueryParserException
+	 * @throws ZendSearch\Lucene\Exception, Zend_Search_Lucene_Search_QueryParserException
 	 */
 	protected function __queryParser($query) {
 		$zendQuery = Zend_Search_Lucene_Search_QueryParser::parse($query);
@@ -782,11 +780,11 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	
 	/**
 	 * Marca un documento come cancellato
-	 * Ritorna un eccezione Zend_Search_Lucene_Exception se $id non e'
+	 * Ritorna un eccezione ZendSearch\Lucene\Exception se $id non e'
 	 * presente nel range degli id dell'indice 
 	 * @param integer $id
 	 * @return void
-	 * @throws Zend_Search_Lucene_Exception 
+	 * @throws ZendSearch\Lucene\Exception 
 	 */
 	public function delete($id) {
 		$this->lucene->delete($id);
@@ -855,11 +853,11 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	
 	/**
 	 * Ritorna l'oggetto documento
-	 * Ritorna un eccezione Zend_Search_Lucene_Exception se $id non e'
+	 * Ritorna un eccezione ZendSearch\Lucene\Exception se $id non e'
 	 * presente nel range degli id dell'indice 
 	 * @param integer $id
 	 * @return Zend_Searc_Lucene_Document
-	 * @throws Zend_Search_Lucene_Exception 
+	 * @throws ZendSearch\Lucene\Exception 
 	 */
 	public function getDocument($id) {
 		return $this->lucene->getDocument($id);
@@ -1007,10 +1005,10 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	
 	/**
 	 * Verifica se un documento e' stato marcato come cancellato
-	 * Ritorna un eccezione Zend_Search_Lucene_Exception se $id non e'
+	 * Ritorna un eccezione ZendSearch\Lucene\Exception se $id non e'
 	 * presente nel range degli id dell'indice 
 	 * @return boolean
-	 * @throws Zend_Search_Lucene_Exception 
+	 * @throws ZendSearch\Lucene\Exception 
 	 */
 	public function isDeleted($id) {
 		return $this->lucene->isDeleted($id);

@@ -71,13 +71,13 @@ class IFileFactory {
 	}
 	
 	/**
-	 * Return an instance of IFile_Indexing_Interface object
+	 * Return an instance of IFileIndexingInterface object
 	 * 
 	 * @throws IFileException
 	 * @return IFile_Indexing_Interface
 	 * @throws ReflectionException, IFileException 
 	 */
-	public function getIFileIndexing($type, $resource, $xmlConfig = null) {
+	public function getIFileIndexing($type, $resource) {
 		
 		// get name class
 		$className = "IFileIndexing".ucfirst(strtolower($type));
@@ -105,11 +105,6 @@ class IFileFactory {
 		} 
 		if(!$found) {
 			throw new IFileException('The class does not implement IFileIndexingInterface');
-		}
-		
-		// setto il nuovo file di configurazione
-		if ($xmlConfig != null) {
-			IFileConfig::setXmlConfig($xmlConfig);	
 		}
 		
 		// return object

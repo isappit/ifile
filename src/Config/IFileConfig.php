@@ -29,7 +29,7 @@ class IFileConfig {
 	/**
 	 * Token class
 	 */
-	const ZEND_TOKENFILTER = 'ZendSearch\Lucene\Analysis\TokenFilterInterface';
+	const ZEND_TOKENFILTER = 'ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface';
 	/**
 	 * Analyzer class
 	 */
@@ -302,9 +302,9 @@ class IFileConfig {
 					$fileFilter = trim($customFilter->nodeValue);
 					$classFilter = $customFilter->getAttributeNode("class")->value;
 					
-					if (!empty($fileFilter)) {					
+					if (!empty($fileFilter) && !empty($classFilter)) {					
 						// conbtrollo esistenza della classe						
-						$obj = $this->checkTokenFilter($fileFilter, $classFilter);
+						$obj = $this->checkTokenFilter($fileFilter."\\".$classFilter);
 						// inserisce il riferimento all'oggetto
 						array_push($registryFilter, $obj);
 						// salvo anche le stringhe di configurazione
@@ -315,6 +315,9 @@ class IFileConfig {
 				$this->config['filters'] = (!empty($registryFilter)) ? $registryFilter : null;
 				// salvo anche le stringhe di configurazione
 				$this->config['xml-filters'] = (!empty($xmlRegistryFilter)) ? $xmlRegistryFilter : null;
+				
+				echo __METHOD__.PHP_EOL;
+				print_r($this->config);
 			}
 		}	
 	}
@@ -481,24 +484,33 @@ class IFileConfig {
 	 * @return Zend_Search_Lucene_Analysis_TokenFilter
 	 * @throws ReflectionException , IFileException  
 	 */
-	protected function checkTokenFilter ($fileFilter, $classFilter) {
+	protected function checkTokenFilter ($classFilter) {
 		
-		if (is_dir(realpath($fileFilter)) || !is_file($fileFilter)) {
-			throw new IFileException('File TokenFilters does not exist');
+		if (!class_exists($classFilter)) {
+			throw new IFileException('Class TokenFilters '.$classFilter.' does not exist');
 		}
 		
-		// require della classe
-		require_once($fileFilter);
 		// recupera tutte le classi che estende
-		$classes = $this->getAncestors($classFilter);
+		$interfaces = $this->getIntefaces($classFilter);
 		
 		// verifico che la classe estenda la Zend_Search_Lucene_Analysis_TokenFilter			
-		if(!in_array(self::ZEND_TOKENFILTER, $classes)) {
-			throw new IFileException('The class does not implement Zend_Search_Lucene_Analysis_TokenFilter');
+		if(!in_array(self::ZEND_TOKENFILTER, $interfaces)) {
+			throw new IFileException('The class does not implement ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface');
 		}
+		
 		// Gli oggetti TokenFilter sono utilizzati solo dalla interfaccia Lucene
 		// pertanto non dovrebbero essere istanziati qui, ma nella creazione di Lucene
 		return $classFilter;
+	}
+	
+	/**
+	 * Ritorna un array delle implementazioni
+	 *
+	 * @param string $class
+	 * @return array
+	 */
+	private function getIntefaces ($class) {
+		return class_implements($class);
 	}
 	
 	/**
