@@ -10,11 +10,11 @@ use ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface;
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/en-GB
+ * @subpackage TokenFilter/Stemming/French
  * @author 	   Giampaolo Losito, Antonio Di Girolamo
  * @copyright  2011 isApp.it (www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
- * @version    1.0
+ * @version    2.0
  */
 
 /**
@@ -22,7 +22,7 @@ use ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface;
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/en-GB
+ * @subpackage TokenFilter/Stemming/French
  * @author 	   Giampaolo Losito, Antonio Di Girolamo
  * @copyright  2011 isApp.it (www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999

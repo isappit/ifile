@@ -6,7 +6,7 @@ namespace Isappit\Ifile\Tokenfilter\Stemming\English\EnglishStemmer;
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/en-GB
+ * @subpackage TokenFilter/Stemming/English/EnglishStemmer
  * @author 	   Richard Heyes & Jon Abernathy - http://www.phpguru.org/
  * @copyright  2005 Richard Heyes (http://www.phpguru.org/)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
@@ -18,7 +18,7 @@ namespace Isappit\Ifile\Tokenfilter\Stemming\English\EnglishStemmer;
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming
+ * @subpackage TokenFilter/Stemming/English/EnglishStemmer
  * @author 	   Richard Heyes & Jon Abernathy - http://www.phpguru.org/
  * @copyright  2005 Richard Heyes (http://www.phpguru.org/)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
