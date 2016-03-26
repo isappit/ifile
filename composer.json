@@ -47,6 +47,11 @@
 			"reference": "master"
 		},
 		{
+			"type": "git",
+			"url": "https://github.com/JamesHeinrich/getID3.git",
+			"reference": "master"
+		},
+		{
             "type": "composer",
             "url": "http://packages.zendframework.com/"
         }
@@ -54,6 +59,7 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendpdf": "dev-master",
-        "zendframework/zendsearch": "dev-master"
+        "zendframework/zendsearch": "dev-master",
+        "james-heinrich/getid3": "dev-master"
     }
 }

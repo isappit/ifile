@@ -1,17 +1,16 @@
 <?php
-namespace Isappit\Ifile\Tokenfilter\Stemming\Porter;
+namespace Isappit\Ifile\Tokenfilter\Stemming\Russian;
 
 use Isappit\Ifile\Exception\IFileStemException;
 use Isappit\Ifile\Servercheck\LuceneServerCheck;
 use ZendSearch\Lucene\Analysis\Token as Zend_Search_Lucene_Analysis_Token;
 use ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface;
-
 /**
  * IFile Framework
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/Porter
+ * @subpackage TokenFilter/Stemming/Russian
  * @author 	   Giampaolo Losito, Antonio Di Girolamo
  * @copyright  2011 isApp.it (www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
@@ -19,17 +18,17 @@ use ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface;
  */
 
 /**
- * Lucene Token Filter per lo stemming della lingua Porter utilizzando la libreria PECL "Stem" 
+ * Lucene Token Filter per lo stemming della lingua Russa utilizzando la libreria PECL "Stem" 
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage TokenFilter/Stemming/Porter
+ * @subpackage TokenFilter/Stemming/Russian
  * @author 	   Giampaolo Losito, Antonio Di Girolamo
  * @copyright  2011 isApp.it (www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
 
-class PorterPECLStemmer implements TokenFilterInterface
+class RussianUnicodePECLStemmer implements TokenFilterInterface
 {
     
     /**
@@ -49,8 +48,8 @@ class PorterPECLStemmer implements TokenFilterInterface
 			throw new IFileStemException("PECL Stem library not supported.");
 		}
 		
-		if (!function_exists('stem_porter')) {
-			throw new IFileStemException("Porter Stemmer not supported. Install and compile PECL Stem with Porter Stemmer.");
+		if (!function_exists('stem_russian_unicode')) {
+			throw new IFileStemException("Russian Stemmer not supported. Install and compile PECL Stem with Russian Stemmer.");
 		}
     }
 
@@ -63,7 +62,7 @@ class PorterPECLStemmer implements TokenFilterInterface
     public function normalize(Zend_Search_Lucene_Analysis_Token $srcToken) {
 		
 		$newToken = new Zend_Search_Lucene_Analysis_Token(
-                                     stem_porter( $srcToken->getTermText() ),
+                                     stem_russian_unicode( $srcToken->getTermText() ),
                                      $srcToken->getStartOffset(),
                                      $srcToken->getEndOffset());
 
