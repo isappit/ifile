@@ -33,7 +33,7 @@ class IFileConfig {
 	/**
 	 * Analyzer class
 	 */
-	const ZEND_ANALYZER = 'ZendSearch\Lucene\Analysis\Analyzer';
+	const ZEND_ANALYZER = 'ZendSearch\Lucene\Analysis\Analyzer\Common\AbstractCommon';
 	/**
 	 * IFileConfig instance
 	 * 
@@ -258,7 +258,7 @@ class IFileConfig {
 				
 				if (!empty($fileAnalyzer)) {
 					$classAnalyzer = $xpath->query("custom-default", $analyzer)->item(0)->getAttributeNode("class")->value;				
-					$obj = $this->checkAnalyzer($fileAnalyzer, $classAnalyzer);
+					$obj = $this->checkAnalyzer($fileAnalyzer."\\".$classAnalyzer);
 					$this->config['custom-analyzer'] = $obj;
 					// salvo anche le stringhe di configurazione
 					$this->config['xml-custom-analyzer'] = array('file' => $fileAnalyzer, 'class' => $classAnalyzer);
@@ -455,33 +455,31 @@ class IFileConfig {
 	/**
 	 * Verifica che l'oggetto analyzer esista
 	 * 
-	 * @return Zend_Search_Lucene_Analysis_Analyzer
+	 * @return ZendSearch\Lucene\Analysis\Analyzer
 	 * @throws ReflectionException , IFileException  
 	 */
-	protected function checkAnalyzer ($fileAnalyzer, $classAnalyzer) {
+	protected function checkAnalyzer ($classFilter) {
 		
-		if (is_dir(realpath($fileAnalyzer)) || !is_file($fileAnalyzer)) {
-			throw new IFileException('File Analyzer does not exist');
+		if (!class_exists($classFilter)) {
+			throw new IFileException('Class Analyzer '.$classFilter.' does not exist');
 		}
 		
-		// require della classe
-		require_once($fileAnalyzer);
 		// recupera tutte le classi che estende
-		$classes = $this->getAncestors($classAnalyzer);
+		$classes = $this->getAncestors($classFilter);
 		
 		// verifico che la classe estenda la Zend_Search_Lucene_Analysis_TokenFilter			
 		if(!in_array(self::ZEND_ANALYZER, $classes)) {
-			throw new IFileException('The class does not implement ZendSearch\\Lucene\\Analysis\\Analyzer');
+			throw new IFileException('The class does not extends '.self::ZEND_ANALYZER);
 		}
 		// L'oggetto Analyzer e' utilizzato solo dalla interfaccia Lucene
 		// pertanto non dovrebbero essere istanziati qui, ma nella creazione di Lucene
-		return $classAnalyzer;
+		return $classFilter;
 	}
 	
 	/**
 	 * Verifica che l'oggetto Token Filter esista
 	 * 
-	 * @return Zend_Search_Lucene_Analysis_TokenFilter
+	 * @return ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface
 	 * @throws ReflectionException , IFileException  
 	 */
 	protected function checkTokenFilter ($classFilter) {
@@ -495,7 +493,7 @@ class IFileConfig {
 		
 		// verifico che la classe estenda la Zend_Search_Lucene_Analysis_TokenFilter			
 		if(!in_array(self::ZEND_TOKENFILTER, $interfaces)) {
-			throw new IFileException('The class does not implement ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface');
+			throw new IFileException('The class does not implement '.self::ZEND_TOKENFILTER);
 		}
 		
 		// Gli oggetti TokenFilter sono utilizzati solo dalla interfaccia Lucene

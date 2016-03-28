@@ -208,7 +208,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 			$analyzer = $reflection->newInstance();		
 		} else {			
 			// Reflection		
-			$reflection = new ReflectionClass($customAnalyzer);
+			$reflection = new \ReflectionClass($customAnalyzer);
 			// creazione dell'oggetto
 			$analyzer = $reflection->newInstance();
 		}
