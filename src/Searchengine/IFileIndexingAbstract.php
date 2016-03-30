@@ -7,6 +7,8 @@ use Isappit\Ifile\Exception\IFileException;
 use Isappit\Ifile\Helpers\IFileHelper;
 use Isappit\Ifile\Helpers\IFileInfoFile;
 use Isappit\Ifile\Query\IFileQueryRegistry;
+use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
+use ZendSearch\Lucene\Document\Field as Zend_Search_Lucene_Field;
 
 /**
  * IFile framework

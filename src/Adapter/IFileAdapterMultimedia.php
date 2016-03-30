@@ -2,7 +2,7 @@
 namespace Isappit\Ifile\Adapter;
 
 use Isappit\Ifile\Adapter\IFileAdapterAbstract;
-use Isappit\Ifile\Adapter\Helpers\Multimedia2Txt
+use Isappit\Ifile\Adapter\Helpers\Multimedia2Txt;
 use Isappit\Ifile\Exception\IFileAdapterException;
 use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
 

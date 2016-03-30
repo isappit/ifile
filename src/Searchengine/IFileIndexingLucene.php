@@ -9,7 +9,16 @@ use ZendSearch\Lucene\Lucene as Zend_Search_Lucene;
 use ZendSearch\Lucene\Analysis\Analyzer\Analyzer as Zend_Search_Lucene_Analysis_Analyzer;
 use ZendSearch\Lucene\Analysis\TokenFilter\StopWords as Zend_Search_Lucene_Analysis_TokenFilter_StopWords;
 use ZendSearch\Lucene\Analysis\TokenFilter\ShortWords as Zend_Search_Lucene_Analysis_TokenFilter_ShortWords;
-
+use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
+use ZendSearch\Lucene\Document\Field as Zend_Search_Lucene_Field;
+use ZendSearch\Lucene\Search\Query\Boolean as Zend_Search_Lucene_Search_Query_Boolean;
+use ZendSearch\Lucene\Search\Query\Fuzzy as Zend_Search_Lucene_Search_Query_Fuzzy;
+use ZendSearch\Lucene\Search\Query\MultiTerm as Zend_Search_Lucene_Search_Query_MultiTerm;
+use ZendSearch\Lucene\Search\Query\Phrase as Zend_Search_Lucene_Search_Query_Phrase;
+use ZendSearch\Lucene\Search\QueryParser as Zend_Search_Lucene_Search_QueryParser;
+use ZendSearch\Lucene\Search\Query\Range as Zend_Search_Lucene_Search_Query_Range;
+use ZendSearch\Lucene\Search\Query\Wildcard as Zend_Search_Lucene_Search_Query_Wildcard;
+use ZendSearch\Lucene\Index\Term as Zend_Search_Lucene_Index_Term;
 /**
  * IFile framework
  * 

@@ -2,6 +2,7 @@
 namespace Isappit\Ifile\Adapter;
 
 use Isappit\Ifile\Adapter\IfileAdapterInterface;
+use Isappit\Ifile\Adapter\Beans\LuceneDataIndexBean;
 use Isappit\Ifile\Adapter\Helpers\OpenOffice2Txt;
 use Isappit\Ifile\Exception\IFileAdapterException;
 /**

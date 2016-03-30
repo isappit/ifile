@@ -3,7 +3,7 @@ namespace Isappit\Ifile\Adapter;
 
 use Isappit\Ifile\Adapter\IFileAdapterAbstract;
 use Isappit\Ifile\Adapter\Helpers\Image2Txt;
-use Isappit\Ifile\Adapter\Helpers\Multimedia2Txt
+use Isappit\Ifile\Adapter\Helpers\Multimedia2Txt;
 use Isappit\Ifile\Exception\IFileAdapterException;
 use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
 /**
@@ -81,7 +81,7 @@ class IFileAdapterImage extends IFileAdapterAbstract
 				break;
 			default:
 				// istanzia la classe per la parserizzazione dei file Immagine
-				$image = new Multimedia2txt($this->getFilename(), $IfileConfig->getConfig('encoding'));
+				$image = new Multimedia2Txt($this->getFilename(), $IfileConfig->getConfig('encoding'));
 				//$result 	= $multimedia->parseTag($this->tagType);
 				$result = $image->parseTag($this->tagType);
 		}

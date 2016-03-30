@@ -13,7 +13,7 @@ use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
- * @version    1.0 LuceneDataIndexBean.php 2011-01-12 15:05:21
+ * @version    2.0
  */
 
 /**
@@ -26,7 +26,7 @@ use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class DocumentDataIndexBean {
+class LuceneDataIndexBean {
 	
 	/**
 	 * Titolo del documento
