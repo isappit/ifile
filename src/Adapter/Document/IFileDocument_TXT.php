@@ -1,9 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter\Document;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -13,8 +11,12 @@ namespace Isappit\Ifile\Adapter\Document;
  * @version    2.0
  */
 
-/** Adatpter_Search_Lucene_Document_Abstract */
-require_once 'Adapter_Search_Lucene_Document_Abstract.php';
+namespace Isappit\Ifile\Adapter\Document;
+
+use Isappit\Ifile\Adapter\IFileAdapterAbstract;
+use Isappit\Ifile\Adapter\Beans\LuceneDataIndexBean;
+use Isappit\Ifile\Exception\IFileAdapterException;
+
 
 /**
  * Adapter per il recupero del contenuto dei file TXT
@@ -26,7 +28,7 @@ require_once 'Adapter_Search_Lucene_Document_Abstract.php';
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class IFileDocument_TXT extends Adapter_Search_Lucene_Document_Abstract 
+class IFileDocument_TXT extends IFileAdapterAbstract 
 {
 	public function __construct() {
 		parent::__construct();
@@ -46,8 +48,7 @@ class IFileDocument_TXT extends Adapter_Search_Lucene_Document_Abstract
 		
 		// il body deve essere valorizzato
 		if (!$this->indexValues->issetNotEmpty('body')) {
-			require_once 'Adapter_Search_Lucene_Exception.php';
-			throw new Adapter_Search_Lucene_Exception('Empty body');	
+			throw new IFileAdapterException('Empty body');	
 		}
         
 		return $this->indexValues->getLuceneDocument();
@@ -67,8 +68,7 @@ class IFileDocument_TXT extends Adapter_Search_Lucene_Document_Abstract
 		$data = @file_get_contents($this->getFilename());
 		
 		if ($data === false) {
-			require_once 'Adapter_Search_Lucene_Exception.php';
-			throw new Adapter_Search_Lucene_Exception('Error retrieving the contents of the file');
+			throw new IFileAdapterException('Error retrieving the contents of the file');
 		}
 		
 		$this->indexValues->setBody($data);

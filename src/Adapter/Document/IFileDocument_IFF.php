@@ -1,9 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter\Document;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -12,9 +10,9 @@ namespace Isappit\Ifile\Adapter\Document;
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    2.0
  */
+namespace Isappit\Ifile\Adapter\Document;
 
-/** Adatpter_Search_Lucene_Document_Abstract */
-require_once 'Adapter_Search_Lucene_Document_Multimedia.php';
+use Isappit\Ifile\Adapter\IFileAdapterMultimedia;
 
 /**
  * Adapter per il recupero del contenuto dei METATAG dei file IFF
@@ -27,7 +25,7 @@ require_once 'Adapter_Search_Lucene_Document_Multimedia.php';
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class IFileDocument_IFF extends Adapter_Search_Lucene_Document_Multimedia 
+class IFileDocument_IFF extends IFileAdapterMultimedia 
 {
 	public function __construct() {		
 		parent::__construct();	

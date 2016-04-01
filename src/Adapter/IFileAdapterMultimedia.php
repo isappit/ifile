@@ -1,14 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter;
-
-use Isappit\Ifile\Adapter\IFileAdapterAbstract;
-use Isappit\Ifile\Adapter\Helpers\Multimedia2Txt;
-use Isappit\Ifile\Exception\IFileAdapterException;
-use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -17,6 +10,15 @@ use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    2.0
  */
+
+namespace Isappit\Ifile\Adapter;
+
+use Isappit\Ifile\Adapter\IFileAdapterAbstract;
+use Isappit\Ifile\Adapter\Helpers\Multimedia2Txt;
+use Isappit\Ifile\Config\IFileConfig;
+use Isappit\Ifile\Exception\IFileAdapterException;
+use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
+use ZendSearch\Lucene\Document\Field as Zend_Search_Lucene_Field;
 
 /**
  * Adapter per il recupero del contenuto dei metadati dei file multimediali

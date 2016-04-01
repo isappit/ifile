@@ -1,9 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter\Document;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -12,12 +10,12 @@ namespace Isappit\Ifile\Adapter\Document;
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    2.0
  */
+namespace Isappit\Ifile\Adapter\Document;
 
-/** Adatpter_Search_Lucene_Document_Abstract */
-require_once 'Adapter_Search_Lucene_Document_Multimedia.php';
+use Isappit\Ifile\Adapter\IFileAdapterMultimedia;
 
 /**
- * Adapter per il recupero del contenuto degli ID3 TAG dei file MP3
+ * Adapter per il recupero del contenuto dei METATAG dei file MP3
  *
  * @category   IndexingFile
  * @package    ifile
@@ -26,7 +24,7 @@ require_once 'Adapter_Search_Lucene_Document_Multimedia.php';
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class IFileDocument_MP3 extends Adapter_Search_Lucene_Document_Multimedia 
+class IFileDocument_MP3 extends IFileAdapterMultimedia 
 {
 	public function __construct() {
 		parent::__construct();					 

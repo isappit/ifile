@@ -1,9 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter\Document;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -12,9 +10,9 @@ namespace Isappit\Ifile\Adapter\Document;
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    2.0
  */
+namespace Isappit\Ifile\Adapter\Document;
 
-/** Adapter_Search_Lucene_Document_Image */
-require_once 'Adapter_Search_Lucene_Document_Image.php';
+use Isappit\Ifile\Adapter\IFileAdapterImage;
 
 /**
  * Adapter per il recupero del contenuto degli EXIF TAG dei file JPG
@@ -26,7 +24,7 @@ require_once 'Adapter_Search_Lucene_Document_Image.php';
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class IFileDocument_JPG extends Adapter_Search_Lucene_Document_Image 
+class IFileDocument_JPG extends IFileAdapterImage 
 {
 	protected $tagType = 'jpg';
 	

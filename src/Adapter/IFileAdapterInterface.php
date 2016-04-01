@@ -1,9 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -12,6 +10,8 @@ namespace Isappit\Ifile\Adapter;
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    2.0
  */
+
+namespace Isappit\Ifile\Adapter;
 
 /**
  * Elemento di interfaccia per gli Adapter

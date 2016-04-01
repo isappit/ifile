@@ -1,25 +1,24 @@
 <?php
-namespace Isappit\Ifile\Adapter\Helpers;
 /**
  * IFile Framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
- * @subpackage adapter/helpers
+ * @subpackage adapter
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright 
+ * @copyright
  * @license
  * @version    1.0 class.multimedia2txt.php 2011-01-12 12:19:34
  */
 
-/** @see getID3 */
-require_once ("getid3/getid3.php");
+namespace Isappit\Ifile\Adapter\Helpers;
+
 /**
  * Recupera le informazioni di un file multimediali utilizzando la libreria getID3 
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage adapter/helpers
+ * @subpackage adapter
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
  * @copyright  
  * @license

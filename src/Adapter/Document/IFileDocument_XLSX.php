@@ -1,9 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter\Document;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -13,10 +11,11 @@ namespace Isappit\Ifile\Adapter\Document;
  * @version    2.0
  */
 
-/** Zend_Search_Lucene_Document_Xlsx */
-require_once 'Zend/Search/Lucene/Document/Xlsx.php';
-/** Adatpter_Search_Lucene_Document_Abstract */
-require_once 'Adapter_Search_Lucene_Document_Abstract.php';
+namespace Isappit\Ifile\Adapter\Document;
+
+use Isappit\Ifile\Adapter\IFileAdapterAbstract;
+use Isappit\Ifile\Exception\IFileAdapterException;
+use ZendSearch\Lucene\Document\Xlsx as Zend_Search_Lucene_Document_Xlsx;
 
 /**
  * Adapter per il recupero del contenuto dei file XLSX
@@ -28,7 +27,7 @@ require_once 'Adapter_Search_Lucene_Document_Abstract.php';
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class IFileDocument_XLSX extends Adapter_Search_Lucene_Document_Abstract 
+class IFileDocument_XLSX extends IFileAdapterAbstract 
 {
 	public function __construct() {
 		parent::__construct();
@@ -49,8 +48,7 @@ class IFileDocument_XLSX extends Adapter_Search_Lucene_Document_Abstract
 		$doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($this->getFilename());	
 		// il body deve essere valorizzato
 		if (trim($doc->getFieldValue('body')) == '') {
-			require_once 'Adapter_Search_Lucene_Exception.php';
-			throw new Adapter_Search_Lucene_Exception('Empty body');
+			throw new IFileAdapterException('Empty body');
 		}
 		
 		return $doc;

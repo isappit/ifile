@@ -1,9 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter\Document;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -12,9 +10,9 @@ namespace Isappit\Ifile\Adapter\Document;
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    2.0
  */
+namespace Isappit\Ifile\Adapter\Document;
 
-/** Adatpter_Search_Lucene_Document_ODT */
-require_once 'Adapter_Search_Lucene_Document_OpenOffice.php';
+use Isappit\Ifile\Adapter\IFileAdapterOpenOffice;
 
 /**
  * Adapter per il recupero del contenuto dei file ODS
@@ -26,7 +24,7 @@ require_once 'Adapter_Search_Lucene_Document_OpenOffice.php';
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class IFileDocument_ODS extends Adapter_Search_Lucene_Document_OpenOffice 
+class IFileDocument_ODS extends IFileAdapterOpenOffice 
 {
 	public function __construct() {
 		parent::__construct();

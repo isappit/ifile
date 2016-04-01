@@ -1,9 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter\Document;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -13,8 +11,12 @@ namespace Isappit\Ifile\Adapter\Document;
  * @version    2.0
  */
 
-/** Adatpter_Search_Lucene_Document_Abstract */
-require_once 'Adapter_Search_Lucene_Document_Abstract.php';
+namespace Isappit\Ifile\Adapter\Document;
+
+use Isappit\Ifile\Adapter\IFileAdapterAbstract;
+use Isappit\Ifile\Adapter\Beans\LuceneDataIndexBean;
+use Isappit\Ifile\Config\IFileConfig;
+use Isappit\Ifile\Exception\IFileAdapterException;
 
 /**
  * Adapter per il recupero del contenuto dei file PDF
@@ -26,7 +28,7 @@ require_once 'Adapter_Search_Lucene_Document_Abstract.php';
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class IFileDocument_PDF extends Adapter_Search_Lucene_Document_Abstract 
+class IFileDocument_PDF extends IFileAdapterAbstract 
 {
 	/**
 	 * Percorso del file PDF
@@ -63,8 +65,7 @@ class IFileDocument_PDF extends Adapter_Search_Lucene_Document_Abstract
 		
 		// il body deve essere valorizzato
 		if (!$this->indexValues->issetNotEmpty('body')) {
-			require_once 'Adapter_Search_Lucene_Exception.php';
-			throw new Adapter_Search_Lucene_Exception('Empty body');	
+			throw new IFileAdapterException('Empty body');	
 		}
         
 		return $this->indexValues->getLuceneDocument();
@@ -106,15 +107,13 @@ class IFileDocument_PDF extends Adapter_Search_Lucene_Document_Abstract
 		// check XPDF 
 		$reportCheckXPDF = $reportServerCheck['XPDF']['PDFTOTEXT'];		 
 		if (!$reportCheckXPDF->getCheck()) {
-			require_once 'Adapter_Search_Lucene_Exception.php';
-			throw new Adapter_Search_Lucene_Exception("XPDF not executable");
+			throw new IFileAdapterException("XPDF not executable");
 		}		
 		
 		// check popen 
 		$reportCheckPopen = $reportServerCheck['Function']['popen'];
 		if (!$reportCheckPopen->getCheck()) {
-			require_once 'Adapter_Search_Lucene_Exception.php';
-			throw new Adapter_Search_Lucene_Exception("Popen function not exists");
+			throw new IFileAdapterException("Popen function not exists");
 		}
 		// definizione dei path
 		$pathBinaryFile = $pathInfoBinaryFile = dirname(__FILE__)."/helpers/binaries/";
@@ -170,8 +169,7 @@ class IFileDocument_PDF extends Adapter_Search_Lucene_Document_Abstract
 			// check XPDFINFO 
 			$reportCheckXPDF = $reportServerCheck['XPDF']['PDFINFO'];		 
 			if (!$reportCheckXPDF->getCheck()) {
-				require_once 'Adapter_Search_Lucene_Exception.php';
-				throw new Adapter_Search_Lucene_Exception("XPDF INFO not executable");
+				throw new IFileAdapterException("XPDF INFO not executable");
 			}	
 		}
 		
@@ -262,16 +260,15 @@ class IFileDocument_PDF extends Adapter_Search_Lucene_Document_Abstract
 			// pulizia del buffer degli errori
 			libxml_clear_errors();
 			// istanzio un oggetto DOM
-			$dom = new DOMDocument();
+			$dom = new \DOMDocument();
 			//carico il file HTML
 			if (!$dom->loadHTML($contents)) {
 				$errors = libxml_get_errors();
-				require_once 'Adapter_Search_Lucene_Exception.php';
-				throw new Adapter_Search_Lucene_Exception('XPDF not return HTML meta-data');
+				throw new IFileAdapterException('XPDF not return HTML meta-data');
 			}
 			
 			// creo un oggetto Xpath
-			$xpath = new DOMXPath($dom);
+			$xpath = new \DOMXPath($dom);
 			// recupero i nodi dei meta dati
 			$nodeMeta = $xpath->query("//html/head/meta");
 			// recupero le informazioni del file PDF	

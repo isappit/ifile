@@ -1,13 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter;
-
-use Isappit\Ifile\Adapter\IfileAdapterInterface;
-use Isappit\Ifile\Adapter\Beans\DocumentDataIndexBean;
-use Isappit\Ifile\Adapter\Helpers\AdapterHelper;
-use Isappit\Ifile\Exception\IFileAdapterException;
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -16,6 +10,11 @@ use Isappit\Ifile\Exception\IFileAdapterException;
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    2.0
  */
+
+namespace Isappit\Ifile\Adapter;
+
+use Isappit\Ifile\Adapter\IfileAdapterInterface;
+use Isappit\Ifile\Exception\IFileAdapterException;
 
 /**
  * Classe astratta che implementa l'interfaccia per gli Adapter.

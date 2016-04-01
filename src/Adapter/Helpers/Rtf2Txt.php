@@ -1,24 +1,24 @@
 <?php
-namespace Isappit\Ifile\Adapter\Helpers;
-
 /**
  * IFile Framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
- * @subpackage adapter/helpers
+ * @subpackage adapter
  * @author 	   http://www.blogseye.com/php-rtf-to-text-converter/
- * @copyright  
+ * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    2.0
  */
+
+namespace Isappit\Ifile\Adapter\Helpers;
 
 /**
  * Permette di recuperare il contenuto di un documento MS Word in formato testo. 
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage adapter/helpers
+ * @subpackage adapter
  * @author     http://www.blogseye.com/php-rtf-to-text-converter/
  * @copyright  
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999

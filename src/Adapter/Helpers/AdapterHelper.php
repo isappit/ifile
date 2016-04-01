@@ -1,24 +1,23 @@
 <?php
-namespace Isappit\Ifile\Adapter\Helpers;
-
 /**
  * IFile Framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
- * @subpackage adapter/helpers
+ * @subpackage adapter
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright 
+ * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    1.0 AdapterHelper.php 2011-01-17 16:09:56
  */
+namespace Isappit\Ifile\Adapter\Helpers;
 
 /**
  * Classe di utility
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage adapter/helpers
+ * @subpackage adapter
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999 

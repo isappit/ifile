@@ -1,23 +1,23 @@
 <?php
-namespace Isappit\Ifile\Adapter\Helpers;
 /**
  * IFile Framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
- * @subpackage adapter/helpers
+ * @subpackage adapter
  * @author 	   Bogomil Alexandrov, Peter Litov
  * @copyright  Copyright (c) Motion Ltd. 2004
  * @license    GNU General Public License
  * @version    2.0
  */
+namespace Isappit\Ifile\Adapter\Helpers;
 
 /**
  * Permette di recuperare il contenuto di un documento MS Word in formato testo. 
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage adapter/helpers
+ * @subpackage adapter
  * @author     Bogomil Alexandrov, Peter Litov
  * @copyright  Copyright (c) Motion Ltd. 2004
  * @license    GNU General Public License

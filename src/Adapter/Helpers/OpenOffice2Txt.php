@@ -1,26 +1,27 @@
 <?php
+/**
+ * IFile Framework
+ *
+ * @category   IndexingFile
+ * @package    ifile
+ * @subpackage adapter
+ * @author 	   Giampaolo Losito, Antonio Di Girolomo
+ * @copyright
+ * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
+ * @version    2.0
+ */
+
 namespace Isappit\Ifile\Adapter\Helpers;
 
 use Isappit\Ifile\Adapter\Helpers\AdapterHelper;
 use Isappit\Ifile\Exception\IFileAdapterException;
-/**
- * IFile Framework
- * 
- * @category   IndexingFile
- * @package    ifile
- * @subpackage adapter/helpers
- * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright 
- * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
- * @version    2.0
- */
 
 /**
  * Recuperare il contenuto di un documento OpenOffice in formato testo. 
  * 
  * @category   IndexingFile
  * @package    ifile
- * @subpackage adapter/helpers
+ * @subpackage adapter
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
@@ -50,7 +51,7 @@ class OpenOffice2Txt {
 	function __construct($archiveFile) {
 		$this->archive = $archiveFile;
 		// Create new ZIP archive
-	    $this->zip = new ZipArchive;
+	    $this->zip = new \ZipArchive;
 		$code = $this->zip->open($this->archive);
 		// Open received archive file
 	    if (true !== $code) {

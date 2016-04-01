@@ -1,9 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter\Document;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -13,8 +11,9 @@ namespace Isappit\Ifile\Adapter\Document;
  * @version    2.0
  */
 
-/** Adatpter_Search_Lucene_Document_Abstract */
-require_once 'Adapter_Search_Lucene_Document_Multimedia.php';
+namespace Isappit\Ifile\Adapter\Document;
+
+use Isappit\Ifile\Adapter\IFileAdapterMultimedia;
 
 /**
  * Adapter per il recupero del contenuto dei METATAG dei file WMA
@@ -27,7 +26,7 @@ require_once 'Adapter_Search_Lucene_Document_Multimedia.php';
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class IFileDocument_WMA extends Adapter_Search_Lucene_Document_Multimedia 
+class IFileDocument_WMA extends IFileAdapterMultimedia 
 {
 	public function __construct() {		
 		parent::__construct();	

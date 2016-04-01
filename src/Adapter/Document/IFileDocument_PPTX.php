@@ -1,9 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter\Document;
-
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -12,11 +10,11 @@ namespace Isappit\Ifile\Adapter\Document;
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    2.0
  */
+namespace Isappit\Ifile\Adapter\Document;
 
-/** Zend_Search_Lucene_Document_Pptx */
-require_once 'Zend/Search/Lucene/Document/Pptx.php';
-/** Adatpter_Search_Lucene_Document_Abstract */
-require_once 'Adapter_Search_Lucene_Document_Abstract.php';
+use Isappit\Ifile\Adapter\IFileAdapterAbstract;
+use Isappit\Ifile\Exception\IFileAdapterException;
+use ZendSearch\Lucene\Document\Pptx as Zend_Search_Lucene_Document_Pptx;
 
 /**
  * Adapter per il recupero del contenuto dei file PPTX
@@ -28,7 +26,7 @@ require_once 'Adapter_Search_Lucene_Document_Abstract.php';
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class IFileDocument_PPTX extends Adapter_Search_Lucene_Document_Abstract 
+class IFileDocument_PPTX extends IFileAdapterAbstract 
 {
 	public function __construct() {
 		parent::__construct();
@@ -49,8 +47,7 @@ class IFileDocument_PPTX extends Adapter_Search_Lucene_Document_Abstract
 		$doc = Zend_Search_Lucene_Document_Pptx::loadPptxFile($this->getFilename());	
 		// il body deve essere valorizzato
 		if (trim($doc->getFieldValue('body')) == '') {
-			require_once 'Adapter_Search_Lucene_Exception.php';
-			throw new Adapter_Search_Lucene_Exception('Empty body');
+			throw new IFileAdapterException('Empty body');
 		}
 		
 		return $doc;

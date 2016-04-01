@@ -1,13 +1,7 @@
 <?php
-namespace Isappit\Ifile\Adapter;
-
-use Isappit\Ifile\Adapter\IfileAdapterInterface;
-use Isappit\Ifile\Adapter\Beans\LuceneDataIndexBean;
-use Isappit\Ifile\Adapter\Helpers\OpenOffice2Txt;
-use Isappit\Ifile\Exception\IFileAdapterException;
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage adapter
@@ -16,6 +10,13 @@ use Isappit\Ifile\Exception\IFileAdapterException;
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    1.1.1 Adapter_Search_Lucene_Document_OpenOfficeT.php 2011-01-10 16:56:47
  */
+
+namespace Isappit\Ifile\Adapter;
+
+use Isappit\Ifile\Adapter\IfileAdapterInterface;
+use Isappit\Ifile\Adapter\Beans\LuceneDataIndexBean;
+use Isappit\Ifile\Adapter\Helpers\OpenOffice2Txt;
+use Isappit\Ifile\Exception\IFileAdapterException;
 
 /**
  * Adapter per il recupero del contenuto dei file OpenOffice
