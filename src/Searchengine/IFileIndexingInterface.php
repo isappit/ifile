@@ -2,6 +2,7 @@
 namespace Isappit\Ifile\Searchengine;
 
 use Isappit\Ifile\Query\IFileQueryRegistry;
+use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
 /**
  * IFile framework
  * 

@@ -16,7 +16,9 @@ namespace Isappit\Ifile\Adapter\Document;
 use Isappit\Ifile\Adapter\IFileAdapterAbstract;
 use Isappit\Ifile\Adapter\Beans\LuceneDataIndexBean;
 use Isappit\Ifile\Config\IFileConfig;
+use Isappit\Ifile\Config\Helpers\IFileXpdfConfig;
 use Isappit\Ifile\Exception\IFileAdapterException;
+use Isappit\Ifile\Servercheck\LuceneServerCheck;
 
 /**
  * Adapter per il recupero del contenuto dei file PDF
@@ -116,8 +118,8 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 			throw new IFileAdapterException("Popen function not exists");
 		}
 		// definizione dei path
-		$pathBinaryFile = $pathInfoBinaryFile = dirname(__FILE__)."/helpers/binaries/";
-		$configXpdf = $configInfoXpdf = dirname(__FILE__)."/helpers/binaries/xpdfrc/xpdfrc";
+		$pathBinaryFile = $pathInfoBinaryFile = dirname(__FILE__)."../Helpers/binaries/";
+		$configXpdf = $configInfoXpdf = dirname(__FILE__)."../Helpers/binaries/xpdfrc/xpdfrc";
 		
 		$original_name 	= $this->getFilename();
 		$so = $this->_stremingOutput();
@@ -172,6 +174,11 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 				throw new IFileAdapterException("XPDF INFO not executable");
 			}	
 		}
+		
+		
+		echo $pathBinaryFile.$executableInfo.PHP_EOL;
+		echo $pathInfoBinaryFile.$executableSO.PHP_EOL;
+		die();
 		
 		// IMPORTANTE:::::
 		// vengono inibiti tutti i tipi di errori pertanto se si 

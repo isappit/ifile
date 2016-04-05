@@ -88,9 +88,10 @@ class IFileFactory {
 			throw new IFileException('Type of indexing is not allowed');
 		} 
 		
-		$namespace = __NAMESPACE__.'\\Searchengine\\'.$className;
+		// define namespace class
+		$namespaceClass = __NAMESPACE__.'\\Searchengine\\'.$className;
 		// Reflection		
-		$reflection = new \ReflectionClass($namespace);
+		$reflection = new \ReflectionClass($namespaceClass);
 		
 		$found = false;
 		// get interfaces of the class
@@ -121,32 +122,31 @@ class IFileFactory {
 	public function getAdapterSearchLuceneDocument($ext) {
 		
 		// get name class
-		$className =  "Adapter_Search_Lucene_Document_".strtoupper($ext);
-		$pathFile  = $this->dirname.'adapter'.DIRECTORY_SEPARATOR.$className.'.php';
-
+		$className = 'IFileDocument_'.strtoupper($ext);
+		$pathFile  = $this->dirname.'Adapter/Document/'.$className.'.php';
+		
 		// check if file exists 
 		if (!file_exists($pathFile)) {
 			throw new IFileException('Type of file extension is not allowed');
 		} 
-
-		// require class
-		// require_once($pathFile);
-
+		
+		// define namespace class
+		$namespaceClass = __NAMESPACE__.'\\Adapter\\Document\\'.$className;
 		// Reflection		
-		$reflection = new ReflectionClass($className);
+		$reflection = new \ReflectionClass($namespaceClass);
 		$found = false;
 		// get interfaces of the class
 		$interfaces = $reflection->getInterfaces();
 		// check that class implement the ActionInterface			
 		foreach($interfaces as $interface) {
-			if ($interface->getName() == 'Adapter_Search_Lucene_Document_Interface') 
+			if ($interface->getName() == __NAMESPACE__.'\\Adapter\\IFileAdapterInterface') 
 			{
 				$found = true;
 				break;	
 			}				 
 		} 
 		if(!$found) {
-			throw new IFileException('The class does not implement Adapter_Search_Lucene_Document_Interface');
+			throw new IFileException('The class does not implement IFileAdapterInterface');
 		}
 		
 		// ritorna l'oggetto

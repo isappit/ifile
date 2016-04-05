@@ -60,9 +60,17 @@ class LuceneServerCheck {
 	 */
 	const TOZENDVERSION = '1.12.1';
 	/**
+	 * Prefisso Adapter Document
+	 */
+	const ADAPTER_DOCUMENT = 'IFileDocument_';
+	/**
 	 * Percorso degli Adapters
 	 */
-	const ADAPTERS_PATH = 'adapter/';
+	const ADAPTERS_PATH = 'Adapter/Document/';
+	/**
+	 * Percorso dei Binari
+	 */
+	const BINARIES_PATH = 'Adapter/Helpers/binaries/';
 	/**
 	 * XPDF installato nel sistema
 	 */
@@ -70,71 +78,71 @@ class LuceneServerCheck {
 	/**
 	 * ANTIWORD per Windows 
 	 */	
-	const BINARIES_WIN_DOC = 'adapter/helpers/binaries/windows/antiword.exe';
+	const BINARIES_WIN_DOC = 'windows/antiword.exe';
 	
 	/**
 	 * ANTIWORD per Linux
 	 */	
-	const BINARIES_LIN_DOC = 'adapter/helpers/binaries/linux/antiword';
+	const BINARIES_LIN_DOC = 'linux/antiword';
 	
 	/**
 	 * ANTIWORD per OS
 	 */	
-	const BINARIES_OSX_DOC = 'adapter/helpers/binaries/osx/antiword';
+	const BINARIES_OSX_DOC = 'osx/antiword';
 	
 	/**
 	 * XPDF per Windows 
 	 */	
-	const BINARIES_WIN = 'adapter/helpers/binaries/windows/pdftotext.exe';
+	const BINARIES_WIN = 'windows/pdftotext.exe';
 	/**
 	 * XPDF per Windows 64bit
 	 */	
-	const BINARIES_WIN_64 = 'adapter/helpers/binaries/windows/bin64/pdftotext.exe';
+	const BINARIES_WIN_64 = 'windows/bin64/pdftotext.exe';
 	/**
 	 * XPDF INFO per Windows 
 	 */	
-	const BINARIES_INFO_WIN = 'adapter/helpers/binaries/windows/pdfinfo.exe';
+	const BINARIES_INFO_WIN = 'windows/pdfinfo.exe';
 	/**
 	 * XPDF INFO per Windows 
 	 */	
-	const BINARIES_INFO_WIN_64 = 'adapter/helpers/binaries/windows/bin64/pdfinfo.exe';
+	const BINARIES_INFO_WIN_64 = 'windows/bin64/pdfinfo.exe';
 		
 	/**
 	 * XPDF per OSX 
 	 */	
-	const BINARIES_OSX = 'adapter/helpers/binaries/osx/pdftotext';
+	const BINARIES_OSX = 'osx/pdftotext';
 	/**
 	 * XPDF per FREEBSD 
 	 */	
-	const BINARIES_FRE = 'adapter/helpers/binaries/freebsd/pdftotext';	
+	const BINARIES_FRE = 'freebsd/pdftotext';	
 	
 	/**
 	 * XPDF per Linux 
 	 */
-	const BINARIES_LIN = 'adapter/helpers/binaries/linux/pdftotext';	
+	const BINARIES_LIN = 'linux/pdftotext';	
 	/**
 	 * XPDF per Linux 64bit
 	 */
-	const BINARIES_LIN_64 = 'adapter/helpers/binaries/linux/bin64/pdftotext';
+	const BINARIES_LIN_64 = 'linux/bin64/pdftotext';
 	
 	/**
 	 * XPDF INFO per Linux 
 	 */
-	const BINARIES_INFO_LIN = 'adapter/helpers/binaries/linux/pdfinfo';	
+	const BINARIES_INFO_LIN = 'linux/pdfinfo';	
 	/**
 	 * XPDF INFO per Linux 64bit
 	 */
-	const BINARIES_INFO_LIN_64 = 'adapter/helpers/binaries/linux/bin64/pdfinfo';
+	const BINARIES_INFO_LIN_64 = 'linux/bin64/pdfinfo';
 	
 	/**
 	 * XPDF per universal 
 	 */
-	const BINARIES_UNV = 'adapter/helpers/binaries/custom/pdftotext';
+	const BINARIES_UNV = 'custom/pdftotext';
 		
 	/**
 	 * Versione minima di PHP 
 	 */	
-	const PHPVERSION = '5.1.0';
+	const PHPVERSION = '5.3.0';
 	
 	/**
 	 * Array di oggetti ReportCheck
@@ -320,27 +328,16 @@ class LuceneServerCheck {
 	private function readExtensionsAllows() {
 		// @TODO da rivedere il recupero del Path
 		$dir = dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.LuceneServerCheck::ADAPTERS_PATH;
-					
+		
 		if (is_dir($dir)) {
 			if ($dh = opendir($dir)) {
 				while (($file = readdir($dh)) !== false) {
-					if (is_file($dir.$file) && strpos($file, "Adapter_Search_Lucene_Document_") !== false) {
+					if (is_file($dir.$file) && strpos($file, LuceneServerCheck::ADAPTER_DOCUMENT) !== false) {
 						// delete extension				
 						$filename = preg_replace('/\.[^.]*$/', '', $file);
 						// get extension file indexing
-						$extension = preg_replace('/Adapter_Search_Lucene_Document_/', '', $filename);
-						
-						switch ($extension) {
-							case 'Abstract':
-							case 'Interface':
-							case 'OpenOffice':
-							case 'Multimedia':
-							case 'Image':
-								// not parser
-								break;
-							default:
-								$this->extensionsAllows[strtolower($extension)] = strtolower($extension);
-						}
+						$extension = preg_replace('/'.LuceneServerCheck::ADAPTER_DOCUMENT.'/', '', $filename);
+						$this->extensionsAllows[strtolower($extension)] = strtolower($extension);
 					}
 				}
 				closedir($dh);
@@ -372,7 +369,7 @@ class LuceneServerCheck {
 	private function checkServer() {
 		// server 32/64bit
 		$server = $this->getServerBit();
-		$use = ($server == '64bit') ? 'Only for linux/windows.</br>Copy adapter/helpers/binaries/[linux|windows]/bin64/pdftotext in adapter/helpers/binaries/[linux|windows]' : 'Not defined'; 		
+		$use = ($server == '64bit') ? 'Only for linux/windows.</br>Copy Adapter/Helpers/binaries/[linux|windows]/bin64/pdftotext in Adapter/Helpers/binaries/[linux|windows]' : 'Not defined'; 		
 		// inizializza l'oggetto per il report
 		$reportCheck = new ReportCheck(true, 'Server', $server, 'Not defined' , 'Note: If the OS is 64bit but PHP running a 32 bit, the check will return (32 bit)', 'http://www.php.net/manual/en/install.php', $use);
 				
@@ -413,16 +410,18 @@ class LuceneServerCheck {
 		// pdftotext personalizzata
 		$pdftotextConfig = $this->_ifileConfig->getXpdf('pdftotext');
 		
+		$customXPDF = false;
 		// controlla se esiste una configurazione di una XPDF personalizzata
 		if (!empty($pdftotextConfig['executable'])) {
+			$customXPDF = true;
 			$path  = $pdftotextConfig['executable'];
-			$perms = $this->checkPermits($path, "0755", false, true);			
+			$perms = $this->checkPermits($path, "0755", false, $customXPDF);
 		}else if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 			$path  = LuceneServerCheck::BINARIES_WIN;
 			if ($serverbit == '64') {
 				$path  = LuceneServerCheck::BINARIES_WIN_64;
 			}
-			$perms = $this->checkPermits($path, "0755");			
+			$perms = $this->checkPermits($path, "0755");
 		}else if(strtoupper(substr(PHP_OS, 0, 3)) === 'FRE'){
 			$perms = $this->checkPermits(LuceneServerCheck::BINARIES_FRE, "0755");	
 			$path  = LuceneServerCheck::BINARIES_FRE;		
@@ -441,13 +440,15 @@ class LuceneServerCheck {
 			$path  = LuceneServerCheck::BINARIES_UNV;
 		}
 		
+		$infoPath = ($customXPDF) ? $path : LuceneServerCheck::BINARIES_PATH.$path;
+		
 		if (!$perms) {									
 			$reportCheck->setMessage('Unexecutable');	
-			$reportCheck->setInfo('Permission XPDF Binaries File ('.$path.'): '.$this->configmod.' - Please set to 0755 for binaries XPDF in '.strtoupper(substr(PHP_OS, 0, 3)));	
+			$reportCheck->setInfo('Permission XPDF Binaries File ('.$infoPath.'): '.$this->configmod.' - Please set to 0755 for binaries XPDF in '.strtoupper(substr(PHP_OS, 0, 3)));	
 		} else {
 			$reportCheck->setCheck(true);
 			$reportCheck->setMessage('Executable');
-			$reportCheck->setInfo('Permission XPDF Binaries File ('.$path.'): '.$this->configmod);
+			$reportCheck->setInfo('Permission XPDF Binaries File ('.$infoPath.'): '.$this->configmod);
 		}
 		
 		$this->pushReportCheck('XPDF', 'PDFTOTEXT', $reportCheck);
@@ -470,10 +471,12 @@ class LuceneServerCheck {
 		// pdfinfo personalizzata
 		$pdfinfoConfig = $this->_ifileConfig->getXpdf('pdfinfo');
 		
+		$customXPDF = false;
 		// controlla se esiste una configurazione di una XPDF INFO personalizzata
 		if (!empty($pdfinfoConfig['executable'])) {
+			$customXPDF = true;
 			$path  = $pdfinfoConfig['executable'];
-			$perms = $this->checkPermits($path, "0755", false, true);	
+			$perms = $this->checkPermits($path, "0755", false, $customXPDF);	
 		} else if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 			$path  = LuceneServerCheck::BINARIES_INFO_WIN;
 			if ($serverbit == '64') {
@@ -497,13 +500,14 @@ class LuceneServerCheck {
 			$reportCheck->setRequire('Not defined');	
 			$reportCheck->setInfo('XPDF INFO Binaries File isn\'t supported - for '.strtoupper(substr(PHP_OS, 0, 3)));
 		} else {
+			$infoPath = ($customXPDF) ? $path : LuceneServerCheck::BINARIES_PATH.$path;
 			if (!$perms) {									
 			$reportCheck->setMessage('Unexecutable');	
-				$reportCheck->setInfo('Permission XPDF INFO Binaries File ('.$path.'): '.$this->configmod.' - Please set to 0755 for binaries XPDF in '.strtoupper(substr(PHP_OS, 0, 3)));	
+				$reportCheck->setInfo('Permission XPDF INFO Binaries File ('.$infoPath.'): '.$this->configmod.' - Please set to 0755 for binaries XPDF in '.strtoupper(substr(PHP_OS, 0, 3)));	
 			} else {
 				$reportCheck->setCheck(true);
 				$reportCheck->setMessage('Executable');
-				$reportCheck->setInfo('Permission XPDF INFO Binaries File ('.$path.'): '.$this->configmod);
+				$reportCheck->setInfo('Permission XPDF INFO Binaries File ('.$infoPath.'): '.$this->configmod);
 			}	
 		}
 		
@@ -540,11 +544,11 @@ class LuceneServerCheck {
 		} else {
 			if (!$perms) {									
 				$reportCheck->setMessage('Unexecutable');	
-				$reportCheck->setInfo('Permission ANTIWORD Binaries File ('.$path.'): '.$this->configmod.' - Please set to 0755 for binaries ANTIWORD in '.strtoupper(substr(PHP_OS, 0, 3)));	
+				$reportCheck->setInfo('Permission ANTIWORD Binaries File ('.LuceneServerCheck::BINARIES_PATH.$path.'): '.$this->configmod.' - Please set to 0755 for binaries ANTIWORD in '.strtoupper(substr(PHP_OS, 0, 3)));	
 			} else {
 				$reportCheck->setCheck(true);
 				$reportCheck->setMessage('Executable');
-				$reportCheck->setInfo('Permission ANTIWORD Binaries File ('.$path.'): '.$this->configmod);
+				$reportCheck->setInfo('Permission ANTIWORD Binaries File ('.LuceneServerCheck::BINARIES_PATH.$path.'): '.$this->configmod);
 			}	
 		}
 		
@@ -795,29 +799,20 @@ class LuceneServerCheck {
 	 * 
 	 * @return boolean
 	 */
-	function checkPermits($path, $perm = '0755', $oct = false, $custom = false)
+	function checkPermits($path, $perm = 0755, $oct = false, $custom = false)
 	{
 		if (!$custom) {
 			// @TODO da rivedere il recupero del Path
-			$path = dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.$path;	
+			$path = dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.LuceneServerCheck::BINARIES_PATH.$path;
 		}
 		
-		// cerca di forzare i permessi
-		// chmod($path, $perm);
 	    clearstatcache();
-		
-		// alcuni sistemi operativi ritornano il valore n ottale
-		// vedi Macintosh o FreeBSD 
-		if (!$oct) {
-			$configmod = substr(sprintf('%o', fileperms($path)), -4);
-			$trcss = (($configmod == $perm || $configmod == "0777") ?  true : false) ;
-		} else {
-			$configmod = octdec(substr(sprintf('%o', fileperms($path)), -4));
-			$trcss = (($configmod == $perm || $configmod == "777") ?  true : false) ;
-		}
-		
+	    // recupera i permessi in formato ottale
+	    $configmod = decoct(fileperms($path) & 0777);
+		$trcss = ($perm === $configmod || 0777 === $configmod) ? true : false;
+	    
 		$this->configmod = $configmod;
 		return $trcss;		  
-	}  
+	} 
 }
 ?>
