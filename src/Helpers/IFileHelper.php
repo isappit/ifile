@@ -1,7 +1,10 @@
 <?php
 namespace Isappit\Ifile\Helpers;
 
+use Isappit\Ifile\Config\IFileConfig;
 use Isappit\Ifile\Exception\IFileException;
+use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
+use ZendSearch\Lucene\Document\Field as Zend_Search_Lucene_Field;
 /**
  * IFile framework
  * 

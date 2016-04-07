@@ -809,7 +809,7 @@ class LuceneServerCheck {
 	    clearstatcache();
 	    // recupera i permessi in formato ottale
 	    $configmod = decoct(fileperms($path) & 0777);
-		$trcss = ($perm === $configmod || 0777 === $configmod) ? true : false;
+		$trcss = ((int)$perm === (int)$configmod || 777 === (int)$configmod) ? true : false;
 	    
 		$this->configmod = $configmod;
 		return $trcss;		  

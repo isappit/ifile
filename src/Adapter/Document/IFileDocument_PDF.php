@@ -174,12 +174,6 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 				throw new IFileAdapterException("XPDF INFO not executable");
 			}	
 		}
-		
-		
-		echo $pathBinaryFile.$executableInfo.PHP_EOL;
-		echo $pathInfoBinaryFile.$executableSO.PHP_EOL;
-		die();
-		
 		// IMPORTANTE:::::
 		// vengono inibiti tutti i tipi di errori pertanto se si 
 		// verificano errori da shell il contenuto rimane vuoto. 
