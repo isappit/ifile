@@ -16,6 +16,7 @@ namespace Isappit\Ifile\Adapter\Document;
 use Isappit\Ifile\Adapter\IFileAdapterAbstract;
 use Isappit\Ifile\Adapter\Beans\LuceneDataIndexBean;
 use Isappit\Ifile\Exception\IFileAdapterException;
+use Isappit\Ifile\Servercheck\LuceneServerCheck;
 
 /**
  * Adapter per il recupero del contenuto dei file XML.

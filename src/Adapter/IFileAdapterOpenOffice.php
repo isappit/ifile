@@ -13,10 +13,11 @@
 
 namespace Isappit\Ifile\Adapter;
 
-use Isappit\Ifile\Adapter\IfileAdapterInterface;
+use Isappit\Ifile\Adapter\IFileAdapterAbstract;
 use Isappit\Ifile\Adapter\Beans\LuceneDataIndexBean;
 use Isappit\Ifile\Adapter\Helpers\OpenOffice2Txt;
 use Isappit\Ifile\Exception\IFileAdapterException;
+use Isappit\Ifile\Servercheck\LuceneServerCheck;
 
 /**
  * Adapter per il recupero del contenuto dei file OpenOffice
@@ -28,7 +29,7 @@ use Isappit\Ifile\Exception\IFileAdapterException;
  * @copyright
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
-class IFileAdapterOpenOffice extends IfileAdapterInterface 
+class IFileAdapterOpenOffice extends IFileAdapterAbstract 
 {
 	public function __construct() {
 		// verifica che esista dell'estenzione EXIF per il parser dei TAG EXIF

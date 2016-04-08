@@ -118,8 +118,8 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 			throw new IFileAdapterException("Popen function not exists");
 		}
 		// definizione dei path
-		$pathBinaryFile = $pathInfoBinaryFile = dirname(__FILE__)."../Helpers/binaries/";
-		$configXpdf = $configInfoXpdf = dirname(__FILE__)."../Helpers/binaries/xpdfrc/xpdfrc";
+		$pathBinaryFile = $pathInfoBinaryFile = dirname(__FILE__)."/../Helpers/binaries/";
+		$configXpdf 	= $configInfoXpdf = dirname(__FILE__)."/../Helpers/binaries/xpdfrc/xpdfrc";
 		
 		$original_name 	= $this->getFilename();
 		$so = $this->_stremingOutput();
@@ -174,6 +174,7 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 				throw new IFileAdapterException("XPDF INFO not executable");
 			}	
 		}
+		
 		// IMPORTANTE:::::
 		// vengono inibiti tutti i tipi di errori pertanto se si 
 		// verificano errori da shell il contenuto rimane vuoto. 

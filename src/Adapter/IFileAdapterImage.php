@@ -18,6 +18,7 @@ use Isappit\Ifile\Adapter\Helpers\Image2Txt;
 use Isappit\Ifile\Adapter\Helpers\Multimedia2Txt;
 use Isappit\Ifile\Config\IFileConfig;
 use Isappit\Ifile\Exception\IFileAdapterException;
+use Isappit\Ifile\Servercheck\LuceneServerCheck;
 use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
 use ZendSearch\Lucene\Document\Field as Zend_Search_Lucene_Field;
 

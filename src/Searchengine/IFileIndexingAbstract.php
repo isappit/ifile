@@ -244,7 +244,10 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 			throw new IFileException('Missing field name or term');
 		}
 		
-		$refl   = new ReflectionClass('IFile_Indexing_Abstract');
+		// recupera il namespace
+		$ifileIndexingAbstarct = __NAMESPACE__.'\\IFileIndexingAbstract';
+		
+		$refl   = new \ReflectionClass($ifileIndexingAbstarct);
 		$consts = $refl->getConstants();
 		
 		if (!in_array($type, $consts, true)) {
@@ -252,7 +255,7 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 		}	
 		
 		// creazione di un oggetto standard
-		$customField = new stdClass();
+		$customField = new \stdClass();
 		$customField->field = $field;
 		$customField->term = $term;
 		$customField->type = $type;

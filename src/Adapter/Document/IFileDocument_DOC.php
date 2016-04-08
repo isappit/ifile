@@ -15,6 +15,7 @@ namespace Isappit\Ifile\Adapter\Document;
 use Isappit\Ifile\Adapter\IFileAdapterAbstract;
 use Isappit\Ifile\Adapter\Beans\LuceneDataIndexBean;
 use Isappit\Ifile\Adapter\Helpers\Word2Txt;
+use Isappit\Ifile\Config\IFileConfig;
 use Isappit\Ifile\Exception\IFileAdapterException;
 
 /**

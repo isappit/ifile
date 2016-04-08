@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 /**
- * Leggi il file readme.txt per la descrizione dei TAG del file IFileConfig.xml 
+ * Leggi il file readme.md per la descrizione dei TAG del file IFileConfig.xml 
  */  
 -->
 <ifile>
-	<root-application>/Users/giampaolo/logs</root-application>
+	<root-application>/Users/giampaolo/Sites/personal/github</root-application>
 	<!--table-name collation="utf8_general_ci">indexjifile</table-name-->
 	<!--timelimit>180</timelimit-->
 	<!--memorylimit></memorylimit-->
 	<!--resultlimit></resultlimit-->
 	<!--default-search-field>body</default-search-field-->
-	<!--duplicate>1</duplicate-->
-	<server bit="32" />
-	<!--encoding>UTF-8</encoding-->
-	<!--xpdf>
-		<pdfinfo>
-			<executable>C:\xampp\htdocs\IFile\binaries\xpdfbin-win-3.03\bin32\pdfinfo.exe</executable>			
+	<duplicate>0</duplicate>
+	<server bit="64" />
+	<encoding>UTF-8</encoding>
+	<xpdf>
+		<!-- pdfinfo>
+			<executable>/usr/local/bin/pdftotext</executable>			
 			<xpdfrc></xpdfrc>
-		</pdfinfo>
+		</pdfinfo-->
 		<pdftotext>
-			<executable>C:\xampp\htdocs\IFile\binaries\xpdfbin-win-3.03\bin32\pdftotext.exe</executable>			
-			<xpdfrc></xpdfrc>
+			<executable>/usr/local/bin/pdftotext</executable>			
+			<!--  xpdfrc>/Users/giampaolo/Sites/personal/github/ifile/src/Adapter/Helpers/binaries/xpdfrc/xpdfrc</xpdfrc -->
 		</pdftotext>
 		<opw></opw>
-	</xpdf-->
+	</xpdf>
 	<!--doctotxt encoding="8859-1" type="ANTIWORD" /-->
 	<!--doctotxt encoding="" type="COM" /-->
-	<!--
 	<zend-document>
 		<fields>
 			<field name="body" type="UnStored" encoding="UTF-8"/>
@@ -41,21 +40,34 @@
 			<field name="modified" type="UnStored" encoding="UTF-8" />
 		</fields>		
 	</zend-document>
-	-->
 	<analyzer>		
 		<type>
-			<!--default>Utf8_CaseInsensitive</default-->
 			<default>Utf8Num\CaseInsensitive</default>
-			<!--custom-default class="StandardAnalyzer_Analyzer_Standard_English">C:\xampp\htdocs\IFile\analyzer\StandardAnalyzer\Analyzer\Standard\English.php</custom-default-->
+			<!--  custom-default class="Test">Isappit\Ifile\Analyzer</custom-default -->
 		</type>
 		<filters>
-			<!--stop-words>C:\xampp\htdocs\IFile\stopwords\stopwords.txt</stop-words-->
-			<!--short-words>2</short-words-->
-			<!--custom-filters>
-				<filter class="StandardAnalyzer_Analysis_TokenFilter_EnglishPECLStemmer">C:\xampp\htdocs\IFile\sf_IFile-Allura\trunk\tokenfilter\stemming\english\EnglishPECLStemmer.php</filter>
-				<filter class="StandardAnalyzer_Analysis_TokenFilter_EnglishPorterStemmer">C:\xampp\htdocs\IFile\sf_IFile-Allura\trunk\tokenfilter\stemming\english\EnglishPorterStemmer.php</filter>
-				<filter class="StandardAnalyzer_Analysis_TokenFilter_ItalianPECLStemmer">C:\xampp\htdocs\IFile\sf_IFile-Allura\trunk\tokenfilter\stemming\italian\ItalianPECLStemmer.php</filter>
-			</custom-filters-->		
+			<!-- stop-words>/Users/giampaolo/Sites/personal/github/stopwords.txt</stop-words -->
+			<!-- short-words>2</short-words -->
+			<!--  custom-filters>
+				<filter class="DanishPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Danish</filter>
+				<filter class="DutchPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Dutch</filter>
+				<filter class="EnglishPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\English</filter>
+				<filter class="EnglishPorterStemmer">Isappit\Ifile\Tokenfilter\Stemming\English</filter>
+				<filter class="FinnishPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Finnish</filter>
+				<filter class="FrenchPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\French</filter>
+				<filter class="GermanPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\German</filter>
+				<filter class="HungarianPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Hungarian</filter>
+				<filter class="ItalianPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Italian</filter>
+				<filter class="NorwegianPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Norwegian</filter>
+				<filter class="PorterPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Porter</filter>
+				<filter class="PortuguesePECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Portuguese</filter>
+				<filter class="RomanianPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Romanian</filter>
+				<filter class="RussianPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Russian</filter>
+				<filter class="RussianUnicodePECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Russian</filter>
+				<filter class="SpanishPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Spanish</filter>
+				<filter class="SwedishPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Swedish</filter>
+				<filter class="TurkishPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Turkish</filter>
+			</custom-filters -->		
 		</filters>
 	</analyzer>	
 </ifile>

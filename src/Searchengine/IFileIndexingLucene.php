@@ -3,6 +3,7 @@ namespace Isappit\Ifile\Searchengine;
 
 use Isappit\Ifile\Config\IFileConfig;
 use Isappit\Ifile\Exception\IFileException;
+use Isappit\Ifile\Query\IFileQuery;
 use Isappit\Ifile\Query\IFileQueryRegistry;
 use Isappit\Ifile\Servercheck\LuceneServerCheck;
 use ZendSearch\Lucene\Lucene as Zend_Search_Lucene;
@@ -88,7 +89,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 		// salva l'handler della risorsa di indicizzazione
 		$this->setIndexResource($indexDir);
 		// verifica se esiste la directory dell'indice
-		$create = !is_dir($indexDir);		
+		$existsDir = is_dir($indexDir);		
 		
 		// @TODO
 		// gestire il problema sulla creazione/apertura dell'indice 
@@ -98,8 +99,12 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 		
 		// se esiste allora si dovrebbe invocare la ::open()
 		// altrimenti la ::create() 
-		
-		$this->lucene = Zend_Search_Lucene::create($indexDir);				
+		if (!$existsDir) {
+			$this->lucene = Zend_Search_Lucene::create($indexDir);
+		} else {
+			$this->lucene = Zend_Search_Lucene::open($indexDir);
+		}
+						
 		
 		
 		// @TODO: sembra che la nuova versione di Zend Search non implementi in Lucene 
@@ -298,6 +303,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 		// chiamata per verificare se il file e' gia' stato indicizzato
 		// @TODO successivamente utilizzare il metodo query
 		$hits = $this->lucene->find('key:'.$key);
+		
 		if(is_array($hits) && count($hits) == 1){ 
 			if(!$this->isDeleted($hits[0]->id)) {
 				throw new IFileException("File already in the index");
@@ -807,7 +813,8 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * @return void
 	 */	
 	public function setResultLimit($limit) {
-		return $this->lucene->setResultSetLimit($limit);
+		// return $this->lucene->setResultSetLimit($limit);
+		Zend_Search_Lucene::setResultSetLimit($limit);
 	}
 	
 	/**
@@ -815,7 +822,8 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * @return integer
 	 */	
 	public function getResultLimit() {
-		return $this->lucene->getResultSetLimit();
+		// return $this->lucene->getResultSetLimit();
+		return Zend_Search_Lucene::getResultSetLimit();
 	}
 	
 	/**
@@ -824,7 +832,8 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * @return void
 	 */	
 	public function setDefaultSearchField($field) {
-		$this->lucene->setDefaultSearchField($field);
+		// $this->lucene->setDefaultSearchField($field);
+		Zend_Search_Lucene::setDefaultSearchField($field);
 	}
 	
 	/**
@@ -832,7 +841,8 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * @return string
 	 */	
 	public function getDefaultSearchField() {
-		return $this->lucene->getDefaultSearchField();
+		// return $this->lucene->getDefaultSearchField();
+		return Zend_Search_Lucene::getDefaultSearchField();
 	}
 	
 	/**

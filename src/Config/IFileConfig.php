@@ -316,8 +316,8 @@ class IFileConfig {
 				// salvo anche le stringhe di configurazione
 				$this->config['xml-filters'] = (!empty($xmlRegistryFilter)) ? $xmlRegistryFilter : null;
 				
-				echo __METHOD__.PHP_EOL;
-				print_r($this->config);
+// 				echo __METHOD__.PHP_EOL;
+// 				print_r($this->config);
 			}
 		}	
 	}
