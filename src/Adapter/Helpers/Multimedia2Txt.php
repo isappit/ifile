@@ -13,6 +13,8 @@
 
 namespace Isappit\Ifile\Adapter\Helpers;
 
+use getID3;
+
 /**
  * Recupera le informazioni di un file multimediali utilizzando la libreria getID3 
  * 
