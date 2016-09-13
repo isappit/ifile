@@ -1,5 +1,6 @@
 /.buildpath
 /.project
+/.idea/
 /ClassMapAutoloader.php
 /test.php
 /.settings/
@@ -7,3 +8,4 @@
 /composer.phar
 /IFileConfig.xml
 /composer.lock
+/IFileConfigMysql.xml

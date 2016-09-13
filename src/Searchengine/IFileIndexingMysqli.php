@@ -1,37 +1,37 @@
 <?php
-namespace Isappit\Ifile\Searchengine;
-
-use Isappit\Ifile\Exception\IFileException;
 /**
  * IFile framework
- * 
- * @category   IndexingFile
- * @package    ifile
- * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright
- * @license
- * @version    1.1.1 IFile_Indexing_Mysqli.php 2011-08-16 17:14:22
- */
-
-/** Zend_Search_Lucene_Document */
-require_once 'Zend/Search/Lucene/Document.php';
-/** IFileAdapterFactory */
-require_once 'helpers/IFileQueryHit.php';
-/** LuceneDataIndexBean */
-//require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'adapter/beans/LuceneDataIndexBean.php';
-require_once 'adapter/beans/LuceneDataIndexBean.php';
-
-/**
- * Utilizza MySql come motore di indicizzazione e ricerca
  *
  * @category   IndexingFile
  * @package    ifile
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright
- * @license
+ * @link       https://github.com/isappit/ifile for the canonical source repository
+ * @copyright  Copyright (c) 2011-2016 isApp.it (http://www.isapp.it)
+ * @license	   GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
+ */
+
+namespace Isappit\Ifile\Searchengine;
+
+use Isappit\Ifile\Config\IFileConfig;
+use Isappit\Ifile\Exception\IFileException;
+use Isappit\Ifile\Query\IFileQuery;
+use Isappit\Ifile\Query\IFileQueryHit;
+use Isappit\Ifile\Query\IFileQueryRegistry;
+use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
+use ZendSearch\Lucene\Document\Field as Zend_Search_Lucene_Field;
+use ZendSearch\Lucene\Index\Term as Zend_Search_Lucene_Index_Term;
+
+/**
+ * Use "Full Text" of MySql how Search Engine
  */
 class IFileIndexingMysqli extends IFileIndexingAbstract {
-	
+
+
+    /**
+     *
+     */
+    const DEFAULT_ENGINE = "MyISAM";
+
 	/**
 	 * Nome della Tabella
 	 * 
@@ -63,7 +63,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 	 * @return void 
 	 * @throws Zend_Search_Lucene_Exception, IFileException 
 	 */
-	public function __construct(mysqli $connection) {
+	public function __construct(\mysqli $connection) {
 		
 		// Recupera i dati di configurazione
 		$IfileConfig = IFileConfig::getInstance();
@@ -78,8 +78,8 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 		
 		// controlla che sia una istanza della classe mysqli
 		// questo e' dovuto perchè l'eccezione invocata da PHP non e' gestibile (Catchable)
-		if (!($connection instanceof mysqli)) {
-			throw new IFileException('Catchable fatal error: Argument 1 passed to IFile_Indexing_MySqli::__construct() must be an instance of mysqli');
+		if (!($connection instanceof \mysqli)) {
+			throw new IFileException('Catchable fatal error: Argument 1 passed to IFileIndexingMySqli::__construct() must be an instance of mysqli');
 		}
 		
 		// salva l'handler della risorsa di indicizzazione
@@ -142,12 +142,16 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 			if ($charset !== null) {
 				$charset = "DEFAULT CHARSET = {$charset} ";
 			}
-			
+
+			// definizione della collation
 			$collation = $this->__getCollation();
 			if ($collation !== null) {
 				$collation = "COLLATE = {$collation} ";
 			}
-			
+
+			// definizione del ENGINE (ora anche INNODB può utilzzare la FULLTEXT)
+            $engine = "ENGINE = ". $this->__getEngine();
+
 			// crea la tabella
 			$sqlCreate['query'] = "CREATE TABLE IF NOT EXISTS `#__TABLE__#` (
 					  `id` int(22) NOT NULL auto_increment,
@@ -156,7 +160,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 					  `body` longtext NOT NULL,
 					  PRIMARY KEY  (`id`),
 					  FULLTEXT KEY `body` (`body`)  
-					) ENGINE=MyISAM {$charset} {$collation}";
+					) {$engine} {$charset} {$collation}";
 			
 			$result = $this->input_mysqli($sqlCreate);
 			
@@ -164,8 +168,27 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 			$sqlKey['query']  = "ALTER TABLE `#__TABLE__#` ADD FULLTEXT(`KEY`) ";
 			$this->input_mysqli($sqlKey);
 		}
-	} 
-	
+	}
+
+
+    /**
+     * Ritorna l'engine definito in configurazione oppure MyISAM
+     *
+     * @return string
+     */
+    private function __getEngine() {
+        // Recupera i dati di configurazione
+        $IfileConfig = IFileConfig::getInstance();
+        $engine = $IfileConfig->getConfig('table-engine');
+
+        return ($engine != null) ? $engine : self::DEFAULT_ENGINE;
+    }
+
+	/**
+	 * Ritorna la collection definita in configurazione
+     *
+     * @return string
+	 */
 	private function __getCollation() {
 		// Recupera i dati di configurazione
 		$IfileConfig = IFileConfig::getInstance();
@@ -409,7 +432,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 			case 0:
 				$searchType = "IN BOOLEAN MODE" ;
 				break;
-			// QURY EXPANSION
+			// QUERY EXPANSION
 			case 1:
 				$searchType = "WITH QUERY EXPANSION";
 				break;
@@ -489,8 +512,8 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 					WHERE MATCH (`${field}`) AGAINST ('${term}' ${searchType})
 					AND `DELETED` = 0
 					${strOrder}";
-			
-			$res = $this->output_mysqli($sql, Array('num_rows' => true, 'fetch' => true));			
+
+			$res = $this->output_mysqli($sql, Array('num_rows' => true, 'fetch' => true));
 			
 			// se esistono risultati allora faccio il merge
 			if ($res['num_rows'] != 0) {
@@ -516,7 +539,8 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 					FROM `#__TABLE__#`
 					WHERE MATCH (`${field}`) AGAINST ('${term}' ${searchType})
 					AND `DELETED` = 0";
-			$res = $this->output_mysqli($sql, Array('num_rows' => true, 'fetch' => true));			
+
+			$res = $this->output_mysqli($sql, Array('num_rows' => true, 'fetch' => true));
 			
 			if ($res['num_rows'] != 0) {
 				$arrayMinusMarge = array_merge($arrayMinusMarge, $res['rows']);
@@ -527,7 +551,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 		
 		// elimino dall'insieme dei documenti l'elenco di quelli che non 
 		// devono essere presenti nell'insieme (MATCH_PROHIBITEN)
-		$arrayDiff = array_udiff($arrayMarge, $arrayMinusMarge, array("IFile_Indexing_Mysqli", "comp_func_cr"));	
+		$arrayDiff = array_udiff($arrayMarge, $arrayMinusMarge, array("Isappit\\Ifile\\Searchengine\\IFileIndexingMysqli", "comp_func_cr"));
 
 		return $arrayDiff;
 	}
@@ -754,7 +778,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 			
 			// elimino dall'insieme dei documenti l'elenco di quelli che non 
 			// devono essere presenti nell'insieme (MATCH_PROHIBITEN)
-			$arrayDiff = array_udiff($arrayMarge, $arrayMinusMarge, array("IFile_Indexing_Mysqli", "comp_func_cr"));
+			$arrayDiff = array_udiff($arrayMarge, $arrayMinusMarge, array($this, "comp_func_cr"));
 
 			// creazione dell'oggetto Zend_Search_Lucene_Search_QueryHit
 			$hits = $this->__setHits($arrayDiff);
@@ -810,7 +834,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 	 * 
 	 */
 	protected function __queryRange(IFileQueryRegistry $query) {
-		throw new IFileException("This method is not supported");
+		throw new IFileException("This method is not supported to MySql");
 	}
 	
 	/**
@@ -850,8 +874,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 				AND `DELETED` = 0
 				${strOrder}";
 		
-		
-		$res = $this->output_mysqli($sql, Array('num_rows' => true, 'fetch' => true));			
+		$res = $this->output_mysqli($sql, Array('num_rows' => true, 'fetch' => true));
 		
 		if ($res['num_rows'] != 0) {
 			// creazione dell'oggetto Zend_Search_Lucene_Search_QueryHit
@@ -881,8 +904,8 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 			if ($limit != null && $limit <= $countRecord) break;
 			
 			$ifilehit = new IFileQueryHit($this);
-			$ifilehit->id = $hit['id']; 	
-			$ifilehit->score = $hit['score'];
+			$ifilehit->id = $ifilehit->document_id = $hit['id'];
+            $ifilehit->score = $hit['score'];
 			array_push($listHits, $ifilehit);
 			
 			$countRecord++; 	
@@ -1064,7 +1087,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 	/**
 	 * Ritorna l'oggetto documento
 	 * 
-	 * Ritorna un eccezione IFileException se $id non e'
+	 * Ritorna una eccezione IFileException se $id non e'
 	 * presente nel range degli id dell'indice 
 	 * 
 	 * @param integer $id
@@ -1072,7 +1095,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 	 * @throws IFileException
 	 */
 	public function getDocument($id) {
-		
+
 		$sql = "SELECT * FROM `#__TABLE__#` WHERE `ID` = {$id} ";
 		$res = $this->output_mysqli($sql, Array('num_rows' => true, 'fetch' => true));
 		
@@ -1305,7 +1328,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 		
 		$res = array();
 		$query = $this->replaceNameTable($query);
-		
+
 		if ($result = @$this->getIndexResource()->query($query)) {
 		  if (!empty($param)) {
 		  	foreach ($param as $key => $val) {
@@ -1331,7 +1354,7 @@ class IFileIndexingMysqli extends IFileIndexingAbstract {
 		} else {
 			throw new IFileException("Error in query process: ".$this->getIndexResource()->error);
 		}	
-		
+
 		return $res;	
 	}
 	

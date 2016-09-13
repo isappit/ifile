@@ -1,4 +1,4 @@
-Versione 1.4 - 16 Febbraio 2015
+Version 1.4 - 16 February 2015
 - Fixed: Solved bug on MultiTerms search. Integrated the "signs" to management the "optional" terms or "required"  
 - Fixed: Correct creation and modify date with the "infopdf" 
 - Fetaure: Created in the configuration class the new method to return the supported encoding type 

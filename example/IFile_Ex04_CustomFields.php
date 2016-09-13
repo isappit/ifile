@@ -5,7 +5,8 @@
  * @category   IndexingFile
  * @package    ifile.example
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright  2011-2013 isApp.it (www.isapp.it)
+ * @link       https://github.com/isappit/ifile for the canonical source repository
+ * @copyright  Copyright (c) 2011-2016 isApp.it (http://www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    1.2.1
  * 
@@ -44,9 +45,10 @@ try {
 	
 	// WARNING:
 	// Not use name of custom fields that IFile define automatically
-	// The Custom Fields overwrite the field created from IFile when this parse the document  
+	// The Custom Fields overwrite the field created from IFile when this parse the document
+    // See documentation for the complete list of IFile Fields
 	// Example: this field overwrite the field "key" created to IFile
-	// $ifile->addCustomField('key', 'mykeyfile', IFile_Indexing_Interface::FIELD_TYPE_KEYWORD);
+	// $ifile->addCustomField('key', 'mykeyfile', IFileIndexingInterface::FIELD_TYPE_KEYWORD);
 	
 	// get all custom field
 	$customFields = $ifile->getCustomField();

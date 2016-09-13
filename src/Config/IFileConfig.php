@@ -152,8 +152,10 @@ class IFileConfig {
 			// table-name
 			$this->config['table-name'] = ($xpath->query("table-name", $ifile)->item(0)) ? trim($xpath->query("table-name", $ifile)->item(0)->nodeValue) : null;
 			if (!empty($this->config['table-name'])) {
-				$collation = $xpath->query("table-name", $ifile)->item(0)->getAttributeNode("collation")->value;				
-				$this->config['table-collation'] = (empty($collation)) ? null : $collation;				
+				$collation  = ($xpath->query("table-name", $ifile)->item(0)->getAttributeNode("collation")) ? $xpath->query("table-name", $ifile)->item(0)->getAttributeNode("collation")->value : null;
+                $engine     = ($xpath->query("table-name", $ifile)->item(0)->getAttributeNode("engine")) ? $xpath->query("table-name", $ifile)->item(0)->getAttributeNode("engine")->value : null;
+				$this->config['table-collation'] = (empty($collation)) ? null : $collation;
+                $this->config['table-engine']    = (empty($engine)) ? null : $engine;
 			}
 			
 			// timelimit

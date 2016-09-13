@@ -5,7 +5,8 @@
  * @category   IndexingFile
  * @package    ifile.example
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright  2011-2013 isApp.it (www.isapp.it)
+ * @link       https://github.com/isappit/ifile for the canonical source repository
+ * @copyright  Copyright (c) 2011-2016 isApp.it (http://www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    1.2.1
  * 

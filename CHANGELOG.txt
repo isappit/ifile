@@ -1,5 +1,8 @@
 Versione 2.0 - xx xx 20xx
-- Feature: rispetta gli standart PHP-FIG: PRS-2
+- Migration: migrazione da SourceForge a GitHub
+- Feature: Agganciato il pacchetto migrato su GitHub in Packagist
+- Feature: rispettati gli standart PHP-FIG: PRS-2, PRS-4
+
 
 Versione 1.4 - 16 Febbraio 2015
 - Fixed: Risolto il bug sulla ricerca MultiTermine integrando il "signs" per la gestione dei termini "facoltativi" o "obbligatori"

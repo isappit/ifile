@@ -1,29 +1,19 @@
 <?php
-namespace Isappit\Ifile\Query;
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @subpackage query
- * @copyright
- * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
- * @version    2.0
- */
-
-/**
- * Gestione della hit dei risultati di ricerca. 
- * 
- * @category   IndexingFile
- * @package    ifile
- * @subpackage quary
- * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright
+ * @link       https://github.com/isappit/ifile for the canonical source repository
+ * @copyright  Copyright (c) 2011-2016 isApp.it (http://www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
 
-/** Zend_Search_Lucene_Search_QueryHit */
-require_once 'Zend/Search/Lucene/Search/QueryHit.php';
+namespace Isappit\Ifile\Query;
+
+use Isappit\Ifile\Searchengine\IFileIndexingInterface;
+use ZendSearch\Lucene\Search\QueryHit as Zend_Search_Lucene_Search_QueryHit;
 
 /**
  * Oggetto per la gestione dei risultati.
@@ -31,23 +21,16 @@ require_once 'Zend/Search/Lucene/Search/QueryHit.php';
  * Questo permette di ritornare un'oggetto con le stesse
  * caratteristiche che ha l'oggetto Zend_Search_Lucene_Search_QueryHit
  * che utilizza ZEND_SEARCH_LUCENE per i risultati delle query
- *
- * @category   IndexingFile
- * @package    ifile
- * @subpackage helpers
- * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright
- * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
 class IFileQueryHit extends Zend_Search_Lucene_Search_QueryHit {
 	
 	/**
-     * Costruttore - passa un oggettodi IFile_Indexing_Interface 
+     * Costruttore - passa un oggetto di IFileIndexingInterface
      *
      * @param IFile_Indexing_Interface $index
      */
 
-    public function __construct(IFile_Indexing_Interface $index)
+    public function __construct(IFileIndexingInterface $index)
     {
         $this->_index = $index;
     }	

@@ -12,7 +12,7 @@
  *
  <ifile>
  	<root-application>...</root-application>
- 	<table-name collation="..." >...</table-name>
+ 	<table-name collation="..." engine="...">...</table-name>
  	<timelimit>...</timelimit>
 	<memorylimit>...</memorylimit>
 	<resultlimit>...</resultlimit>
@@ -80,6 +80,11 @@
  * TYPE: string
  *
  * Nome della collation da utilizzare per l'ordinamento associato al charset
+ *
+ * Attribute: engine [opzionale]
+ * TYPE: string
+ *
+ * Nome del tipo di Engine da utilizzare per la FullText (MyISAM | InnoDB)
  *
  * 4
  * <timelimit>...</timelimit> [opzionale] {1}
@@ -251,6 +256,20 @@
  * - Binary
  * - Text
  * - UnStored
+ *
+ * Se si sta utilizzando come SearchEngine MySql sarà necessario obbligatoriamente definire i seguenti field di tipo "text"
+ * - name
+ * - path
+ * - filename
+ *
+ * Esempio:
+ * <zend-document>
+ *		<fields>			
+ *			<field name="name" type="Text" />
+ *			<field name="path" type="Text" />
+ *			<field name="filename" type="Text" />			
+ *		</fields>		
+ *	</zend-document>
  *
  * Elenco dei tipi di field permessi da Zend Lucene
  *

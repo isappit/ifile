@@ -1,28 +1,23 @@
 <?php
-namespace Isappit\Ifile;
-
-use Isappit\Ifile\Config\IFileConfig;
-use Isappit\Ifile\Exception\IFileException;
 /**
  * IFile framework
- * 
- * @category   IndexingFile
- * @package    ifile
- * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright
- * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
- * @version    2.0
- */
-
-/**
- * Istance dinamically an object of type:
- * Adapter_Search_Lucene_Document_Interface or IFileIndexingInterface
  *
  * @category   IndexingFile
  * @package    ifile
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright
+ * @link       https://github.com/isappit/ifile for the canonical source repository
+ * @copyright  Copyright (c) 2011-2016 isApp.it (http://www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
+ */
+
+namespace Isappit\Ifile;
+
+use Isappit\Ifile\Config\IFileConfig;
+use Isappit\Ifile\Exception\IFileException;
+
+/**
+ * Istance dinamically an object of type:
+ * Adapter_Search_Lucene_Document_Interface or IFileIndexingInterface
  */
 class IFileFactory {
 	// error_reporting(E_PARSE);
@@ -92,7 +87,6 @@ class IFileFactory {
 		$namespaceClass = __NAMESPACE__.'\\Searchengine\\'.$className;
 		// Reflection		
 		$reflection = new \ReflectionClass($namespaceClass);
-		
 		$found = false;
 		// get interfaces of the class
 		$interfaces = $reflection->getInterfaces();
@@ -113,7 +107,7 @@ class IFileFactory {
 	}
 	
 	/**
-	 * Retunr Adatpter_Search_Lucene_Document_Interface object
+	 * Return Adatpter_Search_Lucene_Document_Interface object
 	 * 
 	 * @throws IFileException
 	 * @return Adatpter_Search_Lucene_Document_Interface

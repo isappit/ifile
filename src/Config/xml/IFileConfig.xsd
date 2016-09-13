@@ -34,6 +34,7 @@
 	<xs:element name="table-name">
 		<xs:complexType mixed="true">
 			<xs:attribute name="collation" type="xs:string"/>
+			<xs:attribute name="engine" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 	

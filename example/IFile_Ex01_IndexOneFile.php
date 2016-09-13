@@ -5,7 +5,8 @@
  * @category   IndexingFile
  * @package    ifile.example
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
- * @copyright  2011-2013 isApp.it (www.isapp.it)
+ * @link       https://github.com/isappit/ifile for the canonical source repository
+ * @copyright  Copyright (c) 2011-2016 isApp.it (http://www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  * @version    1.2.1
  * 
@@ -19,18 +20,23 @@ require ("../autoload_prs4.php");
 require("../vendor/autoload.php");
 
 use Isappit\Ifile\IFileFactory;
+use Isappit\Ifile\Config\IFileConfig;
 
 // Define the folder of index. 
 // The first time, if the folder exists IFile throw an exception.
 $index_path = 'example_ifile_index';
 // Path of Document
 $file		= 'myfiles/IFile_Introduzione_1_2.pdf';
-// $fileConfig = "/Users/giampaolo/Sites/personal/github/ifile/IFileConfig.xml";
+// Define external configuration file ( if not defined, IFile use: src/Config/xml/IFileConfig.xml )
+// $fileConfig = "/Users/isapp/Sites/personal/github/ifile/IFileConfig.xml";
 
 // try/catch
 try {
-	// setto il nuovo file di configurazione
+	// IMPORTANT: 
+	// if use a external Configuration file is need to set external 
+	// configuration file first to instance IFileFactory
 	// IFileConfig::setXmlConfig($fileConfig);
+	
 	// instance IFileFactory
 	$IFileFactory = IFileFactory::getInstance();
 	// define lucene interface

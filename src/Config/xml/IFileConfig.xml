@@ -6,7 +6,7 @@
 -->
 <ifile>
 	<root-application>/Users/giampaolo/Sites/personal/github</root-application>
-	<!--table-name collation="utf8_general_ci">indexjifile</table-name-->
+	<!--table-name collation="utf8_general_ci" engine="MyISAM">indexjifile</table-name-->
 	<!--timelimit>180</timelimit-->
 	<!--memorylimit></memorylimit-->
 	<!--resultlimit></resultlimit-->
