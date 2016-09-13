@@ -21,7 +21,7 @@
 	<duplicate>...</duplicate>
 	<server bit="..." />
  	<encoding>...</encoding>
-	<doctotxt encoding"..." type="..." />
+	<doctotxt encoding="..." type="..." />
 	<xpdf>
 		<opw>...</opw>
 		<pdftotext>
@@ -61,13 +61,13 @@
 ### ifile
 La root del file di configurazione 
 
-```
+```xml
 <ifile>...</ifile>
 ```
 
-Proprietà    | Occorrenza   | Tipo
------------- | ------------ | -------------
-obbligatorio | 1            | ComplexType - all
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+ifile        | obbligatorio | 1            | ComplexType - all
 
 ### root-application
 Configurazione del path-root dell'applicazione.
@@ -75,34 +75,31 @@ Configurazione del path-root dell'applicazione.
 Questo e' molto utile da utilizzare in caso si debba spostare l'applicazione in ambienti diversi, 
 permettendo cosi' di avere path relativi dei file indicizzati in fase di ricerca e recupero.
 
-```
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+root-application | obbligatorio | 1            | string 
+
+```xml
 <root-application>...</root-application>
 ```
-
-Proprietà    | Occorrenza   | Tipo
------------- | ------------ | -------------
-obbligatorio | 1            | string 
 
 ### table-name
 Configurazione del nome della tabella utilizzata per l'indicizzazione
 dei file su un DB (non ancora implementata). 
 
-```
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+table-name   | opzionale    | 1            | string
+
+```xml
 <table-name>...</table-name>
 ```
- 
-Proprietà    | Occorrenza   | Tipo
------------- | ------------ | -------------
-opzionale    | 1            | string
 
+Attributo    | Proprietà    | Tipo          | Descizione
+------------ | ------------ | ------------- | ------------ 
+collation    | opzionale    | string        | Nome della collation da utilizzare per l'ordinamento associato al charset
+engine       | opzionale    | string        | Nome del tipo di Engine da utilizzare per la FullText (MyISAM | InnoDB)
 
-**Attribute:** collation [opzionale] (string)
-
-Nome della collation da utilizzare per l'ordinamento associato al charset
-
-**Attribute:** engine [opzionale] )string)
-
-Nome del tipo di Engine da utilizzare per la FullText (MyISAM | InnoDB)
 
  *
  * 4
