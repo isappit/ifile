@@ -1,15 +1,16 @@
-/**
- * Descrizione file XML IFileConfig.xml
- *
- * Il file permette di configurare la libreria IFile
- *
- * Importante:
- * 
- * 1. Il file si deve trovare sotto la cartella "config"
- * 2. Questo file XML viene validato dal file XSD "config\IFileConfig.xsd"
- *
- * STRUTTURA
- *
+# IFile configurazione (Italian Language)
+
+ In questo file descrive il file XML IFileConfig.xml
+ Il XML file permette di configurare IFile per il suo corretto utilizzo.
+ 
+ **Importante:**
+ 
+1. Il file si trova sotto la cartella "config". Dalla versione 2.0 è possibile anche utilizzare un file XML esterno alla libreria
+2. il file doi configurazione XML viene validato dal file XSD "config\IFileConfig.xsd"
+
+## STRUTTURA DEL FILE
+ 
+ ```xml
  <ifile>
  	<root-application>...</root-application>
  	<table-name collation="..." engine="...">...</table-name>
@@ -53,38 +54,50 @@
 		</filters>
 	</analyzer>
  </ifile>
- *
- *
- * DESCRIZIONE
- * 1
- * <ifile>...</ifile> [obbligatorio]{1}
- * TYPE: ComplexType - all
- *
- * 2
- * <root-application>...</root-application> [obbligatorio]{1}
- * TYPE: string
- * 
- * Configurazione della root dell'applicazione.
- * Questo e' molto utile da utilizzare in caso si debba spostare
- * l'applicazione in ambienti diversi, permettendo cosi' di avere
- * path relativi dei file indicizzati.  
- *
- * 3
- * <table-name>...</table-name> [opzionale] {1}
- * TYPE: string
- *
- * Configurazione del nome della tabella utilizzata per l'indicizzazione
- * dei file su un DB (non ancora implementata).
- *
- * Attribute: collation [opzionale]
- * TYPE: string
- *
- * Nome della collation da utilizzare per l'ordinamento associato al charset
- *
- * Attribute: engine [opzionale]
- * TYPE: string
- *
- * Nome del tipo di Engine da utilizzare per la FullText (MyISAM | InnoDB)
+ ```
+ 
+## DESCRIZIONE TAG XML
+
+### ifile
+La root del file di configurazione 
+
+```<ifile>...</ifile>```
+
+Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | -------------
+obbligatorio | 1            | ComplexType - all
+
+### root-application
+Configurazione del path-root dell'applicazione.
+
+Questo e' molto utile da utilizzare in caso si debba spostare l'applicazione in ambienti diversi, 
+permettendo cosi' di avere path relativi dei file indicizzati in fase di ricerca e recupero.
+
+```<root-application>...</root-application>```
+
+Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | -------------
+obbligatorio | 1            | string 
+
+### table-name
+Configurazione del nome della tabella utilizzata per l'indicizzazione
+dei file su un DB (non ancora implementata). 
+
+```<table-name>...</table-name>```
+ 
+Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | -------------
+opzionale    | 1            | string
+
+
+**Attribute:** collation [opzionale] (string)
+
+Nome della collation da utilizzare per l'ordinamento associato al charset
+
+**Attribute:** engine [opzionale] )string)
+
+Nome del tipo di Engine da utilizzare per la FullText (MyISAM | InnoDB)
+
  *
  * 4
  * <timelimit>...</timelimit> [opzionale] {1}
