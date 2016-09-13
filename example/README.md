@@ -32,11 +32,13 @@ Example:
 
 Remember that if you want use FullText of MySql as Search Engine is important define in the configuration file:
  - "Table Name", "Collaction" and Engine if you want use InnoDB and not MyISAM how engine:
- ```xml
+
+ ```
  	<table-name collation="utf8_general_ci">ifile_index_table</table-name>
  ```
  - Fields: name, path, filename as "Text":
- ```xml
+ 
+ ```
    <zend-document>
 		<fields>			
 			<field name="name" type="Text" />
