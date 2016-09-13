@@ -92,7 +92,7 @@ Tag          | Proprietà    | Occorrenza   | Tipo
 table-name   | opzionale    | 1            | string
 
 ```xml
-<table-name>...</table-name>
+<table-name collation="..." engine="...">...</table-name>
 ```
 
 Attributo    | Proprietà    | Tipo          | Descizione
@@ -100,73 +100,117 @@ Attributo    | Proprietà    | Tipo          | Descizione
 collation    | opzionale    | string        | Nome della collation da utilizzare per l'ordinamento associato al charset
 engine       | opzionale    | string        | Nome del tipo di Engine da utilizzare per la FullText (MyISAM | InnoDB)
 
+### timelimit
+Configurazione del tempo massimo di esecuzione del processo di parsering.
 
- *
- * 4
- * <timelimit>...</timelimit> [opzionale] {1}
- * TYPE: integer
- *
- * Configurazione del tempo massimo di esecuzione del processo di parsering.
- * Il valore minimo e' di 180 secondi.
- *
- * 5
- * <memorylimit>...</memorylimit> [opzionale] {1}
- * TYPE: integer
- *
- * Configurazione la memoria massima (in MEGABYTE) che lo script può allocare durante 
- * l'esecuzione del processo di parsering e indicizzazione.
- *
- * 6
- * <resultlimit>...</resultlimit> [opzionale] {1}
- * TYPE: integer
- *
- * Configurazione del numero massimo di risultati che la query di ricerca deve restituire.
- * Se non settato ritorna tutti i risultati.
- *
- * 7
- * <default-search-field>...</default-search-field> [opzionale] {1}
- * TYPE: integer
- *
- * Configurazione del field (campo) dove effettuare la ricerca del termine.
- * Se non settato ricerca in tutti i fields (campi) dell'indice
- *
- * 8
- * <encoding>...</encoding> [opzionale] {1} 
- * TYPE: enumeration
- * - UTF-8
- * - ASCII
- * - ISO8859-1
- * - ISO8859-15
- * - ISO8859-2
- * - ISO8859-7
- * - CP1256
- * - Windows-1252
- *
- * Elenco del tipo di enconding.
- * Se non settato si prende come parametro di default: null.
- *
- * 9
- * <duplicate>...</duplicate> [opzionale] {1}
- * TYPE: enumeration
- * - 0
- * - 1
- *
- * Definisce la possibilità di avere documenti duplicati all'interno dell'indice.
- * Ovvero se settato a zero (0) o non presente il tag il sistema verifica che il contenuto
- * del documento da indicizzare non sia gia' presente nell'indice.
- * Se presente invoca una eccezione. Altrimenti se settato a uno (1) il sistema non
- * verifica l'esistenza del documento all'interno dell'indice
- *
- * 10 
- * <server bit="..." /> [opzionale] {1}
- *
- * Serve a definire il tipo server
- * TYPE: ComplexType
- *
- * Attribute: bit [opzionale]
- * TYPE: enumeration
- * - 32
- * - 64
+**_Il valore minimo e' di 180 secondi._**
+
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+timelimit    | opzionale    | 1            | integer
+
+```xml
+<timelimit>...</timelimit>
+```
+
+### memorylimit
+Configurazione la memoria massima (in MEGABYTE) che lo script può allocare  
+durante l'esecuzione del processo di parsering e indicizzazione.
+
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+memorylimit  | opzionale    | 1            | integer
+
+```xml
+<timelimit>...</timelimit>
+```
+
+### resultlimit
+Configurazione del numero massimo di risultati che la query di ricerca deve restituire.
+
+**_Se non settato ritorna tutti i risultati._**
+
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+resultlimit  | opzionale    | 1            | integer
+
+```xml
+<resultlimit>...</resutllimit>
+```
+
+### default-search-field
+Configurazione per forzare la ricerca dei termini in un determinato field (campo).
+
+**_Se non settato ricerca in tutti i fields (campi) dell'indice_**
+
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+default-search-field  | opzionale    | 1            | string
+
+```xml
+<default-search-field>...</default-search-field>
+```
+
+### encoding
+Elenco del tipo di enconding.
+
+**_Se non settato si prende come parametro di default:_** _null_
+
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+encoding     | opzionale    | 1            | enumeration
+
+_Valori ammessi:_
+ - UTF-8
+ - ASCII
+ - ISO8859-1
+ - ISO8859-15
+ - ISO8859-2
+ - ISO8859-7
+ - CP1256
+ - Windows-1252
+
+```xml
+<encoding>...</encoding>
+```
+
+### encoding
+Definisce la possibilità di avere documenti duplicati all'interno dell'indice.
+Ovvero se settato a zero (0) o il tag non è presente, il sistema verifica che il contenuto
+del documento da indicizzare non sia gia' presente nell'indice.
+Se presente invoca una eccezione. 
+Altrimenti se settato a uno (1) il sistema non verifica l'esistenza del documento all'interno dell'indice
+
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+duplicate    | opzionale    | 1            | enumeration
+
+_Valori ammessi:_
+ - 0
+ - 1
+ 
+```xml
+<duplicate>...</duplicate>
+```
+
+### server
+E' un tag chiuso e serve a definire il tipo server
+
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+server       | opzionale    | 1            | 
+
+Attributo    | Proprietà    | Tipo          | Descizione
+------------ | ------------ | ------------- | ------------ 
+bit          | obbligatorio | enumaration   | Definisce se il server è a 32 o 64 bit, utile per l'utilizzo corretto della XPDF e altre componenti di terze parti 
+
+_Valori ammessi:_
+ - 32
+ - 64
+ 
+```xml
+<server bit="..." />
+```
  *
  * 11 
  * <doctotxt encoding="..." type="..." /> [opzionale] {1}
