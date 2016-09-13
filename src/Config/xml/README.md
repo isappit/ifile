@@ -61,7 +61,9 @@
 ### ifile
 La root del file di configurazione 
 
-```<ifile>...</ifile>```
+```
+<ifile>...</ifile>
+```
 
 Proprietà    | Occorrenza   | Tipo
 ------------ | ------------ | -------------
@@ -73,7 +75,9 @@ Configurazione del path-root dell'applicazione.
 Questo e' molto utile da utilizzare in caso si debba spostare l'applicazione in ambienti diversi, 
 permettendo cosi' di avere path relativi dei file indicizzati in fase di ricerca e recupero.
 
-```<root-application>...</root-application>```
+```
+<root-application>...</root-application>
+```
 
 Proprietà    | Occorrenza   | Tipo
 ------------ | ------------ | -------------
@@ -83,7 +87,9 @@ obbligatorio | 1            | string
 Configurazione del nome della tabella utilizzata per l'indicizzazione
 dei file su un DB (non ancora implementata). 
 
-```<table-name>...</table-name>```
+```
+<table-name>...</table-name>
+```
  
 Proprietà    | Occorrenza   | Tipo
 ------------ | ------------ | -------------
