@@ -8,10 +8,10 @@ The examples, 03 and 04, create documents in index manually or with Custom Field
 Other examples uses the index created to see how IFile search the terms in the index.  
 
 Remember that you can define your configuration in two mode:
-- use "Config/IFileConfig.xml" stored in the "vendor" (not recommended)
-- you can configure external XML at the "vendor foder" and set this file configuration first to create the IFileFactory
+1. use "Config/IFileConfig.xml" stored in the "vendor" (not recommended)
+2. you can configure external XML at the "vendor foder" and set this file configuration first to create the IFileFactory
 
-Example:
+Example mode 2:
 ```php
 
     // Define external configuration file ( if not defined, IFile use: src/Config/xml/IFileConfig.xml in vendor )
@@ -30,7 +30,7 @@ Example:
 
 ### Configuring MySql FullText Engine
 
-Remember that if you want use FullText of MySql as Search Engine is important define in the configuration file:
+If you want use FullText of MySql as Search Engine is important define in the configuration file, [more detail](https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md):
  - "Table Name", "Collaction" and Engine if you want use InnoDB and not MyISAM how engine:
 
  ```
