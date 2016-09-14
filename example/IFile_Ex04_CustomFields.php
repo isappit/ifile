@@ -17,7 +17,7 @@
  */ 
 error_reporting(E_ALL);
 require ("../autoload_prs4.php");
-require("../vendor/autoload.php");
+require("../../../autoload.php");
 
 use Isappit\Ifile\IFileFactory;
 use Isappit\Ifile\Searchengine\IFileIndexingInterface;
