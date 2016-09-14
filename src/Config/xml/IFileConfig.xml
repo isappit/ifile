@@ -43,7 +43,7 @@
 	<analyzer>		
 		<type>
 			<default>Utf8Num\CaseInsensitive</default>
-			<!--  custom-default class="Test">Isappit\Ifile\Analyzer</custom-default -->
+			<!--  custom-default class="Test">Isappit\Ifile\CustomAnalyzer</custom-default -->
 		</type>
 		<filters>
 			<!-- stop-words>/Users/giampaolo/Sites/personal/github/stopwords.txt</stop-words -->
