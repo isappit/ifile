@@ -640,7 +640,7 @@ Example:
 </filters>
 ```
 
-##### analyzer -> filters -> stop-words
+#### analyzer -> filters -> stop-words
 Configure the absolute path of is stored the txt file with the list of stop words.
 
 Tag          | Property    | Occurrences   | Type
@@ -653,7 +653,7 @@ Example:
 <stop-words>/Users/isapp/Sites/personal/github/stopwords.txt</stop-words>
 ```
 
-##### analyzer -> filters -> short-words
+#### analyzer -> filters -> short-words
 Configure the minimun number of character for the single token (term)
 
 Tag          | Property    | Occurrences   | Type
@@ -682,7 +682,7 @@ Example:
 </custom-filters>
 ```
 
-##### analyzer -> custom-filters -> filter
+#### analyzer -> custom-filters -> filter
 Configure namespace of the class that extend ZendSearch\Lucene\Analysis\TokenFilter,  [more detail](http://framework.zend.com/manual/en/zend.search.lucene.extending.html)
 
 Tag          | Property    | Occurrences   | Type
@@ -704,6 +704,7 @@ IFile define the custom filters of type "Stemmer".
 The class are in the "TokenFilter/" folder in the IFile library. 
 
 **_IMPORTANT:_**
+
 The Stemmer used the "PECL Stem Library" verify if this package is installed on you server to use this filters.
 
 Below the table of the Stemmer implemented in IFile.
