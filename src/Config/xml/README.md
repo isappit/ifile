@@ -1,13 +1,13 @@
-# IFile configurazione (Italian Language)
+# IFile configuratio
 
- Questo file descrive come configurare correttamente IFile.utilizzo.
- 
- **Importante:**
- 
-1. Il file di configurazione si trova in "Config/xml/IFileConfig.xml". Dalla versione 2.0 è possibile anche utilizzare un file XML esterno alla libreria (vedi documentazione)
-2. il file di configurazione viene validato dal file XSD "Config/xml/IFileConfig.xsd"
+This file describes how to properly configure Ifile.
+ 
+**Important:**
+ 
+1. The configuration file is in "Config/xml/IFileConfig.xml". Since version 2.0 you can also use an external XML file to the library (see IFile documentation)
+2. The configuration file is validated by the XSD file "Config/xml/IFileConfig.xsd
 
-## STRUTTURA DEL FILE
+## STRUCTURE
  
  ```xml
  <ifile>
@@ -55,127 +55,127 @@
  </ifile>
  ```
  
-## DESCRIZIONE TAG XML
+## DESCRIPTION XML TAG
 
 ### ifile
-La root del file di configurazione 
+This is the root of xml file configuration
 
 ```xml
 <ifile>...</ifile>
 ```
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property     | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-ifile        | obbligatorio | 1            | ComplexType - all
+ifile        |  mandatory   | 1            | ComplexType - all
 
 ### root-application
-Configurazione del path-root dell'applicazione.
+Configure the path-root application.
 
-Questo e' molto utile da utilizzare in caso si debba spostare l'applicazione in ambienti diversi, 
-permettendo cosi' di avere path relativi dei file indicizzati in fase di ricerca e recupero.
+This tag is very helpful if you want migrate your index in other application or different enviroment or server.
+IFile define relative path of the document indexing. 
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-root-application | obbligatorio | 1            | string 
+root-application |  mandatory | 1            | string 
 
-Esempio:
+ Example:
 
 ```xml
 <root-application>/usr/local/var/wwww/myproject</root-application>
 ```
 
 ### table-name
-Configurazione del nome della tabella utilizzata per l'indicizzazione
-dei file su un DB (non ancora implementata). 
+Configure the Table Name used from IFile for store the content and file information.
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+**_Defined only if you want use MySql FullText Engine how Search Engine_** 
+
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-table-name   | opzionale    | 1            | string
+table-name   |  optional    | 1            | string
 
-Esempio:
+ Example:
 
 ```xml
 <table-name collation="utf8_general_ci" engine="MyISAM">my_table</table-name>
 ```
 
-Attributo    | Proprietà    | Tipo          | Descizione
+Attribute    | Property    | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
-collation    | opzionale    | string        | Nome della collation da utilizzare per l'ordinamento associato al charset
-engine       | opzionale    | string        | Nome del tipo di Engine da utilizzare per la FullText (MyISAM | InnoDB)
+collation    |  optional    | string        | Name of the collation to use for sorting associated with the charset
+engine       |  optional    | string        | Name of the Engine Type to use for FullText ( MyISAM | InnoDB )
 
 ### timelimit
-Configurazione del tempo massimo di esecuzione del processo di parsering.
+Configure the execusion time limit to the process parser. 
 
-**_Il valore minimo accettato e' di 180 secondi._**
+**_The minimum value accepted is 180 second._**
 
-**_Se non settato il valore è quello configurato nel php.ini._**
+**_If not defined the default value is get from your PHP configuration (php.ini)._**
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-timelimit    | opzionale    | 1            | integer
+timelimit    |  optional    | 1            | integer
 
-Esempio:
+ Example:
 
 ```xml
 <timelimit>600</timelimit>
 ```
 
 ### memorylimit
-Configurazione la memoria massima (in MEGABYTE) che lo script può allocare
-durante l'esecuzione del processo di parsering e indicizzazione.
+Configure the memory limit (in MEGABYTE) used for the parsering and indexing process.  
 
-**_Se non settato il valore è quello configurato nel php.ini._**
+**_If not defined the default value is get from your PHP configuration (php.ini)._**
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-memorylimit  | opzionale    | 1            | integer
+memorylimit  |  optional    | 1            | integer
 
-Esempio:
+ Example:
 
 ```xml
 <memorylimit>512</memorylimit>
 ```
 
 ### resultlimit
-Configurazione del numero massimo di risultati che la query di ricerca deve restituire.
+Configure the maximum number of result that returned the query search. 
 
-**_Se non settato ritorna tutti i risultati._**
+**_If not defined the query return all results._**
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-resultlimit  | opzionale    | 1            | integer
+resultlimit  |  optional    | 1            | integer
 
-Esempio:
+ Example:
 
 ```xml
 <resultlimit>100</resutllimit>
 ```
 
 ### default-search-field
-Configurazione per forzare la ricerca dei termini in un determinato field (campo).
+Configure the default search field that IFile used to search the terms. 
 
-**_Se non settato ricerca in tutti i fields (campi) dell'indice_**
+**_If not defined IFile search in all fields of the index._**
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-default-search-field  | opzionale    | 1            | string
+default-search-field  |  optional    | 1            | string
 
-Esempio:
+ Example:
 
 ```xml
 <default-search-field>body</default-search-field>
 ```
 
 ### encoding
-Elenco del tipo di enconding.
+Configure the type encoding. 
 
-**_Se non settato IFile utilizza di default:_** _null_
+**_If not defined, default value is:_** _null_
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-encoding     | opzionale    | 1            | enumeration
+encoding     |  optional    | 1            | enumeration
 
-_Valori ammessi - Attributo "encoding":_
+_Allowed values -  Attribute "encoding":_
  - UTF-8
  - ASCII
  - ISO8859-1
@@ -185,91 +185,86 @@ _Valori ammessi - Attributo "encoding":_
  - CP1256
  - Windows-1252
 
-Esempio:
+ Example:
 
 ```xml
-<encoding>...</encoding>
+<encoding>UTF-8</encoding>
 ```
 
 ### duplicate
-Definisce la possibilità di avere documenti duplicati all'interno dell'indice.
-Ovvero se settato a zero (0) o il tag non è presente, il sistema verifica che il contenuto
-del documento da indicizzare non sia gia' presente nell'indice.
-Se presente invoca una eccezione. 
-Altrimenti se settato a uno (1) il sistema non verifica l'esistenza del documento all'interno dell'indice
+Configure if the document is unique in the index. 
 
-**_Se non settato IFile utilizza di default:_** _0_
+If is setted to "zero" (0), IFile checked if the document exists in the index and invoke an exception if document exists.
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+If is setted to "one" (1) you can index many time the same document.
+
+**_If not defined, default value is:_** _0_
+
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-duplicate    | opzionale    | 1            | enumeration
+duplicate    |  optional    | 1            | enumeration
 
-_Valori ammessi - Attributo "duplicate":_
+ _Allowed values -  Attribute "duplicate":_
  - 0 (default)
  - 1
 
-Esempio:
+ Example:
 
 ```xml
-<duplicate>...</duplicate>
+<duplicate>1</duplicate>
 ```
 
 ### server
-E' un tag chiuso e serve a definire il tipo server
+Close tag to define the server type.
 
-**_Se non settato IFile utilizza di default:_** _32_
+**_If not defined, default value is:_** _32_
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property     | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-server       | opzionale    | 1            | 
+server       |  optional    | 1            | 
 
-Attributo    | Proprietà    | Tipo          | Descizione
+Attribute    | Property     | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
-bit          | obbligatorio | enumaration   | Definisce se il server è a 32 o 64 bit, utile per l'utilizzo corretto della XPDF e altre componenti di terze parti 
+bit          |  mandatory   | enumaration   | It defines if the server is 32 or 64 bits, which is useful for proper use of XPDF and other third-party components 
 
-_Valori ammessi - Attributo "bit":_
+ _Allowed values -  Attribute "bit":_
  - 32 (default)
  - 64
 
-Esempio:
+ Example:
 
 ```xml
-<server bit="..." />
+<server bit="64" />
 ```
 
 ### doctotxt
-E' un tag chiuso e serve a definire il tipo di parser da utilizzare per il recupero dei contenuti dei file Microsoft Word ( con estensione .doc )
+Close tag to define the parser type that IFile must use to get the content of the Microsoft Word Document (.doc)
 
-**_Se non settato IFile utilizza il type di default:_** _PHP_
+**_If not defined, default value is:_** _PHP_
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property     | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-doctotxt     | opzionale    | 1            | ComplexType 
+doctotxt     |  optional    | 1            | ComplexType 
 
-Attributo    | Proprietà    | Tipo          | Descizione
+Attribute    | Property    | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
-encoding     | opzionale    | string        | Utilizzato **_solo per il tipo di parser ANTIWORD_**. Elenco dei tipi di encoding per il recupero del contenuto dei .doc 
-type         | obbligatorio | enumeration   | Elenco dei tipi di parser da utilizzare per il recupero del contenuto dai file .doc 
+encoding     |  optional    | string        | **_Used only for the ANTIWORD parser type_**. List of encoding types for the recovery of the content of Microsoft Word Document (.doc) 
+type         |  mandatory   | enumeration   | List of types of parser to use for retrieving the content from Microsoft Word Document (.doc) 
 
-_Valori ammessi - Attributo "encoding":_
- Gli encoding disponibili sono presenti nella cartella "Adapter/Helpers/binaries/resources", 
- nell'attributo "encoding" deve essere utilizzato il nome del file senza estensione.
- Vedi esempio per il parser con ANTIWORD.
+ _Allowed values -  Attribute "encoding":_
+The allowed encoding are present in the folder "Adapter/Helpers/binaries/resources".
+In the "encoding" attribute you must use the only name file without extension (see antiword example).   
  
- **_Se non settato ANTIWORD utilizza l'encodind di default:_** _8859-1_
- 
- Esempio: se si vuole utilizzare come file di encoding "UTF-8.txt", andrà settato l'attributo encoding="UTF-8" 
-
-_Valori ammessi - Attributo "type":_
+ _Allowed values -  Attribute "type":_
  - PHP (default)
  - COM
  - ANTIWORD
 
 **type = "PHP"**
 
-IFile utilizza una classe PHP per il recupero dei contenuti, questa classe permette la lettura di documenti nel solo encoding 8859-1   
+IFile uses an PHP class to get the content, this class support only Microsoft Word Document written with 8859.1 encoding.
 
-Esempio:
+ Example:
 
 ```xml
 <doctotxt type="PHP" />
@@ -277,31 +272,35 @@ Esempio:
 
 **type = "COM"**
 
-IFile utilizza la libreria "COM" di PHP. Questa libreria è utilizzabile solo su macchine con sistema operativo Windows, vedi [Documentazione PHP](http://php.net/manual/en/com.requirements.php)  
+IFile uses the "COM" library. This library is available only on Windows Operation Sistem, [more datail](http://php.net/manual/en/com.requirements.php)  
 
-Esempio:
+ Example:
 
 ```xml
 <doctotxt type="COM" />
 ```
 **type = "ANTIWORD"**
 
-IFile utilizza la componente binaria di terze parti ANTIWORD per la lettura dei contenuti dei documenti Microsoft Word, [maggiori dettagli](http://www.winfield.demon.nl/)   
+IFile uses the third-party component ANTIWORD to get the content of the Microsoft Word Document,  [more detail](http://www.winfield.demon.nl/) 
 
-Esempio per parser ANTIVORD:
+You need define the "encoding" attribute using only the name of the file, for example if you want use the encoding file "UTF-8.txt", you mest set encoding="UTF-8"    
+
+**_If "encoding" isn't defined ANTIWORD uses default value:_** _8859-1_
+
+Example:
 
 ```xml
 <doctotxt encoding="UTF-8" type="ANTIWORD" />
 ```
 
 ### xpdf
-Permette di configurare la componente binaria di terze parti XPDF per la lettura dei contenuti dei documenti PDF, [maggiori dettagli](http://www.foolabs.com/xpdf/)
+Configure the third-party component XPDF, to get content of PDF documents, [more detail](http://www.foolabs.com/xpdf/)
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-xpdf         | opzionale    | 1            | ComplexType - sequence
+xpdf         |  optional    | 1            | ComplexType - sequence
 
-Esempio:
+Example:
 
 ```xml
 <xpdf>
@@ -318,26 +317,26 @@ Esempio:
 ```
 
 #### xpdf -> opw
-Contiene la password di protezione dei file PDF.
+Configure the password used to protect PDF files.
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-opw          | opzionale    | 1            | string
+opw          |  optional    | 1            | string
 
-Esempio:
+Example:
 
 ```xml
 <opw>38sh7s9#@9hs0</opw>
 ```
 
 #### xpdf -> pdftotext
-Contiene i tag per la configurazione della componente binaria di terze parti "pdftotext"
+It contains the tag to configure the third-party component XPDF (pdftotext)
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-pdftotext    | opzionale    | 1            | ComplexType - sequence
+pdftotext    |  optional    | 1            | ComplexType - sequence
 
-Esempio:
+Example:
 
 ```xml
 <pdftotext>
@@ -346,44 +345,44 @@ Esempio:
 </pdftotext>
 ```
 
-##### xpdf -> pdftotext -> executable
-Definisce il path per la componente binaria di terze parti "pdftotext". 
+#### xpdf -> pdftotext -> executable
+Configure the external XPDF (pdftotext) at IFile. 
+ 
+**_If not defined, IFile search the "pdftotext" binary component in the library._**
 
-**_Se non definito, IFile cerca di default di utilizzare la componente presente nella libreria in funzione del sistema operativo._**
-
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-executable   | opzionale    | 1            | string
+executable   |  optional    | 1            | string
 
-Esempio:
+ Example:
 
 ```xml
 <executable>/usr/local/bin/pdftotext</executable>
 ```
 
-##### xpdf -> pdftotext -> executable
-Definisce un path diverso per la xpdfrc da utilizzare nella "pdftotext".
+#### xpdf -> pdftotext -> xpdfrc
+Configure the external XPDF configuration file at IFile.
 
-**_Se non definito, IFile utilizza la configurazione presente nella libreria._**
+**_If not defined, IFile search the xpdfrc configuration file in the library._**
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-xpdfrc       | opzionale    | 1            | string
+xpdfrc       |  optional    | 1            | string
 
-Esempio:
+ Example:
 
 ```xml
 <xpdfrc>/usr/local/var/www/xpdfrc</xpdfrc>
 ```
 
 #### xpdf -> pdfinfo
-Contiene i tag per la configurazione della componente binaria di terze parti "pdfinfo"
+It contains the tag to configure the third-party component XPDF (pdfinfo)
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-pdfinfo      | opzionale    | 1            | ComplexType - sequence
+pdfinfo      |  optional    | 1            | ComplexType - sequence
 
-Esempio:
+Example:
 
 ```xml
 <pdfinfo>
@@ -393,45 +392,48 @@ Esempio:
 ```
 
 ##### xpdf -> pdfinfo -> executable
-Definisce il path per la componente binaria di terze parti "pdfinfo". 
+Configure the external XPDF (pdftotext) at IFile. 
+ 
+**_If not defined, IFile search the "pdftotext" binary component in the library._**
 
-**_Se non definito, IFile cerca di default di utilizzare la componente presente nella libreria in funzione del sistema operativo._**
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-executable   | opzionale    | 1            | string
+executable   |  optional    | 1            | string
 
-Esempio:
+ Example:
 
 ```xml
 <executable>/usr/local/bin/pdfinfo</executable>
 ```
 
-##### xpdf -> pdfinfo -> executable
-Definisce un path diverso per la xpdfrc da utilizzare nella "pdfinfo".
+##### xpdf -> pdfinfo -> xpdfrc
+Configure the external XPDF configuration file at IFile.
 
-**_Se non definito, IFile utilizza la configurazione presente nella libreria._**
+**_If not defined, IFile search the xpdfrc configuration file in the library._**
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-xpdfrc       | opzionale    | 1            | string
+xpdfrc       |  optional    | 1            | string
 
-Esempio:
+ Example:
 
 ```xml
 <xpdfrc>/usr/local/var/www/xpdfrc</xpdfrc>
 ```
 
 ### zend-document
-Contiene i TAG per la configurazione dei parametri per la ZendSearch\LuceneDocument
+It contains the tag to configure of the parameter of the ZendSearch\Lucene\Document
 
-**_Se non settato IFile utilizza i valori di deafult della ZendSearch\LuceneDocument._**
+**_If not defined IFile uses the default valueu of the ZendSearch\Lucene\Document._**
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-zend-document| opzionale    | 1            | ComplexType - sequence
+zend-document|  optional    | 1            | ComplexType - sequence
 
-Esempio:
+ Example:
 
 ```xml
 <zend-document>
@@ -443,13 +445,13 @@ Esempio:
 ```
 
 #### zend-document -> fields
-Contenitore per la configurazione dei Field. I tag field sono un elenco sequenziale di tag.
+Contain the configuration of the Field.
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-fields       | opzionale    | 1            | ComplexType - sequence
+fields       |  optional    | 1            | ComplexType - sequence
 
-Esempio: 
+ Example: 
 
 ```xml
 <fields>
@@ -459,25 +461,25 @@ Esempio:
 ```
 
 ##### zend-document -> fields -> field
-Permette di configurare i field standard di IFile.
+Configure the Field used in IFile.
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-field        | obbligatorio | n            | ComplexType 
+field        |  mandatory | n            | ComplexType 
 
-Esempio:
+ Example:
 
 ```xml
 <field name="title" type="UnStored" encoding="UTF-8"/>
 ```
 
-Attributo    | Proprietà    | Tipo          | Descizione
+ Attribute   | Property     | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
-name         | obbligatorio | enumeration   | Elenco dei Field ammessi per la configurazione, field "Standard" utilizzati da IFile 
-type         | obbligatorio | enumeration   | Elenco dei tipi di indicizzazione dei fields permessi in Lucene, [maggiori dettagli](https://framework.zend.com/manual/1.10/en/zend.search.lucene.overview.html) 
-encoding     | opzionale    | enumeration   | Elenco degli encoding da utilizzare sul field 
+name         |  mandatory   | enumeration   | List of Fields Name allowed 
+type         |  mandatory   | enumeration   | List of types allowed in Lucene, [more detail](https://framework.zend.com/manual/1.10/en/zend.search.lucene.overview.html) 
+encoding     |  optional    | enumeration   | List of encoding to use on the field 
 
-_Valori ammessi - Attributo "name":_
+ _Allowed values -  Attribute "name":_
  - name
  - extensionfile
  - path
@@ -492,20 +494,20 @@ _Valori ammessi - Attributo "name":_
  - created
  - modified
  
-_Valori ammessi - Attributo "type":_  
+ _Allowed values -  Attribute "type":_  
  - Keyword
  - UnIndexed
  - Binary
  - Text
  - UnStored
  
-**_Se si sta utilizzando come SearchEngine MySql sarà necessario obbligatoriamente definire i seguenti field di tipo "text"_**
+**_If you want use the Search Engine of MySql, you need defined the following field with type="text"_**
  
  - name
  - path
  - filename
 
-Esempio:
+ Example:
 
 ```xml
 <zend-document>
@@ -517,7 +519,7 @@ Esempio:
 </zend-document>
 ```
 
-_Valori ammessi - Attributo "type":_
+ _Allowed values -  Attribute "type":_
  - UTF-8
  - ASCII
  - ISO8859-1
@@ -528,13 +530,13 @@ _Valori ammessi - Attributo "type":_
  - Windows-1252
  
 ### analyzer
-Contiene i TAG per la gestione degli analizatori e dei filtri del testo da indcizzare.
+It contains the tag to managment the analizer and filters.
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-analyzer     | opzionale    | 1            | ComplexType - all
+analyzer     |  optional    | 1            | ComplexType - all
 
-Esempio: 
+ Example: 
 
 ```xml
 <analyzer>
@@ -554,15 +556,15 @@ Esempio:
 ```
 
 #### analyzer -> type
-Contiene due TAG "ALTERNATIVI" per la gestione del tipo di analyzer.
+It contains the tag to managment the analizer type.
  
-**_Se non settato si prende come parametro di default: Utf8_CaseInsensitive._**
+**_If not defined, default value is:_** _Utf8_CaseInsensitive_
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-type         | opzionale    | 1            | ComplexType - choise
+type         |  optional    | 1            | ComplexType - choise
 
-Esempio: 
+ Example: 
 
 ```xml
 <type>
@@ -572,15 +574,15 @@ Esempio:
 ```
 
 #### analyzer -> type -> default
-Configurazione del tipo di analyzer implementati nella ZendSearch, [maggiori dettagli](http://framework.zend.com/manual/en/zend.search.lucene.extending.html).
+Configure the default analizer type implemented in ZendSearch, [more detail](http://framework.zend.com/manual/en/zend.search.lucene.extending.html).
  
-**_Il tag è alternativo con il tag <custom-default>_** 
+**_The tag is an alternative with <custom-default>_** 
  
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-default      | opzionale    | 1            | enumeration
+default      |  optional    | 1            | enumeration
 
-_Valori ammessi - Tag "default":_
+ _Allowed values - Tag "default":_
  - Text
  - TextNum
  - Text_CaseInsensitive
@@ -590,44 +592,44 @@ _Valori ammessi - Tag "default":_
  - Utf8_CaseInsensitive
  - Utf8Num_CaseInsensitive
  
-Esempio: 
+ Example: 
 
 ```xml
 <default>Utf8Num_CaseInsensitive</default>
 ```
 
 #### analyzer -> type -> custom-default
-Configurazione del namespace della classe che estende ZendSearch\Lucene\Analysis\Analyzer, [maggiori dettagli](http://framework.zend.com/manual/en/zend.search.lucene.extending.html)
+Configure namespace of the class that extend ZendSearch\Lucene\Analysis\Analyzer,  [more detail](http://framework.zend.com/manual/en/zend.search.lucene.extending.html)
 
-**_Il tag è alternativo con il tag <default>_** 
+**_The tag is an alternative with <default>_** 
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-custom-default | opzionale    | 1            | string
+custom-default |  optional    | 1            | string
 
-Attributo    | Proprietà    | Tipo          | Descizione
+ Attribute    | Property    | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
-class        | obbligatorio | string        | Nome della classe 
+class        |  mandatory   | string        | Class name 
 
-Esempio: 
+ Example: 
 
 ```xml
 <custom-default class="TestAnalyzer">Isappit\Ifile\CustomAnalyzer</custom-default>
 ```
 
-In IFile è presente una cartella vuota "CustomAnalyzer" utilizzabile per la gestione di questi Analyzer personalizzati.
+In IFile exists a "CustomAnalyzer" used for the "custom analizer"
 
 
 #### analyzer -> filters
-Contiene i TAG per la gestione del filtraggio dei Token (termini) da indicizzare
- 
-**_Se non settato IFile utilizza i filtri standard di ZendSearch._**
+It contains the tag for managment of the filter.
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+**_If not defined, IFile use the ZendSeach standard filter._**
+
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-filters      | opzionale    | 1            | ComplexType - all
+filters      |  optional    | 1            | ComplexType - all
 
-Esempio: 
+ Example: 
 
 ```xml
 <filters>
@@ -641,42 +643,39 @@ Esempio:
 ```
 
 ##### analyzer -> filters -> stop-words
-Configurazione del path del file delle parole che non possono essere utilizzate come Token.
-Il file deve avere l'estensione .txt e i termini devono essere separati da una "ritorno a capo" (LF)
+Configure the absolute path of is stored the txt file with the list of stop words.
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-stop-words   | opzionale    | 1            | string
+stop-words   |  optional    | 1            | string
 
-Esempio:
+ Example:
 
 ```xml
 <stop-words>/Users/isapp/Sites/personal/github/stopwords.txt</stop-words>
 ```
 
 ##### analyzer -> filters -> short-words
-Configurazione del numero minimo di caratteri del Token.
+Configure the minimun number of character for the single token (term)
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-short-words   | opzionale    | 1            | integer
+short-words   |  optional    | 1            | integer
 
-Esempio:
+ Example:
 
 ```xml
 <short-words>3</short-words>
 ```
 
 #### analyzer -> custom-filters
-Contenitore dei TAG per la gestione di filtri personalizzati.
- 
-**_Se non settato IFile utilizza i filtri standard di ZendSearch._**
+It contains the tag for management the custom filters.
 
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-custom-filters | opzionale    | 1            | ComplexType - all
+custom-filters |  optional    | 1            | ComplexType - all
 
-Esempio: 
+ Example: 
 
 ```xml
 <custom-filters>
@@ -686,32 +685,30 @@ Esempio:
 ```
 
 ##### analyzer -> custom-filters -> filter
-Configurazione del namespace della classe che estende ZendSearch\Lucene\Analysis\TokenFilter, [maggiori dettagli](http://framework.zend.com/manual/en/zend.search.lucene.extending.html)
+Configure namespace of the class that extend ZendSearch\Lucene\Analysis\TokenFilter,  [more detail](http://framework.zend.com/manual/en/zend.search.lucene.extending.html)
 
-**_Il tag è alternativo con il tag <default>_** 
-
-Tag          | Proprietà    | Occorrenza   | Tipo
+Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
-filter       | opzionale    | 1            | string
+filter       |  optional    | 1            | string
 
-Attributo    | Proprietà    | Tipo          | Descizione
+Attribute    | Property    | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
-class        | obbligatorio | string        | Nome della classe 
+class        |  mandatory | string        | Nome della classe 
 
-Esempio: 
+ Example: 
 
 ```xml
 <filter class="EnglishPorterStemmer">Isappit\Ifile\Tokenfilter\Stemming\English</filter>
 ``` 
 
 ###### Stemmer
-IFile definisce già dei filtri personalizzati per lo "Stemmer". 
-Le classi sono presenti nella cartella "TokenFilter/" della libreria IFile.
+IFile define the custom filters of type "Stemmer".
+The class are in the "TokenFilter/" folder in the IFile library. 
 
-**_IMPORTANTE:_**
-La maggior parte degli Stemmer necessitano della libreria "PECL Stem library" 
+**_IMPORTANT:_**
+The Stemmer used the "PECL Stem Library" verify if this package is installed on you server to use this filters.
 
-Di seguito la tabella con gli stemmer implementati in IFile.
+Below the table of the Stemmer implemented in IFile.
 
 Class        | Namespace  
 ------------ | ------------ 
@@ -733,4 +730,3 @@ RussianUnicodePECLStemmer | Isappit\Ifile\Tokenfilter\Stemming\Russian
 SpanishPECLStemmer | Isappit\Ifile\Tokenfilter\Stemming\Spanish 
 SwedishPECLStemmer | Isappit\Ifile\Tokenfilter\Stemming\Swedish 
 TurkishPECLStemmer | Isappit\Ifile\Tokenfilter\Stemming\Turkish 
-
