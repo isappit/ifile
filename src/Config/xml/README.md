@@ -1,9 +1,9 @@
-# IFile configuratio
+# IFile configuration
 
 This file describes how to properly configure Ifile.
- 
+
 **Important:**
- 
+
 1. The configuration file is in "Config/xml/IFileConfig.xml". Since version 2.0 you can also use an external XML file to the library (see IFile documentation)
 2. The configuration file is validated by the XSD file "Config/xml/IFileConfig.xsd
 
@@ -78,7 +78,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 root-application |  mandatory | 1            | string 
 
- Example:
+Example:
 
 ```xml
 <root-application>/usr/local/var/wwww/myproject</root-application>
@@ -93,7 +93,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 table-name   |  optional    | 1            | string
 
- Example:
+Example:
 
 ```xml
 <table-name collation="utf8_general_ci" engine="MyISAM">my_table</table-name>
@@ -115,7 +115,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 timelimit    |  optional    | 1            | integer
 
- Example:
+Example:
 
 ```xml
 <timelimit>600</timelimit>
@@ -130,7 +130,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 memorylimit  |  optional    | 1            | integer
 
- Example:
+Example:
 
 ```xml
 <memorylimit>512</memorylimit>
@@ -145,7 +145,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 resultlimit  |  optional    | 1            | integer
 
- Example:
+Example:
 
 ```xml
 <resultlimit>100</resutllimit>
@@ -160,7 +160,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 default-search-field  |  optional    | 1            | string
 
- Example:
+Example:
 
 ```xml
 <default-search-field>body</default-search-field>
@@ -185,7 +185,7 @@ _Allowed values -  Attribute "encoding":_
  - CP1256
  - Windows-1252
 
- Example:
+Example:
 
 ```xml
 <encoding>UTF-8</encoding>
@@ -208,7 +208,7 @@ duplicate    |  optional    | 1            | enumeration
  - 0 (default)
  - 1
 
- Example:
+Example:
 
 ```xml
 <duplicate>1</duplicate>
@@ -227,11 +227,11 @@ Attribute    | Property     | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
 bit          |  mandatory   | enumaration   | It defines if the server is 32 or 64 bits, which is useful for proper use of XPDF and other third-party components 
 
- _Allowed values -  Attribute "bit":_
+_Allowed values -  Attribute "bit":_
  - 32 (default)
  - 64
 
- Example:
+Example:
 
 ```xml
 <server bit="64" />
@@ -251,11 +251,11 @@ Attribute    | Property    | Type          |  Description
 encoding     |  optional    | string        | **_Used only for the ANTIWORD parser type_**. List of encoding types for the recovery of the content of Microsoft Word Document (.doc) 
 type         |  mandatory   | enumeration   | List of types of parser to use for retrieving the content from Microsoft Word Document (.doc) 
 
- _Allowed values -  Attribute "encoding":_
+_Allowed values -  Attribute "encoding":_
 The allowed encoding are present in the folder "Adapter/Helpers/binaries/resources".
 In the "encoding" attribute you must use the only name file without extension (see antiword example).   
  
- _Allowed values -  Attribute "type":_
+_Allowed values -  Attribute "type":_
  - PHP (default)
  - COM
  - ANTIWORD
@@ -264,7 +264,7 @@ In the "encoding" attribute you must use the only name file without extension (s
 
 IFile uses an PHP class to get the content, this class support only Microsoft Word Document written with 8859.1 encoding.
 
- Example:
+Example:
 
 ```xml
 <doctotxt type="PHP" />
@@ -274,7 +274,7 @@ IFile uses an PHP class to get the content, this class support only Microsoft Wo
 
 IFile uses the "COM" library. This library is available only on Windows Operation Sistem, [more datail](http://php.net/manual/en/com.requirements.php)  
 
- Example:
+Example:
 
 ```xml
 <doctotxt type="COM" />
@@ -354,7 +354,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 executable   |  optional    | 1            | string
 
- Example:
+Example:
 
 ```xml
 <executable>/usr/local/bin/pdftotext</executable>
@@ -369,7 +369,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 xpdfrc       |  optional    | 1            | string
 
- Example:
+Example:
 
 ```xml
 <xpdfrc>/usr/local/var/www/xpdfrc</xpdfrc>
@@ -401,7 +401,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 executable   |  optional    | 1            | string
 
- Example:
+Example:
 
 ```xml
 <executable>/usr/local/bin/pdfinfo</executable>
@@ -412,12 +412,11 @@ Configure the external XPDF configuration file at IFile.
 
 **_If not defined, IFile search the xpdfrc configuration file in the library._**
 
-
 Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 xpdfrc       |  optional    | 1            | string
 
- Example:
+Example:
 
 ```xml
 <xpdfrc>/usr/local/var/www/xpdfrc</xpdfrc>
@@ -428,12 +427,11 @@ It contains the tag to configure of the parameter of the ZendSearch\Lucene\Docum
 
 **_If not defined IFile uses the default valueu of the ZendSearch\Lucene\Document._**
 
-
 Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 zend-document|  optional    | 1            | ComplexType - sequence
 
- Example:
+Example:
 
 ```xml
 <zend-document>
@@ -451,7 +449,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 fields       |  optional    | 1            | ComplexType - sequence
 
- Example: 
+Example: 
 
 ```xml
 <fields>
@@ -467,19 +465,19 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 field        |  mandatory | n            | ComplexType 
 
- Example:
+Example:
 
 ```xml
 <field name="title" type="UnStored" encoding="UTF-8"/>
 ```
 
- Attribute   | Property     | Type          |  Description
+Attribute    | Property     | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
 name         |  mandatory   | enumeration   | List of Fields Name allowed 
 type         |  mandatory   | enumeration   | List of types allowed in Lucene, [more detail](https://framework.zend.com/manual/1.10/en/zend.search.lucene.overview.html) 
 encoding     |  optional    | enumeration   | List of encoding to use on the field 
 
- _Allowed values -  Attribute "name":_
+_Allowed values -  Attribute "name":_
  - name
  - extensionfile
  - path
@@ -494,7 +492,7 @@ encoding     |  optional    | enumeration   | List of encoding to use on the fie
  - created
  - modified
  
- _Allowed values -  Attribute "type":_  
+_Allowed values -  Attribute "type":_  
  - Keyword
  - UnIndexed
  - Binary
@@ -507,7 +505,7 @@ encoding     |  optional    | enumeration   | List of encoding to use on the fie
  - path
  - filename
 
- Example:
+Example:
 
 ```xml
 <zend-document>
@@ -519,7 +517,7 @@ encoding     |  optional    | enumeration   | List of encoding to use on the fie
 </zend-document>
 ```
 
- _Allowed values -  Attribute "type":_
+_Allowed values -  Attribute "type":_
  - UTF-8
  - ASCII
  - ISO8859-1
@@ -536,7 +534,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 analyzer     |  optional    | 1            | ComplexType - all
 
- Example: 
+Example: 
 
 ```xml
 <analyzer>
@@ -564,7 +562,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 type         |  optional    | 1            | ComplexType - choise
 
- Example: 
+Example: 
 
 ```xml
 <type>
@@ -582,7 +580,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 default      |  optional    | 1            | enumeration
 
- _Allowed values - Tag "default":_
+_Allowed values - Tag "default":_
  - Text
  - TextNum
  - Text_CaseInsensitive
@@ -592,7 +590,7 @@ default      |  optional    | 1            | enumeration
  - Utf8_CaseInsensitive
  - Utf8Num_CaseInsensitive
  
- Example: 
+Example: 
 
 ```xml
 <default>Utf8Num_CaseInsensitive</default>
@@ -607,11 +605,11 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 custom-default |  optional    | 1            | string
 
- Attribute    | Property    | Type          |  Description
+Attribute    | Property    | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
 class        |  mandatory   | string        | Class name 
 
- Example: 
+Example: 
 
 ```xml
 <custom-default class="TestAnalyzer">Isappit\Ifile\CustomAnalyzer</custom-default>
@@ -629,7 +627,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 filters      |  optional    | 1            | ComplexType - all
 
- Example: 
+Example: 
 
 ```xml
 <filters>
@@ -649,7 +647,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 stop-words   |  optional    | 1            | string
 
- Example:
+Example:
 
 ```xml
 <stop-words>/Users/isapp/Sites/personal/github/stopwords.txt</stop-words>
@@ -662,7 +660,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 short-words   |  optional    | 1            | integer
 
- Example:
+Example:
 
 ```xml
 <short-words>3</short-words>
@@ -675,7 +673,7 @@ Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
 custom-filters |  optional    | 1            | ComplexType - all
 
- Example: 
+Example: 
 
 ```xml
 <custom-filters>
@@ -695,7 +693,7 @@ Attribute    | Property    | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
 class        |  mandatory | string        | Nome della classe 
 
- Example: 
+Example: 
 
 ```xml
 <filter class="EnglishPorterStemmer">Isappit\Ifile\Tokenfilter\Stemming\English</filter>
