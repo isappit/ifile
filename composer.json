@@ -15,7 +15,6 @@
         "mp3",
         "jpg"
     ],
-    "minimum-stability" : "dev",
     "homepage": "https://ifile.isapp.it",
     "authors": [
         {
