@@ -12,11 +12,10 @@
  * @copyright  Copyright (c) 2011-2016 isApp.it (http://www.isapp.it)
  * @license	   GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
+require ("../autoload_prs4.php");
+require ("../../../autoload.php");
 
-namespace Isappit\Ifile;
-
-/** LuceneServerCheck */
-require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'servercheck/LuceneServerCheck.php';
+use Isappit\Ifile\Servercheck\LuceneServerCheck;
 
 // instanzia la classe LuceneServerCheck
 $serverCheck = LuceneServerCheck::getInstance();

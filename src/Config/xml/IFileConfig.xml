@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 /**
- * Leggi il file readme.md per la descrizione dei TAG del file IFileConfig.xml 
+ * Read https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md to correct configuration of the IFileConfig.xml
  */  
 -->
 <ifile>
@@ -14,20 +14,20 @@
 	<duplicate>0</duplicate>
 	<server bit="64" />
 	<encoding>UTF-8</encoding>
-	<xpdf>
-		<!-- pdfinfo>
-			<executable>/usr/local/bin/pdftotext</executable>			
+	<!-- xpdf>
+		<pdfinfo>
+			<executable>/usr/local/bin/pdfinfo</executable>
 			<xpdfrc></xpdfrc>
-		</pdfinfo-->
+		</pdfinfo>
 		<pdftotext>
 			<executable>/usr/local/bin/pdftotext</executable>			
-			<!--  xpdfrc>/Users/giampaolo/Sites/personal/github/ifile/src/Adapter/Helpers/binaries/xpdfrc/xpdfrc</xpdfrc -->
+			<xpdfrc></xpdfrc>
 		</pdftotext>
 		<opw></opw>
-	</xpdf>
+	</xpdf-->
 	<!--doctotxt encoding="8859-1" type="ANTIWORD" /-->
 	<!--doctotxt encoding="" type="COM" /-->
-	<zend-document>
+	<!--zend-document>
 		<fields>
 			<field name="body" type="UnStored" encoding="UTF-8"/>
 			<field name="introtext" type="Keyword" encoding="UTF-8" />
@@ -39,14 +39,14 @@
 			<field name="created" type="UnStored" encoding="UTF-8" />						
 			<field name="modified" type="UnStored" encoding="UTF-8" />
 		</fields>		
-	</zend-document>
+	</zend-document-->
 	<analyzer>		
 		<type>
 			<default>Utf8Num\CaseInsensitive</default>
 			<!--  custom-default class="Test">Isappit\Ifile\CustomAnalyzer</custom-default -->
 		</type>
 		<filters>
-			<!-- stop-words>/Users/giampaolo/Sites/personal/github/stopwords.txt</stop-words -->
+			<!-- stop-words>/Users/giampaolo/Sites/personal/github/stopwords_english.txt</stop-words -->
 			<!-- short-words>2</short-words -->
 			<!--  custom-filters>
 				<filter class="DanishPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Danish</filter>
