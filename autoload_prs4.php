@@ -34,11 +34,8 @@ spl_autoload_register(function ($class) {
     // with .php
     $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
 
-    echo "FILE_________________:".$file.PHP_EOL;
-    
     // if the file exists, require it
     if (file_exists($file)) {
-    	echo "REQUIRED____________".PHP_EOL;
         require $file;
     }
 });

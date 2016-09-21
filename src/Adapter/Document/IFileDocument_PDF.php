@@ -58,6 +58,7 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 	 * Implementa il metodo dell'interfaccia Adatpter_Search_Lucene_Document_Interface
 	 * 
 	 * @return Zend_Search_Lucene_Document
+     * @throws IFileAdapterException
 	 */
 	public function loadParserFile()
     {
@@ -97,7 +98,8 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 	 * Ritorna null se si e' verificato un errore nella lettura del file da parte
 	 * della XPDF o true se non vi sono stati errori.
 	 *  
-	 * @return mixed
+	 * @return boolean
+     * @throws IFileAdapterException
 	 */
 	private function getTxtFromBinaries() {
 		
@@ -110,23 +112,25 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 		$reportCheckXPDF = $reportServerCheck['XPDF']['PDFTOTEXT'];		 
 		if (!$reportCheckXPDF->getCheck()) {
 			throw new IFileAdapterException("XPDF not executable");
-		}		
-		
-		// check popen 
+		}
+
+		// check popen
 		$reportCheckPopen = $reportServerCheck['Function']['popen'];
 		if (!$reportCheckPopen->getCheck()) {
 			throw new IFileAdapterException("Popen function not exists");
 		}
 		// definizione dei path
-		$pathBinaryFile = $pathInfoBinaryFile = dirname(__FILE__)."/../Helpers/binaries/";
-		$configXpdf 	= $configInfoXpdf = dirname(__FILE__)."/../Helpers/binaries/xpdfrc/xpdfrc";
-		
+		$pathBinaryFile = $pathInfoBinaryFile = $this->ifileConfig->getBinariesPath();
+		$configXpdf 	= $configInfoXpdf = $this->ifileConfig->getBinariesPath()."xpdfrc/xpdfrc";
+
+        var_dump($pathBinaryFile);
+        die();
+
 		$original_name 	= $this->getFilename();
 		$so = $this->_stremingOutput();
 		$executableSO 	= $so['so'];
 		$executableInfo = (isset($so['info'])) ? $so['info'] : false ;
 		$outputStreming = $so['output'];
-		
 		
 		// XPDF configurazione
 		// opw

@@ -12,6 +12,7 @@ This file describes how to properly configure Ifile.
  ```xml
  <ifile>
  	<root-application>...</root-application>
+ 	<binaries>...</binaries>
  	<table-name collation="..." engine="...">...</table-name>
  	<timelimit>...</timelimit>
 	<memorylimit>...</memorylimit>
@@ -82,6 +83,24 @@ Example:
 
 ```xml
 <root-application>/usr/local/var/wwww/myproject</root-application>
+```
+
+### binaries
+Configure the path of the binaries files. This tag is need to configure the correct path where the binaries files of 
+third-parts components are installed. 
+
+**_If not defined the default value is "vendor/isappit/ifile/src/Adapter/Helpers/binaries"._**
+
+You need download the third-parts binaries files from [here](#).
+
+Tag          | Property     | Occurrences   | Type
+------------ | ------------ | ------------ | -------------
+binaries     |  optional    | 1            | string 
+
+Example:
+
+```xml
+<binaries>/usr/local/var/ifile/binaries</binaries>
 ```
 
 ### table-name
@@ -225,7 +244,8 @@ server       |  optional    | 1            |
 
 Attribute    | Property     | Type          |  Description
 ------------ | ------------ | ------------- | ------------ 
-bit          |  mandatory   | enumaration   | It defines if the server is 32 or 64 bits, which is useful for proper use of XPDF and other third-party components 
+bit          |  mandatory   | enumaration   | It defines if the server is 32 or 64 bits, which is useful for proper 
+use of XPDF and other third-parts components 
 
 _Allowed values -  Attribute "bit":_
  - 32 (default)
@@ -272,7 +292,8 @@ Example:
 
 **type = "COM"**
 
-IFile uses the "COM" library. This library is available only on Windows Operation Sistem, [more datail](http://php.net/manual/en/com.requirements.php)  
+IFile uses the "COM" library. This library is available only on Windows Operation Sistem,
+[more datail](http://php.net/manual/en/com.requirements.php)  
 
 Example:
 
@@ -281,9 +302,11 @@ Example:
 ```
 **type = "ANTIWORD"**
 
-IFile uses the third-party component ANTIWORD to get the content of the Microsoft Word Document,  [more detail](http://www.winfield.demon.nl/) 
+IFile uses the third-part component ANTIWORD to get the content of the Microsoft Word Document,
+[more detail](http://www.winfield.demon.nl/) 
 
-You need define the "encoding" attribute using only the name of the file, for example if you want use the encoding file "UTF-8.txt", you mest set encoding="UTF-8"    
+You need define the "encoding" attribute using only the name of the file, for example if you want use the encoding 
+file "UTF-8.txt", you mest set encoding="UTF-8"    
 
 **_If "encoding" isn't defined ANTIWORD uses default value:_** _8859-1_
 
@@ -294,7 +317,7 @@ Example:
 ```
 
 ### xpdf
-Configure the third-party component XPDF, to get content of PDF documents, [more detail](http://www.foolabs.com/xpdf/)
+Configure the third-part component XPDF, to get content of PDF documents, [more detail](http://www.foolabs.com/xpdf/)
 
 Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
@@ -330,7 +353,7 @@ Example:
 ```
 
 #### xpdf -> pdftotext
-It contains the tag to configure the third-party component XPDF (pdftotext)
+It contains the tag to configure the third-part component XPDF (pdftotext)
 
 Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
@@ -376,7 +399,7 @@ Example:
 ```
 
 #### xpdf -> pdfinfo
-It contains the tag to configure the third-party component XPDF (pdfinfo)
+It contains the tag to configure the third-part component XPDF (pdfinfo)
 
 Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------

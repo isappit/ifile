@@ -2,8 +2,9 @@
 
 ##  2.0 - 15 Settembre 2016
 - Migration: migrazione da SourceForge (SVN) a GitHub (Git)
-- Feature: Definito il pacchetto IFile in Packagist
+- Feature: definito il pacchetto IFile in Packagist
 - Feature: implementati gli standart PHP-FIG: PRS-2, PRS-4
+- Feature: configurazione del path della cartella contenente i file binari di terze parti
 
 
 ## 1.4 - 16 Febbraio 2015

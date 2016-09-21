@@ -5,6 +5,7 @@
 		<xs:complexType>
 			<xs:all>
 				<xs:element ref="root-application" />
+				<xs:element ref="binaries" minOccurs="0" />
 				<xs:element ref="table-name" minOccurs="0" />
 				<xs:element ref="timelimit" minOccurs="0" />
 				<xs:element name="memorylimit" type="xs:positiveInteger" minOccurs="0" />
@@ -29,6 +30,15 @@
           </xs:restriction>
           </xs:simpleType>
     </xs:element>
+
+	<!-- binaries-path -->
+	<xs:element name="binaries">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value = "[\s]*[\S][\s\S]*"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
 	
 	<!-- table-name -->
 	<xs:element name="table-name">

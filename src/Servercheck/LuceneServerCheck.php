@@ -43,6 +43,11 @@ class LuceneServerCheck {
 	 * @var boolean
 	 */
 	private $_ifileConfig = null;
+    /**
+     * Percorso dei file Binari
+     */
+    private $_binariesPath = null;
+
 	/**
 	 * Libreria di Zend Lucene 
 	 */	
@@ -67,10 +72,6 @@ class LuceneServerCheck {
 	 * Percorso degli Adapters
 	 */
 	const ADAPTERS_PATH = 'Adapter/Document/';
-	/**
-	 * Percorso dei Binari
-	 */
-	const BINARIES_PATH = 'Adapter/Helpers/binaries/';
 	/**
 	 * XPDF installato nel sistema
 	 */
@@ -174,7 +175,8 @@ class LuceneServerCheck {
 	 */
 	private function __construct() {
 		// recupero la configurazine di IFile
-		$this->_ifileConfig = IFileConfig::getInstance();
+		$this->_ifileConfig  = IFileConfig::getInstance();
+        $this->_binariesPath = $this->_ifileConfig->getBinariesPath();
 	}
 	
 	/**
@@ -244,6 +246,7 @@ class LuceneServerCheck {
 		
 		echo "<html>\n";
 		echo "<head>\n";
+            echo "<title>IFile Server Check</title>";
 			echo "<style>\n";
 				echo "body {text-align: center;}";
 				echo "table {margin:auto;border-top:1px solid #000;border-left:1px solid #000;}\n";
@@ -369,7 +372,7 @@ class LuceneServerCheck {
 	private function checkServer() {
 		// server 32/64bit
 		$server = $this->getServerBit();
-		$use = ($server == '64bit') ? 'Only for linux/windows.</br>Copy Adapter/Helpers/binaries/[linux|windows]/bin64/pdftotext in Adapter/Helpers/binaries/[linux|windows]' : 'Not defined'; 		
+		$use = 'Server type';
 		// inizializza l'oggetto per il report
 		$reportCheck = new ReportCheck(true, 'Server', $server, 'Not defined' , 'Note: If the OS is 64bit but PHP running a 32 bit, the check will return (32 bit)', 'http://www.php.net/manual/en/install.php', $use);
 				
@@ -409,7 +412,7 @@ class LuceneServerCheck {
 		$serverbit = $server['bit'];
 		// pdftotext personalizzata
 		$pdftotextConfig = $this->_ifileConfig->getXpdf('pdftotext');
-		
+
 		$customXPDF = false;
 		// controlla se esiste una configurazione di una XPDF personalizzata
 		if (!empty($pdftotextConfig['executable'])) {
@@ -440,7 +443,7 @@ class LuceneServerCheck {
 			$path  = LuceneServerCheck::BINARIES_UNV;
 		}
 		
-		$infoPath = ($customXPDF) ? $path : LuceneServerCheck::BINARIES_PATH.$path;
+		$infoPath = ($customXPDF) ? $path : $this->_binariesPath.$path;
 		
 		if (!$perms) {									
 			$reportCheck->setMessage('Unexecutable');	
@@ -500,7 +503,7 @@ class LuceneServerCheck {
 			$reportCheck->setRequire('Not defined');	
 			$reportCheck->setInfo('XPDF INFO Binaries File isn\'t supported - for '.strtoupper(substr(PHP_OS, 0, 3)));
 		} else {
-			$infoPath = ($customXPDF) ? $path : LuceneServerCheck::BINARIES_PATH.$path;
+			$infoPath = ($customXPDF) ? $path : $this->_binariesPath.$path;
 			if (!$perms) {									
 			$reportCheck->setMessage('Unexecutable');	
 				$reportCheck->setInfo('Permission XPDF INFO Binaries File ('.$infoPath.'): '.$this->configmod.' - Please set to 0755 for binaries XPDF in '.strtoupper(substr(PHP_OS, 0, 3)));	
@@ -544,11 +547,11 @@ class LuceneServerCheck {
 		} else {
 			if (!$perms) {									
 				$reportCheck->setMessage('Unexecutable');	
-				$reportCheck->setInfo('Permission ANTIWORD Binaries File ('.LuceneServerCheck::BINARIES_PATH.$path.'): '.$this->configmod.' - Please set to 0755 for binaries ANTIWORD in '.strtoupper(substr(PHP_OS, 0, 3)));	
+				$reportCheck->setInfo('Permission ANTIWORD Binaries File ('.$this->_binariesPath.$path.'): '.$this->configmod.' - Please set to 0755 for binaries ANTIWORD in '.strtoupper(substr(PHP_OS, 0, 3)));
 			} else {
 				$reportCheck->setCheck(true);
 				$reportCheck->setMessage('Executable');
-				$reportCheck->setInfo('Permission ANTIWORD Binaries File ('.LuceneServerCheck::BINARIES_PATH.$path.'): '.$this->configmod);
+				$reportCheck->setInfo('Permission ANTIWORD Binaries File ('.$this->_binariesPath.$path.'): '.$this->configmod);
 			}	
 		}
 		
@@ -736,7 +739,7 @@ class LuceneServerCheck {
 		//$ext['use']['id3'] 		= 'Used for MP3 file parser';
 		$ext['use']['mysqli'] 	= 'Used only for MySqli Interface'; 
 		$ext['use']['exif'] 	= 'Used for JPG file parser'; 
-		$ext['use']['com'] 		= 'Used for DOC file parser'; 
+		$ext['use']['com'] 		= 'Used for DOC file parser (Not supported from Linux server)';
 		$ext['use']['stem'] 	= 'Used for Stemming languages'; 
 		
 		// link
@@ -803,7 +806,7 @@ class LuceneServerCheck {
 	{
 		if (!$custom) {
 			// @TODO da rivedere il recupero del Path
-			$path = dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.LuceneServerCheck::BINARIES_PATH.$path;
+			$path = $this->_binariesPath.$path;
 		}
 		
 	    clearstatcache();

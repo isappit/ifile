@@ -1,9 +1,8 @@
 <?php
 /**
- * IFile framework
+ * IFile
  *
- * Lo script serve solo a verificare se sono installate tutte le librerie necessarie al
- * corretto funzionamento di IFile all'interno dell'ambiente dove questa verra' utilizzata.
+ * This script to check all requirement to use IFile Library
  *
  * @category   IndexingFile
  * @package    ifile
@@ -15,21 +14,30 @@
 require ("../autoload_prs4.php");
 require ("../../../autoload.php");
 
+use Isappit\Ifile\Config\IFileConfig;
 use Isappit\Ifile\Servercheck\LuceneServerCheck;
 
-// instanzia la classe LuceneServerCheck
+// Define external configuration file ( if not defined, IFile use: src/Config/xml/IFileConfig.xml )
+// $fileConfig = "/Users/isapp/Sites/personal/github/ifile/IFileConfig.xml";
+
+// IMPORTANT:
+// if use a external Configuration file is need to set external
+// configuration file first to instance LuceneServerCheck
+// IFileConfig::setXmlConfig($fileConfig);
+
+// instance LuceneServerCheck
 $serverCheck = LuceneServerCheck::getInstance();
-// richiama il metodo di controllo
+// call check
 $serverCheck->serverCheck();
-// recupera l'array degli oggetti di check
+// get check object
 //$reportCheck = $serverCheck->getReportCheck();
 
-// presenta a video il risultato del controllo:
-// in formato tabellare se richiamato da browser
-// in linea se richiamato da shell
+// display result:
 if (empty($argv)) {
+    // display in HTML format
 	$serverCheck->printReportCheckWeb();
-} else {	
+} else {
+    // display in CommanLine fomrat
 	$serverCheck->printReportCheckCLI();
 }
 ?>

@@ -27,7 +27,7 @@ and research on the site.
 
 ### Installation
 
-The easiest way to use IFile project is [Composer](https://getcomposer.org/).  If you don't have it already installed,
+The easiest way to install IFile project is to use [Composer](https://getcomposer.org/).  If you don't have it already installed,
 then please install as per the [documentation](https://getcomposer.org/doc/00-intro.md).
 
 ```bash
@@ -36,11 +36,26 @@ composer require isappit/ifile
 
 ```json
 {
+    "minimum-stability": "RC",
+    "prefer-stable": true,
     "require": {
-        "isappit/ifile": "^2.x"
+        "isappit/ifile": "dev-master"
     }
 }
 ```
+
+IFile need the key *_"minimum-stability": "RC"_* because the ZendSearch dependence is implemented only in "RC" stability.
+
+## Download Binaries files
+If you want indexing PDF files you need:
+
+ - Download the binaries files of third-parts from [here](#)
+ - Configure the "binaries" folder [more detail](src/Config/xml/README.md)   
+
+ Example:
+ ```xml
+ <binaries>/usr/local/var/ifile/binaries</binaries>
+ ```
 
 ### LICENSE
 

@@ -51,11 +51,11 @@ class IFileDocument_DOC extends IFileAdapterAbstract
 	
 	
 	public function __construct() {
-		parent::__construct();	
-		// setta le variabili dei path 
-		$this->pathBinaryFile = dirname(__FILE__).DIRECTORY_SEPARATOR."helpers".DIRECTORY_SEPARATOR."binaries".DIRECTORY_SEPARATOR;
+		parent::__construct();
+		// setta le variabili dei path
+		$this->pathBinaryFile 	= IFileConfig::getInstance()->getBinariesPath();
 		$this->antiwordResource = $this->pathBinaryFile."resources";	
-		$this->config = IFileConfig::getInstance()->getConfig('doctotxt');		 
+		$this->config = IFileConfig::getInstance()->getConfig('doctotxt');
 	}
 	
 	/**
@@ -64,6 +64,7 @@ class IFileDocument_DOC extends IFileAdapterAbstract
 	 * Implementa il metodo dell'interfaccia Adatpter_Search_Lucene_Document_Interface
 	 * 
 	 * @return Zend_Search_Lucene_Document
+	 * @throws IFileAdapterException
 	 */
 	public function loadParserFile()
     {
@@ -91,6 +92,7 @@ class IFileDocument_DOC extends IFileAdapterAbstract
 	 * Cerca di recuperare il contenuto tramite l'utilizzo delle COM
 	 * 
 	 * @return void
+	 * @throws IFileAdapterException
 	 */
 	private function parseCOM() {
 		// verifica che la COM sia richiamabile per il parser dei file DOC
@@ -121,6 +123,7 @@ class IFileDocument_DOC extends IFileAdapterAbstract
 	 * Recupera il contenuto di un file DOC utilizzando le ANTIWORD
 	 * 
 	 * @return void
+	 * @throws IFileAdapterException
 	 */
 	private function parseAntiword() {
 		// verifica che la ANTIWORD sia eseguibile per il parser dei file DOC
@@ -190,6 +193,7 @@ class IFileDocument_DOC extends IFileAdapterAbstract
 	 * Recupera le informazioni del file DOC e il suo contenuto in formato testuale da script PHP
 	 * 
 	 * @return void
+	 * @throws IFileAdapterException
 	 */
 	protected function parsePHP() {
 		

@@ -4,6 +4,7 @@
 - Migration: migration from SourceForge (SVN) to GitHub (Git)
 - Feature: Defined IFile how package in Packagist
 - Feature: implemented standart PHP-FIG: PRS-2, PRS-4
+- Feature: configuration of the folder of third-parts bionaries files
 
 ## 1.4 - 16 February 2015
 - Fixed: Solved bug on MultiTerms search. Integrated the "signs" to management the "optional" terms or "required"  

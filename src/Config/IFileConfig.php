@@ -149,6 +149,15 @@ class IFileConfig {
 			$this->config['root-application'] = ($xpath->query("root-application", $ifile)->item(0)) ? trim($xpath->query("root-application", $ifile)->item(0)->nodeValue) : null;
 			// controlla che la root application sia una directory realmente esistente 
 			if (!empty($this->config['root-application'])) {$this->checkRootApplication($this->config['root-application']);}
+
+            // binaries
+            $binariesPath = dirname(__FILE__)."/../Adapter/Helpers/binaries";
+            $this->config['binaries-path'] = ($xpath->query("binaries", $ifile)->item(0)) ? trim($xpath->query("binaries", $ifile)->item(0)->nodeValue) : $binariesPath;
+            // controlla che il path dei file bianri sia una directory realmente esistente
+            if (!empty($this->config['binaries-path'])) {
+                $this->config['binaries-path'] = $this->checkBinaries($this->config['binaries-path'])."/";
+            }
+
 			// table-name
 			$this->config['table-name'] = ($xpath->query("table-name", $ifile)->item(0)) ? trim($xpath->query("table-name", $ifile)->item(0)->nodeValue) : null;
 			if (!empty($this->config['table-name'])) {
@@ -415,7 +424,7 @@ class IFileConfig {
 	}
 	
 	/**
-	 * Verifica che sia stato configurato un path esistente
+	 * Verifica che sia stato configurato un path esistente per la root application
 	 * 
 	 * @return void
 	 * @throws IFileException  
@@ -426,6 +435,21 @@ class IFileConfig {
 			throw new IFileException('Root-application does not exist');
 		}
 	}
+
+    /**
+     * Verifica che sia stato configurato un path esistente per i file binari
+     *
+     * @return void
+     * @throws IFileException
+     */
+    protected function checkBinaries ($binaries) {
+
+        if (!is_dir(realpath($binaries))) {
+            throw new IFileException('Binaries path does not exist');
+        }
+
+        return realpath($binaries);
+    }
 	
 	/**
 	 * Verifica che sia stato configurato un file esistente
@@ -524,7 +548,16 @@ class IFileConfig {
     	while($class = get_parent_class($class)) { $classes[] = $class; }
 	    return $classes;
 	}
-	
+
+    /**
+     * Ritorna l'array dei tipi di Fields
+     * @param string $fieldName
+     * @return array
+     */
+    public function getBinariesPath() {
+        return $this->config['binaries-path'];
+    }
+
 	/**
 	 * Ritorna l'array dei tipi di Fields
 	 * @param string $fieldName

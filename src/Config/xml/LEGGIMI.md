@@ -84,6 +84,23 @@ Esempio:
 <root-application>/usr/local/var/wwww/myproject</root-application>
 ```
 
+### binaries
+Configura il percorso dei file binari. Questo tag è necessario per la configurazione corretta del percorso dove verranno salvati i binari delle componenti di terza parte. 
+
+**_Se non settato IFile utilizza di default:_** "vendor/isappit/ifile/src/Adapter/Helpers/binaries"
+
+E' necessario scaricare i binari di terze parti da questo [link](#).
+
+Tag          | Property     | Occurrences   | Type
+------------ | ------------ | ------------ | -------------
+binaries     |  optional    | 1            | string 
+
+Esempio:
+
+```xml
+<binaries>/usr/local/var/ifile/binaries</binaries>
+```
+
 ### table-name
 Configurazione del nome della tabella del database utilizzata per l'indicizzazione. 
 
