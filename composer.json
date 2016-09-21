@@ -36,7 +36,9 @@
     "support": {
         "email": "info@isapp.it",
         "issues": "https://github.com/isappit/ifile/issues",
-        "source": "https://github.com/isappit/ifile"
+        "source": "https://github.com/isappit/ifile",
+        "forum": "http://www.isapp.it/en/forum/isapp-it-ifile-framework-indexfile.html",
+        "docs": "http://www.isapp.it/en/documentazione-ifile.html"
     },
     "autoload": {
         "psr-4": {
