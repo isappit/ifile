@@ -1,6 +1,6 @@
 # CHANGELOG
 
-##  2.0 - 15 Settembre 2016
+##  2.0 - 15 September   2016
 - Migration: migration from SourceForge (SVN) to GitHub (Git)
 - Feature: Defined IFile how package in Packagist
 - Feature: implemented standart PHP-FIG: PRS-2, PRS-4

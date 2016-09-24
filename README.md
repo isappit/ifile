@@ -21,6 +21,7 @@ One of the fundamental aspects on which is based is the ability to read texts in
 (iFile supports more of the 25 formats) and search the terms present in the documents. 
 The traceability of the contents of files in search results on its own website, emphasizes the importance of allowing 
 the search of all content within own website. 
+
 The our users, uses IFile for sites of University, Scientific Communities, School, Libraries, Newspapers and 
 all web application or site that publish documents, images or audio files, to improve the user experience, 
 and research on the site.
@@ -47,17 +48,19 @@ composer require isappit/ifile
 IFile need the key *_"minimum-stability": "RC"_* because the ZendSearch dependence is implemented only in "RC" stability.
 
 ## Download Binaries files
-If you want indexing PDF files you need:
+If you want indexing some type of file you need:
 
- - Download the binaries files of third-parts from [here](#)
- - Configure the "binaries" folder [more detail](src/Config/xml/README.md)   
+ - Download the binaries files of third-parts from [here](https://github.com/isappit/ifile-binaries)
+ - Unzip the package on your server
+ - Configure the "ifile-binaries" folder [more detail](src/Config/xml/README.md)   
 
  Example:
- ```xml
- <binaries>/usr/local/var/ifile/binaries</binaries>
- ```
+```xml
+ <binaries>/usr/local/var/ifile/ifile-binaries</binaries>
+```
+[ZIP Archive](https://github.com/isappit/ifile-binaries/archive/master.zip)
 
 ### LICENSE
 
-The files in this archive are released under the Zend Framework license.
+The files in this archive are released under the LGPL-3.0
 You can find a copy of this license in [LICENSE](LICENSE).
