@@ -89,7 +89,7 @@ Example:
 Configure the path of the binaries files. This tag is need to configure the correct path where the binaries files of 
 third-parts components are installed. 
 
-**_If not defined the default value is "vendor/isappit/ifile/src/Adapter/Helpers/binaries"._**
+**_If not defined the default value is "vendor/isappit/ifile/src/Adapter/Helpers/ifile-binaries"._**
 
 You need download the third-parts binaries files from [here](#).
 
@@ -317,7 +317,11 @@ Example:
 ```
 
 ### xpdf
-Configure the third-part component XPDF, to get content of PDF documents, [more detail](http://www.foolabs.com/xpdf/)
+Configure the third-part component XPDF.
+
+_If you use an Operating System not supported to [ifile-binaries](https://github.com/isappit/ifile-binaries), 
+you can install on your server the correct [XPDF]((http://www.foolabs.com/xpdf/)) for your OS and configure this 
+executable file._
 
 Tag          | Property    | Occurrences   | Type
 ------------ | ------------ | ------------ | -------------
@@ -369,7 +373,7 @@ Example:
 ```
 
 #### xpdf -> pdftotext -> executable
-Configure the external XPDF (pdftotext) at IFile. 
+Configure the external XPDF (pdftotext) at [ifile-binaries](https://github.com/isappit/ifile-binaries). 
  
 **_If not defined, IFile search the "pdftotext" binary component in the library._**
 
@@ -384,7 +388,7 @@ Example:
 ```
 
 #### xpdf -> pdftotext -> xpdfrc
-Configure the external XPDF configuration file at IFile.
+Configure the external XPDF configuration file at [ifile-binaries](https://github.com/isappit/ifile-binaries).
 
 **_If not defined, IFile search the xpdfrc configuration file in the library._**
 
@@ -415,7 +419,7 @@ Example:
 ```
 
 ##### xpdf -> pdfinfo -> executable
-Configure the external XPDF (pdftotext) at IFile. 
+Configure the external XPDF (pdftotext) at [ifile-binaries](https://github.com/isappit/ifile-binaries). 
  
 **_If not defined, IFile search the "pdftotext" binary component in the library._**
 
@@ -431,7 +435,7 @@ Example:
 ```
 
 ##### xpdf -> pdfinfo -> xpdfrc
-Configure the external XPDF configuration file at IFile.
+Configure the external XPDF configuration file at [ifile-binaries](https://github.com/isappit/ifile-binaries).
 
 **_If not defined, IFile search the xpdfrc configuration file in the library._**
 

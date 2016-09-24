@@ -5,7 +5,8 @@
  */  
 -->
 <ifile>
-	<root-application>/Users/giampaolo/Sites/personal/github</root-application>
+	<root-application>/Users/isappit/Sites/personal/github</root-application>
+	<!--binaries>/Users/isappit/Sites/personal/github/ifile-binaries</binaries-->
 	<!--table-name collation="utf8_general_ci" engine="MyISAM">indexjifile</table-name-->
 	<!--timelimit>180</timelimit-->
 	<!--memorylimit></memorylimit-->

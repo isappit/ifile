@@ -151,7 +151,7 @@ class IFileConfig {
 			if (!empty($this->config['root-application'])) {$this->checkRootApplication($this->config['root-application']);}
 
             // binaries
-            $binariesPath = dirname(__FILE__)."/../Adapter/Helpers/binaries";
+            $binariesPath = dirname(__FILE__)."/../Adapter/Helpers/ifile-binaries";
             $this->config['binaries-path'] = ($xpath->query("binaries", $ifile)->item(0)) ? trim($xpath->query("binaries", $ifile)->item(0)->nodeValue) : $binariesPath;
             // controlla che il path dei file bianri sia una directory realmente esistente
             if (!empty($this->config['binaries-path'])) {
@@ -481,8 +481,8 @@ class IFileConfig {
 	/**
 	 * Verifica che l'oggetto analyzer esista
 	 * 
-	 * @return ZendSearch\Lucene\Analysis\Analyzer
-	 * @throws ReflectionException , IFileException  
+	 * @return \ZendSearch\Lucene\Analysis\Analyzer
+	 * @throws IFileException
 	 */
 	protected function checkAnalyzer ($classFilter) {
 		
@@ -505,8 +505,8 @@ class IFileConfig {
 	/**
 	 * Verifica che l'oggetto Token Filter esista
 	 * 
-	 * @return ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface
-	 * @throws ReflectionException , IFileException  
+	 * @return \ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface
+	 * @throws IFileException
 	 */
 	protected function checkTokenFilter ($classFilter) {
 		

@@ -1,8 +1,7 @@
 {
     "name": "isappit/ifile",
     "description": "IFile is a Documental Search Engine Framework to the indexing and serching in many format documents ( PDF, DOC, XLS, DOCX, MP3, JPG and many other ).",
-    "license": "LGPL-2.1",
-    "version": "dev-master",
+    "license": "LGPL-3.0",
     "keywords": [
         "framework",
         "zf2",
