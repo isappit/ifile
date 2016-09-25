@@ -109,7 +109,8 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 		$serverCheck->serverCheck();
 		$reportServerCheck = $serverCheck->getReportCheck();
 		// check XPDF 
-		$reportCheckXPDF = $reportServerCheck['XPDF']['PDFTOTEXT'];		 
+		$reportCheckXPDF = $reportServerCheck['XPDF']['PDFTOTEXT'];
+
 		if (!$reportCheckXPDF->getCheck()) {
 			throw new IFileAdapterException("XPDF not executable");
 		}
@@ -122,9 +123,6 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 		// definizione dei path
 		$pathBinaryFile = $pathInfoBinaryFile = $this->ifileConfig->getBinariesPath();
 		$configXpdf 	= $configInfoXpdf = $this->ifileConfig->getBinariesPath()."xpdfrc/xpdfrc";
-
-        var_dump($pathBinaryFile);
-        die();
 
 		$original_name 	= $this->getFilename();
 		$so = $this->_stremingOutput();
@@ -178,7 +176,7 @@ class IFileDocument_PDF extends IFileAdapterAbstract
 				throw new IFileAdapterException("XPDF INFO not executable");
 			}	
 		}
-		
+
 		// IMPORTANTE:::::
 		// vengono inibiti tutti i tipi di errori pertanto se si 
 		// verificano errori da shell il contenuto rimane vuoto. 

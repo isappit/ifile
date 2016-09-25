@@ -69,4 +69,3 @@ try {
 } catch (Exception $e) {
 	echo "Generic Error: ".$e->getMessage()."<br />";
 }
-?>

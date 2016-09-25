@@ -91,4 +91,3 @@ try {
 } catch (Exception $e) {
 	echo "Error in document: ($file) - ".$e->getMessage()."<br />";
 }
-?>

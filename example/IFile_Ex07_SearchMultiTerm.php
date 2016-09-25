@@ -103,4 +103,3 @@ function printResult($type, $result) {
 	
 	echo "End print for: ($type)<br><br>";
 }
-?>

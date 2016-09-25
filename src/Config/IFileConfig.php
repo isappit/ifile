@@ -432,7 +432,7 @@ class IFileConfig {
 	protected function checkRootApplication ($root) {
 		
 		if (!is_dir(realpath($root))) {
-			throw new IFileException('Root-application does not exist');
+            throw new IFileException(sprintf('Root-application path %s does not exist', $root));
 		}
 	}
 
@@ -445,7 +445,7 @@ class IFileConfig {
     protected function checkBinaries ($binaries) {
 
         if (!is_dir(realpath($binaries))) {
-            throw new IFileException('Binaries path does not exist');
+            throw new IFileException(sprintf('Binaries path %s does not exist', $binaries));
         }
 
         return realpath($binaries);

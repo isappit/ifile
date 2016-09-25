@@ -40,4 +40,3 @@ if (empty($argv)) {
     // display in CommanLine fomrat
 	$serverCheck->printReportCheckCLI();
 }
-?>

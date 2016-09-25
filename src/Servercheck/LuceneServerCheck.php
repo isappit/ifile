@@ -444,14 +444,15 @@ class LuceneServerCheck {
 		}
 		
 		$infoPath = ($customXPDF) ? $path : $this->_binariesPath.$path;
+        $permissionInfo = ($this->configmod) ? "Permission [ ".$this->configmod." ]" : "Permission not defined";
 		
 		if (!$perms) {									
 			$reportCheck->setMessage('Unexecutable');	
-			$reportCheck->setInfo('Permission XPDF Binaries File ('.$infoPath.'): '.$this->configmod.' - Please set to 0755 for binaries XPDF in '.strtoupper(substr(PHP_OS, 0, 3)));	
+			$reportCheck->setInfo($permissionInfo. ' ('.$infoPath.') - Please verify if binaries XPDF (OS: '.strtoupper(substr(PHP_OS, 0, 3)).') exists and set permission to 0755');
 		} else {
 			$reportCheck->setCheck(true);
 			$reportCheck->setMessage('Executable');
-			$reportCheck->setInfo('Permission XPDF Binaries File ('.$infoPath.'): '.$this->configmod);
+			$reportCheck->setInfo($permissionInfo.' ('.$infoPath.')');
 		}
 		
 		$this->pushReportCheck('XPDF', 'PDFTOTEXT', $reportCheck);
@@ -805,9 +806,10 @@ class LuceneServerCheck {
 	function checkPermits($path, $perm = 0755, $oct = false, $custom = false)
 	{
 		if (!$custom) {
-			// @TODO da rivedere il recupero del Path
 			$path = $this->_binariesPath.$path;
 		}
+
+        if (!file_exists($path)) return false;
 		
 	    clearstatcache();
 	    // recupera i permessi in formato ottale
