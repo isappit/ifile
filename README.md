@@ -82,7 +82,7 @@ Example:
 For more detail how configure IFile you can read the [README](https://github.com/isappit/ifile/tree/master/src/Config/xml)
 
 ### Documentation
-For now documentation of IFile is written only in "Italian" language. You can read documentation from [here](http://www.isapp.it/en/documentazione-ifile.html), 
+The documentation of IFile is written only in "Italian" language (we hope translate in English). You can read documentation from [here](http://www.isapp.it/en/documentazione-ifile.html), 
 or you can [Donwload PDF](http://www.isapp.it/documentazione/IFile_Introduzione_1_2.pdf).
 
 In IFile library exists also the *_example/_* folder were you can find many [examples](https://github.com/isappit/ifile/tree/master/example) 
