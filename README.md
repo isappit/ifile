@@ -47,19 +47,43 @@ composer require isappit/ifile
 
 IFile need that you configure the composer.json file with the key *_"minimum-stability": "RC"_* (or "dev") because the ZendSearch dependence is implemented only in "RC" stability.
 
-### Download Binaries files
+#### Download Binaries files
 If you want indexing PDF files you need:
 
- - Download the binaries files from [here](https://github.com/isappit/ifile-binaries/archive/master.zip)
+ - Download the binaries files from [github](https://github.com/isappit/ifile-binaries) or download [ZIP Archive](https://github.com/isappit/ifile-binaries/archive/master.zip)
  - Unzip the package on your server
- - Copy the _"ifile-binaries"_ folder in _"vendor/isappit/ifile/src/Adapter/Helpers/"_ or configure IFile to read the "ifile-binaries" folder from external path at IFile. [More detail](https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md) 
+ - Copy the _"ifile-binaries"_ folder in _"src/Adapter/Helpers/"_ or configure IFile to read the "ifile-binaries" folder from external path at IFile. [More detail](https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md) 
 
  Example Configure external path:
 ```xml
  <binaries>/usr/local/var/ifile/ifile-binaries</binaries>
 ```
 
-*Download "ifile-binaries" [ZIP Archive](https://github.com/isappit/ifile-binaries/archive/master.zip)*
+### Configuration
+The configuration file is stored in "src/Config/xml/IFileConfig.xml", but we recommended you to configure external file   
+at project and set this file configuration first to create the IFileFactory.
+
+Example:
+```php
+    // Define external configuration file ( if not defined, IFile use: src/Config/xml/IFileConfig.xml in vendor )
+    $fileConfig = "/Users/isapp/Sites/personal/github/ifile/IFileConfig.xml";
+    
+    // try/catch
+    try {
+    	// IMPORTANT: 
+    	// if use a external Configuration file is need to set external configuration file first to instance IFileFactory
+    	IFileConfig::setXmlConfig($fileConfig);
+    	
+    	// instance IFileFactory
+    	$IFile = IFileFactory::getInstance();
+    	.....
+```
+
+For more detail how configure IFile you can read the [README](https://github.com/isappit/ifile/tree/master/src/Config/xml)
+
+### Example
+In the *_example/_* folder you can find many [examples]() how to use IFile.
+
 
 ### LICENSE
 

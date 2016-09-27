@@ -12,7 +12,9 @@ Gli esempi 03 e 04, creano documenti nell'indice in modo manuale e con la presen
 Tutti gli altri servono a lavorare sull'indice per la ricerca dei termini e la gestione dei documenti.
 
 Ricorda che è possibile definire la configurazione di IFile in due modi, nei nostri esempi è utilizzato il primo metodo, ma è presente anche come utilizzare il secondo:
-1. usando il file "Config/IFileConfig.xml" presente nel vendor (non raccomandato se si effettua un update del pacchetto) 
+
+1. usando il file "Config/IFileConfig.xml" presente nel vendor (non raccomandato se si effettua un update del pacchetto)
+ 
 2. configurando un file XML di configurazione esterno al "vendor" e settando questo prima di istanziare la classe IFileFactory
 
 

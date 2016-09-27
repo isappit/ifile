@@ -4,7 +4,7 @@
  
  **Importante:**
  
-1. Il file di configurazione si trova in "Config/xml/IFileConfig.xml". Dalla versione 2.0 è possibile anche utilizzare un file XML esterno alla libreria (vedi IFile documentazione)
+1. Il file di configurazione si trova in "src/Config/xml/IFileConfig.xml". Dalla versione 2.0 è possibile anche utilizzare un file XML esterno alla libreria (vedi IFile documentazione)
 2. il file di configurazione viene validato dal file XSD "Config/xml/IFileConfig.xsd"
 
 ## STRUTTURA DEL FILE
@@ -87,7 +87,7 @@ Esempio:
 ### binaries
 Configura il percorso dei file binari. Questo tag è necessario per la configurazione corretta del percorso dove verranno salvati i binari delle componenti di terza parte. 
 
-**_Se non settato IFile utilizza di default:_** "vendor/isappit/ifile/src/Adapter/Helpers/binaries"
+**_Se non settato IFile utilizza di default:_** "src/Adapter/Helpers/binaries"
 
 E' necessario scaricare i binari di terze parti da questo [link](#).
 

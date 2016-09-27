@@ -4,7 +4,7 @@ This file describes how to properly configure Ifile.
 
 **Important:**
 
-1. The configuration file is in "Config/xml/IFileConfig.xml". Since version 2.0 you can also use an external XML file to the library (see IFile documentation)
+1. The configuration file is in "src/Config/xml/IFileConfig.xml". Since version 2.0 you can also use an external XML file to the library (see IFile documentation)
 2. The configuration file is validated by the XSD file "Config/xml/IFileConfig.xsd
 
 ## STRUCTURE
@@ -89,7 +89,7 @@ Example:
 Configure the path of the binaries files. This tag is need to configure the correct path where the binaries files of 
 third-parts components are installed. 
 
-**_If not defined the default value is "vendor/isappit/ifile/src/Adapter/Helpers/ifile-binaries"._**
+**_If not defined the default value is "src/Adapter/Helpers/ifile-binaries"._**
 
 You need download the third-parts binaries files from [here](#).
 
