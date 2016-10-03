@@ -319,7 +319,7 @@ Example:
 <doctotxt encoding="UTF-8" type="ANTIWORD" />
 ```
 
-**_If you want use a custom executable installed in your server you need define the absolute path in tag <doctotxt>_**
+**_If you want use a custom executable installed in your server you need define the absolute path in tag "doctotxt"_**
 
 ```xml
 <doctotxt encoding="UTF-8" type="ANTIWORD">/usr/local/bin/antiword</doctotxt>

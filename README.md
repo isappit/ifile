@@ -65,7 +65,7 @@ If you want use third-part component XPDF or ANTIWORD you can use this method:
 If you don't want download and install "ifile-binaries" folder and you want use XPDF or ANTIWORD installed on your server,
 you can configure the third-part executable files in configuration.
 
-For more datail how configure third-parts components in IFile see:
+For more detail how configure third-parts components in IFile see:
  - [XPDF](https://github.com/isappit/ifile/tree/master/src/Config/xml#xpdf)
  - [ANTIWORD](https://github.com/isappit/ifile/tree/master/src/Config/xml#doctotxt)
 
