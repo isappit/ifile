@@ -7,7 +7,8 @@ The examples, 01 and 02, indexing the documents stored in "myfiles" folder.
 
 The examples, 03 and 04, create documents in index manually or with Custom Fields.
 
-Other examples uses the index created to see how IFile search the terms in the index.  
+Other examples uses the index created to see how IFile search the terms in the index. 
+The "IFile_ServerCheck.php" help you to verify the correct configuration and requirement.   
 
 Remember that you can define your configuration in two mode:
 1. use _"vendor/isappit/ifile/src/Config/xml/IFileConfig.xml"_ stored in the "vendor" (not recommended)

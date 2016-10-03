@@ -47,14 +47,34 @@ composer require isappit/ifile
 
 IFile need that you configure the composer.json file with the key *_"minimum-stability": "RC"_* (or "dev") because the ZendSearch dependence is implemented only in "RC" stability.
 
-#### Download Binaries files
-If you want indexing PDF files you need:
+#### How Download and use Binaries files in IFile
+If you want use third-part component XPDF or ANTIWORD you can use this method:
 
- - Download the binaries files from [github](https://github.com/isappit/ifile-binaries) or download [ZIP Archive](https://github.com/isappit/ifile-binaries/archive/master.zip)
+##### Zip Archive
+ - Download ZIP Archive Binaries Files from [here](https://github.com/isappit/ifile-binaries/archive/master.zip)
  - Unzip the package on your server
- - Copy the _"ifile-binaries"_ folder in _"src/Adapter/Helpers/"_ or configure IFile to read the "ifile-binaries" folder from external path at IFile. [More detail](https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md) 
+ - Copy the _"ifile-binaries"_ folder in _"vendor/isappit/ifile/src/Adapter/Helpers/"_ or configure IFile to read 
+ the "ifile-binaries" folder from external path at IFile. [More detail](https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md) 
 
- Example Configure external path:
+##### Clone project from git
+ - Clone project 
+ - Copy the _"ifile-binaries"_ folder in _"vendor/isappit/ifile/src/Adapter/Helpers/"_ or configure IFile to read 
+ the "ifile-binaries" folder from external path at IFile. [More detail](https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md)
+
+##### Install and configure third-part component
+If you don't want download and install "ifile-binaries" folder and you want use XPDF or ANTIWORD installed on your server,
+you can configure the third-part executable files in configuration.
+
+For more datail how configure third-parts components in IFile see:
+ - [XPDF](https://github.com/isappit/ifile/tree/master/src/Config/xml#xpdf)
+ - [ANTIWORD](https://github.com/isappit/ifile/tree/master/src/Config/xml#doctotxt)
+
+Example clone project
+```bash
+git clone https://github.com/isappit/ifile-binaries.git
+```
+
+ Example how configure external path for "ifile-binaries" folder:
 ```xml
  <binaries>/usr/local/var/ifile/ifile-binaries</binaries>
 ```
@@ -82,7 +102,8 @@ Example:
 For more detail how configure IFile you can read the [README](https://github.com/isappit/ifile/tree/master/src/Config/xml)
 
 ### Documentation
-The documentation of IFile is written only in "Italian" language (we hope translate in English). You can read documentation from [here](http://www.isapp.it/en/documentazione-ifile.html), 
+The documentation of IFile is written only in "Italian" language (we hope translate in English in next release). 
+You can read documentation from [here](http://www.isapp.it/en/documentazione-ifile.html), 
 or you can [Donwload PDF](http://www.isapp.it/documentazione/IFile_Introduzione_1_2.pdf).
 
 In IFile library exists also the *_example/_* folder were you can find many [examples](https://github.com/isappit/ifile/tree/master/example) 

@@ -21,7 +21,7 @@ This file describes how to properly configure Ifile.
 	<duplicate>...</duplicate>
 	<server bit="..." />
  	<encoding>...</encoding>
-	<doctotxt encoding="..." type="..." />
+	<doctotxt encoding="..." type="..." >...</doctotxt>
 	<xpdf>
 		<opw>...</opw>
 		<pdftotext>
@@ -302,7 +302,7 @@ Example:
 ```
 **type = "ANTIWORD"**
 
-IFile uses the third-part component ANTIWORD to get the content of the Microsoft Word Document,
+IFile uses the third-part component ANTIWORD to get the content of the Microsoft Word Document -
 [more detail](http://www.winfield.demon.nl/) 
 
 You need define the "encoding" attribute using only the name of the file, for example if you want use the encoding 
@@ -310,11 +310,21 @@ file "UTF-8.txt", you mest set encoding="UTF-8"
 
 **_If "encoding" isn't defined ANTIWORD uses default value:_** _8859-1_
 
+Remember that if you want use encoding in ANTIWORD you need download the "ifile-binaries" folder, 
+[more detail](https://github.com/isappit/ifile-binaries) 
+
 Example:
 
 ```xml
 <doctotxt encoding="UTF-8" type="ANTIWORD" />
 ```
+
+**_If you want use a custom executable installed in your server you need define the absolute path in tag <doctotxt>_**
+
+```xml
+<doctotxt encoding="UTF-8" type="ANTIWORD">/usr/local/bin/antiword</doctotxt>
+```
+
 
 ### xpdf
 Configure the third-part component XPDF.

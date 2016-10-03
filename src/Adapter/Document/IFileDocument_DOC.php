@@ -17,6 +17,7 @@ use Isappit\Ifile\Adapter\Beans\LuceneDataIndexBean;
 use Isappit\Ifile\Adapter\Helpers\Word2Txt;
 use Isappit\Ifile\Config\IFileConfig;
 use Isappit\Ifile\Exception\IFileAdapterException;
+use Isappit\Ifile\Servercheck\LuceneServerCheck;
 
 /**
  * Adapter per il recupero del contenuto dei file DOC
@@ -151,8 +152,15 @@ class IFileDocument_DOC extends IFileAdapterAbstract
 		if (!empty($this->config['encoding'])) {
 			$encoding = " -m ".$this->config['encoding'].".txt";
 		}
-				
-		if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+		// Custom Executable
+		$pathExecutable = $this->config['executable'];
+
+		if (!empty($pathExecutable)) {
+			$antiword = $pathExecutable;
+			// inserisce la variabile di ambiente per il recupero dei file di mappatura
+			putenv("ANTIWORDHOME=".$this->antiwordResource);
+			$handle = popen("{$pathExecutable} {$encoding} {$this->getFilename()}", 'r');
+		} else if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 			// per il SO: WINDOWS
 			$antiword = $this->pathBinaryFile . "windows"; 
 			// inserisce la variabile di ambiente per il recupero dei file di mappatura
@@ -182,11 +190,9 @@ class IFileDocument_DOC extends IFileAdapterAbstract
 				$contents .= fread($handle, 8192);
 		  	}
 		}
-		
 		// creazione del Bean
 		$this->indexValues = new LuceneDataIndexBean();
-		
-		$this->indexValues->setBody($contents);		
+		$this->indexValues->setBody($contents);
 	}
 	
 	/**

@@ -76,7 +76,7 @@
 	
 	<!-- doctotxt -->
 	<xs:element name="doctotxt">
-		<xs:complexType>
+		<xs:complexType mixed="true">
 			<xs:attribute name="type" use="required" type="doctotxt-type"/>
 			<xs:attribute name="encoding" type="xs:string"/>
 		</xs:complexType>

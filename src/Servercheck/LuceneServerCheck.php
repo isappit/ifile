@@ -505,14 +505,16 @@ class LuceneServerCheck {
 			$reportCheck->setInfo('XPDF INFO Binaries File isn\'t supported - for '.strtoupper(substr(PHP_OS, 0, 3)));
 		} else {
 			$infoPath = ($customXPDF) ? $path : $this->_binariesPath.$path;
+            $permissionInfo = ($this->configmod) ? "Permission [ ".$this->configmod." ]" : "Permission not defined";
+
 			if (!$perms) {									
-			$reportCheck->setMessage('Unexecutable');	
-				$reportCheck->setInfo('Permission XPDF INFO Binaries File ('.$infoPath.'): '.$this->configmod.' - Please set to 0755 for binaries XPDF in '.strtoupper(substr(PHP_OS, 0, 3)));	
+			$reportCheck->setMessage('Unexecutable');
+                $reportCheck->setInfo($permissionInfo. ' ('.$infoPath.') - Please verify if binaries XPDF (OS: '.strtoupper(substr(PHP_OS, 0, 3)).') exists and set permission to 0755');
 			} else {
 				$reportCheck->setCheck(true);
 				$reportCheck->setMessage('Executable');
-				$reportCheck->setInfo('Permission XPDF INFO Binaries File ('.$infoPath.'): '.$this->configmod);
-			}	
+                $reportCheck->setInfo($permissionInfo.' ('.$infoPath.')');
+			}
 		}
 		
 		
@@ -528,8 +530,16 @@ class LuceneServerCheck {
 		// inizializza l'oggetto per il report
 		$reportCheck = new ReportCheck(false, 'ANTIWORD Binaries File', 'Unexecutable', 'CHMOD 0755' , 'For more information visit web site', 'http://www.winfield.demon.nl/', 'Used only for DOC file parser');
 		// verifica se antiword e' supportato da IFile
-		$supported = true;
-		if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+		$supported  = true;
+        $customExec = false;
+        // Executable
+        $pathExecutable = $this->_ifileConfig->getDocToTxt('executable');
+
+        if (!empty($pathExecutable)) {
+            $customExec = true;
+            $path  = $pathExecutable;
+            $perms = $this->checkPermits($path, "0755", false, $customExec);
+        } else if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 			$perms = $this->checkPermits(LuceneServerCheck::BINARIES_WIN_DOC, "0755");
 			$path  = LuceneServerCheck::BINARIES_WIN_DOC;
 		} else if(strtoupper(substr(PHP_OS, 0, 3)) === 'DAR'){			
@@ -544,15 +554,18 @@ class LuceneServerCheck {
 		
 		if (!$supported) {
 				$reportCheck->setMessage('Unsupported');	
-				$reportCheck->setInfo('ANTIWORD Binaries File isn\'t supported - for '.strtoupper(substr(PHP_OS, 0, 3)). ' system operation. Check configuration for use COM or PHP parser');
+				$reportCheck->setInfo('ANTIWORD Binaries File isn\'t supported - for '.strtoupper(substr(PHP_OS, 0, 3)). ' system operation in "ifile-binaries" folder. Check configuration for use COM or PHP parser or configure a custom executable');
 		} else {
+
+            $execPath = ($customExec) ? $path : $this->_binariesPath.$path;
+            $permissionInfo = ($this->configmod) ? "Permission [ ".$this->configmod." ]" : "Permission not defined";
 			if (!$perms) {									
-				$reportCheck->setMessage('Unexecutable');	
-				$reportCheck->setInfo('Permission ANTIWORD Binaries File ('.$this->_binariesPath.$path.'): '.$this->configmod.' - Please set to 0755 for binaries ANTIWORD in '.strtoupper(substr(PHP_OS, 0, 3)));
+				$reportCheck->setMessage('Unexecutable');
+                $reportCheck->setInfo($permissionInfo. ' ('.$execPath.') - Please verify if binaries ANTIWORD (OS: '.strtoupper(substr(PHP_OS, 0, 3)).') exists and set permission to 0755');
 			} else {
 				$reportCheck->setCheck(true);
 				$reportCheck->setMessage('Executable');
-				$reportCheck->setInfo('Permission ANTIWORD Binaries File ('.$this->_binariesPath.$path.'): '.$this->configmod);
+                $reportCheck->setInfo($permissionInfo.' ('.$execPath.')');
 			}	
 		}
 		

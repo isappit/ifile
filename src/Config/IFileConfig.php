@@ -136,7 +136,7 @@ class IFileConfig {
 				}
 			}
 			
-			throw new IFileException('File XML is not valid according to the XSD.&#10;Error: '.$errors[0]->message);
+			throw new IFileException(sprintf('File XML is not valid according to the XSD.&#10;Error: %s', $errors[0]->message));
 		}
 		
 		// creo un oggetto Xpath
@@ -187,9 +187,14 @@ class IFileConfig {
 					
 				$encoding = ($doctotxt->getAttributeNode("encoding")) ? $doctotxt->getAttributeNode("encoding")->value : null;
 				$type = ($doctotxt->getAttributeNode("type")) ? $doctotxt->getAttributeNode("type")->value : null;
-				
-				$this->config['doctotxt']['encoding'] = $encoding;
-				$this->config['doctotxt']['type'] 	  = $type;
+
+                $this->config['doctotxt']['executable'] = $xpath->query("doctotxt", $ifile)->item(0)->nodeValue;
+				$this->config['doctotxt']['encoding']   = $encoding;
+				$this->config['doctotxt']['type'] 	    = $type;
+
+                if (!empty($this->config['doctotxt']['executable'])) {
+                    $this->checkExistsFile($this->config['doctotxt']['executable'], $this->config['doctotxt']['type']);
+                }
 				
 			} else {
 				$this->config['doctotxt']['encoding'] = null;
@@ -225,11 +230,11 @@ class IFileConfig {
 						}
 						
 						if (!empty($this->config['xpdf']['pdftotext']['executable'])) {
-							$this->checkCustomXPDF($this->config['xpdf']['pdftotext']['executable'], "pdftotext");
+							$this->checkExistsFile($this->config['xpdf']['pdftotext']['executable'], "pdftotext");
 						} 
 						
 						if (!empty($this->config['xpdf']['pdftotext']['xpdfrc'])) {
-							$this->checkCustomXPDF($this->config['xpdf']['pdftotext']['xpdfrc'], "xpdfrc for pdftotext");
+							$this->checkExistsFile($this->config['xpdf']['pdftotext']['xpdfrc'], "xpdfrc for pdftotext");
 						}
 						
 					}
@@ -245,11 +250,11 @@ class IFileConfig {
 						}
 						
 						if (!empty($this->config['xpdf']['pdfinfo']['executable'])) {
-							$this->checkCustomXPDF($this->config['xpdf']['pdfinfo']['executable'], "pdfinfo");
+							$this->checkExistsFile($this->config['xpdf']['pdfinfo']['executable'], "pdfinfo");
 						} 
 						
 						if (!empty($this->config['xpdf']['pdfinfo']['xpdfrc'])) {
-							$this->checkCustomXPDF($this->config['xpdf']['pdfinfo']['xpdfrc'], "xpdfrc for pdfinfo");
+							$this->checkExistsFile($this->config['xpdf']['pdfinfo']['xpdfrc'], "xpdfrc for pdfinfo");
 						}
 					}
 				}				
@@ -327,7 +332,7 @@ class IFileConfig {
 				// salvo anche le stringhe di configurazione
 				$this->config['xml-filters'] = (!empty($xmlRegistryFilter)) ? $xmlRegistryFilter : null;
 				
-// 				echo __METHOD__.PHP_EOL;
+// 				echo __METHOD__.PHP_EOL;echo "<pre>";
 // 				print_r($this->config);
 			}
 		}	
@@ -458,9 +463,9 @@ class IFileConfig {
 	 * @return void
 	 * @throws IFileException 
 	 */
-	protected function checkCustomXPDF($file, $type = "") {
+	protected function checkExistsFile($file, $type = "") {
 		if (is_dir(realpath($file)) || !is_file($file)) {
-			throw new IFileException("{$type} file does not exist");
+			throw new IFileException(sprintf("%s file (%s) does not exist", $type, $file));
 		}
 	}
 	
@@ -474,7 +479,7 @@ class IFileConfig {
 	protected function checkStopWords ($file) {
 		
 		if (is_dir(realpath($file)) || !is_file($file)) {
-			throw new IFileException('Stop-words file does not exist');
+            throw new IFileException(sprintf("Stop-words file (%s) does not exist", $file));
 		}
 	}
 	
@@ -487,7 +492,7 @@ class IFileConfig {
 	protected function checkAnalyzer ($classFilter) {
 		
 		if (!class_exists($classFilter)) {
-			throw new IFileException('Class Analyzer '.$classFilter.' does not exist');
+			throw new IFileException(sprintf('Class Analyzer %s does not exist', $classFilter));
 		}
 		
 		// recupera tutte le classi che estende
@@ -495,7 +500,7 @@ class IFileConfig {
 		
 		// verifico che la classe estenda la Zend_Search_Lucene_Analysis_TokenFilter			
 		if(!in_array(self::ZEND_ANALYZER, $classes)) {
-			throw new IFileException('The class does not extends '.self::ZEND_ANALYZER);
+			throw new IFileException(sprintf('The class does not extends %s', self::ZEND_ANALYZER));
 		}
 		// L'oggetto Analyzer e' utilizzato solo dalla interfaccia Lucene
 		// pertanto non dovrebbero essere istanziati qui, ma nella creazione di Lucene
@@ -511,7 +516,7 @@ class IFileConfig {
 	protected function checkTokenFilter ($classFilter) {
 		
 		if (!class_exists($classFilter)) {
-			throw new IFileException('Class TokenFilters '.$classFilter.' does not exist');
+			throw new IFileException(sprintf('Class TokenFilters %s does not exist', $classFilter));
 		}
 		
 		// recupera tutte le classi che estende
@@ -519,7 +524,7 @@ class IFileConfig {
 		
 		// verifico che la classe estenda la Zend_Search_Lucene_Analysis_TokenFilter			
 		if(!in_array(self::ZEND_TOKENFILTER, $interfaces)) {
-			throw new IFileException('The class does not implement '.self::ZEND_TOKENFILTER);
+			throw new IFileException(sprintf('The class does not implement %s', self::ZEND_TOKENFILTER));
 		}
 		
 		// Gli oggetti TokenFilter sono utilizzati solo dalla interfaccia Lucene
@@ -583,7 +588,20 @@ class IFileConfig {
 		
 		return null;
 	}
-	
+
+    /**
+     * Ritorna la proprieta' della configurazione per la DocToTxt
+     * @param string $property
+     * @return mixed
+     */
+    public function getDocToTxt($property) {
+        if (isset($this->config['doctotxt'][$property])) {
+            return $this->config['doctotxt'][$property];
+        }
+
+        return null;
+    }
+
 	/**
 	 * Sovrascrive o aggiunge elementi alla configurazione creando una copia di quella originale
 	 * 
@@ -648,7 +666,7 @@ class IFileConfig {
 	public static function setXmlConfig($xmlConfig) {
 		// verifica se il file esiste
 		if (is_dir(realpath($xmlConfig)) || !is_file($xmlConfig)) {
-			throw new IFileException('Configuration file does not exist ['.$xmlConfig.']');
+			throw new IFileException(sprintf('Configuration file does not exist [%s]', $xmlConfig));
 		}
 		
 		self::$xml = $xmlConfig;
