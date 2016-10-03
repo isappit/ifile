@@ -31,10 +31,6 @@ and research on the site.
 The easiest way to install IFile project is to use [Composer](https://getcomposer.org/).  If you don't have it already installed,
 then please install as per the [documentation](https://getcomposer.org/doc/00-intro.md).
 
-```bash
-composer require isappit/ifile
-```
-
 ```json
 {
     "minimum-stability": "RC",
