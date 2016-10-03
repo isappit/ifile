@@ -54,33 +54,33 @@ If you want use third-part component XPDF or ANTIWORD you can use this method:
  - Download ZIP Archive Binaries Files from [here](https://github.com/isappit/ifile-binaries/archive/master.zip)
  - Unzip the package on your server
  - Copy the _"ifile-binaries"_ folder in _"vendor/isappit/ifile/src/Adapter/Helpers/"_ or configure IFile to read 
- the "ifile-binaries" folder from external path at IFile. [More detail](https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md) 
+ the "ifile-binaries" folder from external path at IFile. [More detail](https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md#binaries) 
+
+ Example how configure external path:
+```xml
+ <binaries>/usr/local/var/ifile/ifile-binaries</binaries>
+```
 
 ##### Clone project from git
  - Clone project 
  - Copy the _"ifile-binaries"_ folder in _"vendor/isappit/ifile/src/Adapter/Helpers/"_ or configure IFile to read 
- the "ifile-binaries" folder from external path at IFile. [More detail](https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md)
+ the "ifile-binaries" folder from external path at IFile. [More detail](https://github.com/isappit/ifile/blob/master/src/Config/xml/README.md#binaries)
+
+Example clone project:
+```bash
+git clone https://github.com/isappit/ifile-binaries.git
+```
 
 ##### Install and configure third-part component
 If you don't want download and install "ifile-binaries" folder and you want use XPDF or ANTIWORD installed on your server,
-you can configure the third-part executable files in configuration.
+you can configure the third-parts executable files in configuration.
 
 For more detail how configure third-parts components in IFile see:
  - [XPDF](https://github.com/isappit/ifile/tree/master/src/Config/xml#xpdf)
  - [ANTIWORD](https://github.com/isappit/ifile/tree/master/src/Config/xml#doctotxt)
 
-Example clone project
-```bash
-git clone https://github.com/isappit/ifile-binaries.git
-```
-
- Example how configure external path for "ifile-binaries" folder:
-```xml
- <binaries>/usr/local/var/ifile/ifile-binaries</binaries>
-```
-
 ### Configuration
-The configuration file is stored in "src/Config/xml/IFileConfig.xml", but we recommended you to configure external file   
+The configuration file is stored in "src/Config/xml/IFileConfig.xml", but we recommended you to configure external file 
 at project and set this file configuration first to create the IFileFactory.
 
 Example:
