@@ -310,6 +310,12 @@ Esempio per parser ANTIVORD:
 <doctotxt encoding="UTF-8" type="ANTIWORD" />
 ```
 
+**_Se si vuole utilizzare un eseguibile installato sul proprio server, è necessario definire il path assoluto nel tag "doctotxt"_**
+
+```xml
+<doctotxt encoding="UTF-8" type="ANTIWORD">/usr/local/bin/antiword</doctotxt>
+```
+
 ### xpdf
 Permette di configurare la componente binaria di terze parti XPDF per la lettura dei contenuti dei documenti PDF, [maggiori dettagli](http://www.foolabs.com/xpdf/)
 

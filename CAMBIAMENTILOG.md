@@ -5,6 +5,7 @@
 - Feature: definito il pacchetto IFile in Packagist
 - Feature: implementati gli standart PHP-FIG: PRS-2, PRS-4
 - Feature: configurazione del path della cartella contenente i file binari di terze parti
+- Feature: configurazione del path assoluto di ANTIWORD installato sul server
 
 
 ## 1.4 - 16 Febbraio 2015
