@@ -40,7 +40,7 @@ composer require isappit/ifile
     "minimum-stability": "RC",
     "prefer-stable": true,
     "require": {
-        "isappit/ifile": "dev-master"
+        "isappit/ifile": "2.x"
     }
 }
 ```
