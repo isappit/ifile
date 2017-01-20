@@ -65,7 +65,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * @return void 
 	 */
 	public function __construct($indexDir) {
-		$this->__createIndex($indexDir);		
+		$this->__createIndex($indexDir);
 	}
 	
 	/**
@@ -73,7 +73,7 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 	 * 
 	 * @param string $indexDir Path to the directory. 
 	 * @return void 
-	 * @throws ZendSearch\Lucene\Exception, IFileException
+	 * @throws \ZendSearch\Lucene\Exception, IFileException
 	 */
 	private function __createIndex($indexDir) {
 		// verifica che esista il framework Zend
@@ -104,12 +104,8 @@ class IFileIndexingLucene extends IFileIndexingAbstract {
 		} else {
 			$this->lucene = Zend_Search_Lucene::open($indexDir);
 		}
-						
-		
-		
-		// @TODO: sembra che la nuova versione di Zend Search non implementi in Lucene 
-		// 		  il metodo addREference();
-		
+
+		// @TODO: sembra che la nuova versione di Zend Search non implementi in Lucene il metodo addREference();
 		// per ovviare ai problemi sulle ricerche (multiple o  ricorsive) viene aggiunta 
 		// una reference 
 		// infatti la prima ricerca (chiamata alla find()) viene eliminata l'unica reference 

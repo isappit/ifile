@@ -722,6 +722,44 @@ Esempio:
 <filter class="EnglishPorterStemmer">Isappit\Ifile\Tokenfilter\Stemming\English</filter>
 ``` 
 
+#### plugins 
+Contenitore dei TAG per la gestione dei plugin
+ 
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+plugins      | opzionale    | 1            | ComplexType - all
+
+Esempio: 
+
+```xml
+<plugins>
+    <plugin class="...">...</plugin>
+    ...
+</plugins>
+```
+
+#### plugins -> plugin
+Configurazione del namespace della classe che estende ZendSearch\Lucene\Analysis\TokenFilter, [maggiori dettagli](http://framework.zend.com/manual/en/zend.search.lucene.extending.html)
+
+Tag          | Proprietà    | Occorrenza   | Tipo
+------------ | ------------ | ------------ | -------------
+plugin       | opzionale    | 1            | string
+
+Attributo    | Proprietà    | Tipo          | Descizione
+------------ | ------------ | ------------- | ------------ 
+class        | obbligatorio | string        | Nome della classe 
+
+Esempio: 
+
+```xml
+<plugin class="MyPlugin">Isappit\Ifile\Plugin</plugin>
+``` 
+
+**_IMPORTANTE:_**
+Il plugin deve estendere la classe astratta "Isappit\Ifile\Plugin\IFileAbstractPlugin"
+
+ 
+
 ###### Stemmer
 IFile definisce già dei filtri personalizzati per lo "Stemmer". 
 Le classi sono presenti nella cartella "TokenFilter/" della libreria IFile.

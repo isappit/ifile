@@ -101,9 +101,12 @@ class IFileFactory {
 		if(!$found) {
 			throw new IFileException('The class does not implement IFileIndexingInterface');
 		}
-		
+
+		$indexObject = $reflection->newInstance($resource);
+        // invoke bootstrap
+        $indexObject->bootstrap();
 		// return object
-		return $reflection->newInstance($resource);
+		return $indexObject;
 	}
 	
 	/**

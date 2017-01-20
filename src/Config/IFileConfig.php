@@ -34,6 +34,10 @@ class IFileConfig {
 	 * Analyzer class
 	 */
 	const ZEND_ANALYZER = 'ZendSearch\Lucene\Analysis\Analyzer\Common\AbstractCommon';
+    /**
+     * Plugin class
+     */
+    const IFILE_PLUGIN = 'Isappit\Ifile\Plugin\IFilePluginInterface';
 	/**
 	 * IFileConfig instance
 	 * 
@@ -331,10 +335,34 @@ class IFileConfig {
 				$this->config['filters'] = (!empty($registryFilter)) ? $registryFilter : null;
 				// salvo anche le stringhe di configurazione
 				$this->config['xml-filters'] = (!empty($xmlRegistryFilter)) ? $xmlRegistryFilter : null;
-				
-// 				echo __METHOD__.PHP_EOL;echo "<pre>";
-// 				print_r($this->config);
 			}
+
+            // Plugins
+            $registryPlugin     = array();
+            $xmlRegistryPlugin  = array();
+            $nodePlugins = $xpath->query("//ifile/plugins/plugin");
+
+            foreach($nodePlugins as $plugin) {
+
+                $filePlugin     = trim($plugin->nodeValue);
+                $classPlugin    = $plugin->getAttributeNode("class")->value;
+
+                if (!empty($filePlugin) && !empty($classPlugin)) {
+                    // conbtrollo esistenza della classe
+                    $obj = $this->checkPlugin($filePlugin."\\".$classPlugin);
+                    // inserisce il riferimento all'oggetto
+                    array_push($registryPlugin, $obj);
+                    // salvo anche le stringhe di configurazione
+                    array_push($xmlRegistryPlugin, (array('file'=>$filePlugin, 'class' => $classPlugin )));
+                }
+            }
+
+            $this->config['plugins'] = (!empty($registryPlugin)) ? $registryPlugin : null;
+            // salvo anche le stringhe di configurazione
+            $this->config['xml-plugins'] = (!empty($xmlRegistryPlugin)) ? $xmlRegistryPlugin : null;
+
+//            echo __METHOD__.PHP_EOL;echo "<pre>";
+//            print_r($this->config);
 		}	
 	}
 	
@@ -386,9 +414,8 @@ class IFileConfig {
 	 * Questi sono gli encoding che al momento sono stati testati e verificati.
 	 * 
 	 * Ritorna un array a due dimensioni dove sono presenti l'encoding e per quali alfabeti viene utilizzato
-	 * @TODO 
-	 * La lista dovrebbe essere recuperata dal XML Schema per evitare di 
-	 * andare a modificare ogni volta questo metodo  
+     *
+	 * @TODO: La lista dovrebbe essere recuperata dal XML Schema (o JSON) per evitare di andare a modificare ogni volta questo metodo
 	 *
 	 * @return array $encoding
 	 */
@@ -494,22 +521,44 @@ class IFileConfig {
 		if (!class_exists($classFilter)) {
 			throw new IFileException(sprintf('Class Analyzer %s does not exist', $classFilter));
 		}
-		
 		// recupera tutte le classi che estende
 		$classes = $this->getAncestors($classFilter);
-		
-		// verifico che la classe estenda la Zend_Search_Lucene_Analysis_TokenFilter			
+		// verifico che la classe estenda la Zend_Search_Lucene_Analysis_TokenFilter
 		if(!in_array(self::ZEND_ANALYZER, $classes)) {
 			throw new IFileException(sprintf('The class does not extends %s', self::ZEND_ANALYZER));
 		}
-		// L'oggetto Analyzer e' utilizzato solo dalla interfaccia Lucene
-		// pertanto non dovrebbero essere istanziati qui, ma nella creazione di Lucene
+
 		return $classFilter;
 	}
-	
+
+
+    /**
+     * Verifica che l'oggetto Plugin esista
+     *
+     * @param string $classPlugin
+     * @return \Isappit\Ifile\Plugin\IFilePluginInterface
+     * @throws IFileException
+     */
+    protected function checkPlugin ($classPlugin) {
+
+        if (!class_exists($classPlugin)) {
+            throw new IFileException(sprintf('Class Plugin %s does not exist', $classPlugin));
+        }
+        // recupera tutte le classi che estende
+        $interfaces = $this->getIntefaces($classPlugin);
+        // verifico che la classe estenda la Isappit\IFile\Plugin\IFilePluginInterface
+        if(!in_array(self::IFILE_PLUGIN, $interfaces)) {
+            throw new IFileException(sprintf('The class does not implement %s', self::IFILE_PLUGIN));
+        }
+
+        return $classPlugin;
+    }
+
+
 	/**
 	 * Verifica che l'oggetto Token Filter esista
-	 * 
+	 *
+     * @param string $classFilter
 	 * @return \ZendSearch\Lucene\Analysis\TokenFilter\TokenFilterInterface
 	 * @throws IFileException
 	 */
@@ -518,17 +567,13 @@ class IFileConfig {
 		if (!class_exists($classFilter)) {
 			throw new IFileException(sprintf('Class TokenFilters %s does not exist', $classFilter));
 		}
-		
 		// recupera tutte le classi che estende
 		$interfaces = $this->getIntefaces($classFilter);
-		
-		// verifico che la classe estenda la Zend_Search_Lucene_Analysis_TokenFilter			
+		// verifico che la classe estenda la Zend_Search_Lucene_Analysis_TokenFilter
 		if(!in_array(self::ZEND_TOKENFILTER, $interfaces)) {
 			throw new IFileException(sprintf('The class does not implement %s', self::ZEND_TOKENFILTER));
 		}
 		
-		// Gli oggetti TokenFilter sono utilizzati solo dalla interfaccia Lucene
-		// pertanto non dovrebbero essere istanziati qui, ma nella creazione di Lucene
 		return $classFilter;
 	}
 	

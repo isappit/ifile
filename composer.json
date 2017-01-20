@@ -47,6 +47,7 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendsearch": "2.0.0rc6",
+        "zendframework/zend-eventmanager": "3.*",
         "james-heinrich/getid3": "v1.9.12"
     }
 }

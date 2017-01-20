@@ -45,7 +45,14 @@ interface IFileIndexingInterface {
 	 * Tipo di field: TesNon storicizzato
 	 */
 	const FIELD_TYPE_UNSTORED = 'UnStored';
-	
+
+    /**
+     * Gestisce il bootstrap del framework
+     *
+     * @return void
+     */
+    public function bootstrap();
+
 	/**
 	 * Aggiunge un documento ad un indice
 	 *  

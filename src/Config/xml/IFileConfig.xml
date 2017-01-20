@@ -26,7 +26,7 @@
 		</pdftotext>
 		<opw></opw>
 	</xpdf-->
-	<!--doctotxt encoding="8859-1" type="ANTIWORD" /-->
+	<!--doctotxt encoding="8859-1" type="ANTIWORD">/opt/local/bin/antiword</doctotxt-->
 	<!--doctotxt encoding="" type="COM" /-->
 	<!--zend-document>
 		<fields>
@@ -70,5 +70,9 @@
 				<filter class="TurkishPECLStemmer">Isappit\Ifile\Tokenfilter\Stemming\Turkish</filter>
 			</custom-filters -->		
 		</filters>
-	</analyzer>	
+	</analyzer>
+	<!--plugins>
+		<plugin class="MyPlugin">Isappit\Ifile\Plugin</plugin>
+		<plugin class="MyPlugin02">Isappit\Ifile\Plugin</plugin>
+	</plugins-->
 </ifile>

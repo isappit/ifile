@@ -9,6 +9,8 @@ use Isappit\Ifile\Helpers\IFileInfoFile;
 use Isappit\Ifile\Query\IFileQueryRegistry;
 use ZendSearch\Lucene\Document as Zend_Search_Lucene_Document;
 use ZendSearch\Lucene\Document\Field as Zend_Search_Lucene_Field;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\SharedEventManager;
 
 /**
  * IFile framework
@@ -88,10 +90,44 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 	 * @var array
 	 */
 	protected $termsForFields = array();
-	
-	
+
+    /**
+     * Event Manager
+     *
+     * @var \Zend\EventManager\EventManager
+     */
+    protected $eventManager = null;
+
+
+    /**
+     * IFileIndexingAbstract constructor.
+     */
 	protected function __construct() {}
-	
+
+    /**
+     * Bootstrap della classe di indicizzazione
+     *
+     */
+    public function bootstrap() {
+        $this->eventManager = new EventManager();
+
+        // recupero dati di configurazione
+        $iFileConfig = IFileConfig::getInstance();
+        // recupero la lista dei plugin configurati
+        $plugins = $iFileConfig->getConfig('plugins');
+
+        if ($plugins) {
+            $sharedManager = $this->eventManager->getSharedManager();
+            foreach ($plugins as $plugin) {
+                // Reflection
+                $reflection = new \ReflectionClass($plugin);
+                // creazione dell'oggetto
+                $pluginObject = $reflection->newInstance();
+                // attach events
+                $this->eventManager->attach("onDocumentBeforeAdd", array($pluginObject, 'onDocumentBeforeAdd'));
+            }
+        }
+    }
 	/**
 	 * Aggiunge un documento ad un indice
 	 * 
@@ -174,6 +210,10 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 		// definisce una porzione del testo del corpo utilizzabile come testo
 		// di introduzione al documento e aggiunge il field "introtext" al documento 
 		IFileHelper::setFieldType($doc, 'introtext', IFileHelper::introText(mb_substr($doc->getFieldValue('body'), 0, 200)));
+
+        // trigger onDocumentBeforeAdd
+        $this->eventManager->trigger('onDocumentBeforeAdd', $this, array('doc', $doc));
+
 		// aggiunge il documento all'indice (indicizzazione dei contenuti del file)
 		$this->__addDocument($doc);
 		// svuota il registro dei field personalizzati
@@ -359,6 +399,7 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return mixed
+     * @throws IFileException
 	 */
 	public function queryPhrase(IFileQueryRegistry $query) {
 		// controlla che sia una istanza della classe IFileQueryRegistry
@@ -378,6 +419,7 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return mixed
+     * @throws IFileException
 	 */
 	public function queryFuzzy(IFileQueryRegistry $query) {
 		// controlla che sia una istanza della classe IFileQueryRegistry
@@ -397,7 +439,8 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return mixed
-	 */
+     * @throws IFileException
+     */
 	public function queryBoolean(IFileQueryRegistry $query) {
 		// controlla che sia una istanza della classe IFileQueryRegistry
 		// questo e' dovuto perchè l'eccezione invocata da PHP non e' gestibile (Catchable)
@@ -416,7 +459,8 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return mixed
-	 */
+     * @throws IFileException
+     */
 	public function queryWildcard(IFileQueryRegistry $query) {
 		// controlla che sia una istanza della classe IFileQueryRegistry
 		// questo e' dovuto perchè l'eccezione invocata da PHP non e' gestibile (Catchable)
@@ -435,7 +479,8 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 	 * 
 	 * @param IFileQueryRegistry $query
 	 * @return mixed
-	 */
+     * @throws IFileException
+     */
 	public function queryRange(IFileQueryRegistry $query) {
 		// controlla che sia una istanza della classe IFileQueryRegistry
 		// questo e' dovuto perchè l'eccezione invocata da PHP non e' gestibile (Catchable)
@@ -534,7 +579,8 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 	 * 
 	 * @param stringa $indexFile
 	 * @return void
-	 */
+     * @throws IFileException
+     */
 	public function setIndexFile($indexFile) {
 		// controlla che sia un file esistente
 		if(trim($indexFile) == '' || is_dir($indexFile) || !is_file($indexFile)) {

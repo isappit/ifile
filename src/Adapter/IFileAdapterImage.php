@@ -69,6 +69,7 @@ class IFileAdapterImage extends IFileAdapterAbstract
 	 * Recupera le informazioni del file multimediale
 	 * 
 	 * @return void
+	 * @throws IFileAdapterException
 	 */
 	protected function parse() {
 		
