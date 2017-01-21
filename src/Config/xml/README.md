@@ -53,6 +53,10 @@ This file describes how to properly configure Ifile.
 			</custom-filters>
 		</filters>
 	</analyzer>
+	<plugins>
+        <plugin class="...">...</plugin>
+        ...
+    </plugins>
  </ifile>
  ```
  

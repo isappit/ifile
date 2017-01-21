@@ -52,6 +52,10 @@
 			</custom-filters>
 		</filters>
 	</analyzer>
+	<plugins>
+        <plugin class="...">...</plugin>
+        ...
+    </plugins>
  </ifile>
  ```
  
