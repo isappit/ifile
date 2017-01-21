@@ -766,7 +766,7 @@ ed implementare gli "event core"
 ###### Document
  - onDocumentBeforeAdd
 
-###### Stemmer
+##### Stemmer
 IFile definisce già dei filtri personalizzati per lo "Stemmer". 
 Le classi sono presenti nella cartella "TokenFilter/" della libreria IFile.
 

@@ -779,7 +779,7 @@ The plugin must extend the abstract class "Isappit\Ifile\Plugin\IFileAbstractPlu
 ###### Document
  - onDocumentBeforeAdd
 
-###### Stemmer
+##### Stemmer
 IFile define the custom filters of type "Stemmer".
 The class are in the "TokenFilter/" folder in the IFile library. 
 
