@@ -739,7 +739,7 @@ Esempio:
 ```
 
 #### plugins -> plugin
-Configurazione del namespace della classe che estende ZendSearch\Lucene\Analysis\TokenFilter, [maggiori dettagli](http://framework.zend.com/manual/en/zend.search.lucene.extending.html)
+Configurazione del namespace della classe che estende Isappit\Ifile\Plugin\IFileAbstractPlugin
 
 Tag          | Proprietà    | Occorrenza   | Tipo
 ------------ | ------------ | ------------ | -------------
@@ -756,9 +756,15 @@ Esempio:
 ``` 
 
 **_IMPORTANTE:_**
-Il plugin deve estendere la classe astratta "Isappit\Ifile\Plugin\IFileAbstractPlugin"
+Il plugin deve estendere la classe astratta "Isappit\Ifile\Plugin\IFileAbstractPlugin" 
+ed implementare gli "event core" 
 
- 
+
+#### Altro
+
+##### Core Event
+###### Document
+ - onDocumentBeforeAdd
 
 ###### Stemmer
 IFile definisce già dei filtri personalizzati per lo "Stemmer". 

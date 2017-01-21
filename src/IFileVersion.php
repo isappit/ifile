@@ -1,8 +1,7 @@
 <?php
-namespace Isappit\Ifile;
 /**
  * IFile framework
- * 
+ *
  * @category   IndexingFile
  * @package    ifile
  * @author 	   Giampaolo Losito, Antonio Di Girolomo
@@ -10,6 +9,8 @@ namespace Isappit\Ifile;
  * @copyright  Copyright (c) 2011-2016 isApp.it (http://www.isapp.it)
  * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
  */
+
+namespace Isappit\Ifile;
 
 /**
  * IFile Version Class 

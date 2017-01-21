@@ -736,6 +736,49 @@ Example:
 <filter class="EnglishPorterStemmer">Isappit\Ifile\Tokenfilter\Stemming\English</filter>
 ``` 
 
+#### plugins 
+It contains the tag for management the pliugin
+ 
+Tag          | Property     | Occurrences  | Type
+------------ | ------------ | ------------ | -------------
+plugins      | optional    | 1            | ComplexType - all
+
+Example: 
+
+```xml
+<plugins>
+    <plugin class="...">...</plugin>
+    ...
+</plugins>
+```
+
+#### plugins -> plugin
+Configure namespace of the class that extend Isappit\Ifile\Plugin\IFileAbstractPlugin
+
+Tag          | Property     | Occurrences  | Type
+------------ | ------------ | ------------ | -------------
+plugin       | optional     | 1            | string
+
+Attribute    | Property     | Type          |  Description
+------------ | ------------ | ------------- | ------------ 
+class        | mandatory    | string        | Class name 
+
+Esempio: 
+
+```xml
+<plugin class="MyPlugin">Isappit\Ifile\Plugin</plugin>
+``` 
+
+**_IMPORTANT:_**
+The plugin must extend the abstract class "Isappit\Ifile\Plugin\IFileAbstractPlugin" and implement one or more core event 
+ 
+ 
+#### Other
+
+##### Core Event
+###### Document
+ - onDocumentBeforeAdd
+
 ###### Stemmer
 IFile define the custom filters of type "Stemmer".
 The class are in the "TokenFilter/" folder in the IFile library. 

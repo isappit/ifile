@@ -6,6 +6,28 @@ use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 
+/**
+ * IFile framework
+ *
+ * @category   IndexingFile
+ * @package    ifile
+ * @subpackage servercheck
+ * @author 	   Giampaolo Losito, Antonio Di Girolomo
+ * @copyright
+ * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
+ * @version    2.0
+ */
+
+/**
+ * Classe astratta per la gestione dei plugin
+ *
+ * @category   IndexingFile
+ * @package    ifile
+ * @subpackage servercheck
+ * @author 	   Giampaolo Losito, Antonio Di Girolomo
+ * @copyright
+ * @license    GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999
+ */
 abstract class IFileAbstractPlugin implements EventManagerAwareInterface, IFilePluginInterface {
 
     protected $events;
