@@ -212,7 +212,7 @@ abstract class IFileIndexingAbstract implements IFileIndexingInterface {
 		IFileHelper::setFieldType($doc, 'introtext', IFileHelper::introText(mb_substr($doc->getFieldValue('body'), 0, 200)));
 
         // trigger onDocumentBeforeAdd
-        $this->eventManager->trigger('onDocumentBeforeAdd', $this, array('doc', $doc));
+        $this->eventManager->trigger('onDocumentBeforeAdd', $this, array('doc' => $doc));
 
 		// aggiunge il documento all'indice (indicizzazione dei contenuti del file)
 		$this->__addDocument($doc);
